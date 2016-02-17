@@ -14,4 +14,8 @@ How to Setup the Server:
 
 Notes: If it tells you to migrate, run (python manage.py migrate). This commits your database changes
 
-During Development
+During Development:
+1. Create a remote branch for development (this helps with merging stuff)
+1b. Go to github, under branch, create your own name as your development branch
+1c. When you're committing, commit to your own branch; when your changes are ready to go, merge your development branch with master (there may be merge conflicts)
+2. Create a local branch that keeps track of the remote branch
