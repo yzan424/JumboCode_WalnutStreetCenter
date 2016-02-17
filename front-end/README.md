@@ -10,7 +10,8 @@ How to Setup the Server:
 4. Start your virtualenv (source env/bin/activate)
 5. Install dependencies (pip install -r requirements.txt)
 6. Run the server: (python manage.py runserver)
+7. Visit your webserver: http://localhost:8000/
 
-
+Notes: If it tells you to migrate, run (python manage.py migrate). This commits your database changes
 
 During Development
