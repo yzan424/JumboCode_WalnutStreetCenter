@@ -32,3 +32,5 @@ Notes: If it tells you to migrate, run `python manage.py migrate`. This commits 
 #### Tips
 1. Run (git status) all the time
 2. Commit often, there's always ways to go back 
+3. [Django documentation](https://docs.djangoproject.com/en/1.9/)
+4. [Getting started with Django](https://docs.djangoproject.com/en/1.9/intro/tutorial01/)
