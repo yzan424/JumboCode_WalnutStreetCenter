@@ -19,6 +19,12 @@ During Development:
 1b. Go to github, under branch, create your own name as your development branch
 1c. When you're committing, commit to your own branch; when your changes are ready to go, merge your development branch with master (there may be merge conflicts)
 2. Create a local branch that keeps track of the remote branch (git fetch; git checkout "YOURNAMESAMEASTHEBRANCHYOUMADE")
+3. In your new local branch (You can see what branch you're on with git branch); pull the changes from master with (git pull origin master), there may be merge conflicts. If there were new commits from master, run git push to sync up your local development branch with the server development branch
+4. Do work. (commit and stuff)
+5. When done and ready to commit to master, push everything to the server development branch; merge your own development branch with master, push your local master branch 
+5b. (git branch) make sure you're on your developmental branch
+5c. (git push origin YOURNAME) if necessary
+5d. 
 
 
 
