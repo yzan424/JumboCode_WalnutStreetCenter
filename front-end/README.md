@@ -16,9 +16,7 @@ Notes: If it tells you to migrate, run (python manage.py migrate). This commits 
 
 During Development:
 1. Create a remote branch for development (this helps with merging stuff)
-
 1b. Go to github, under branch, create your own name as your development branch
-
 1c. When you're committing, commit to your own branch; when your changes are ready to go, merge your development branch with master (there may be merge conflicts)
 
 2. Create a local branch that keeps track of the remote branch (git fetch; git checkout "YOURNAMESAMEASTHEBRANCHYOUMADE")
@@ -30,10 +28,10 @@ During Development:
 5. When done and ready to commit to master, push everything to the server development branch; merge your own development branch with master, push your local master branch 
 
 5b. (git branch) make sure you're on your developmental branch
-
 5c. (git push origin YOURNAME) if necessary
-
-5d. 
+5d. (git checkout master) - switch to the master branch, should be the same as the server version
+5e. (git merge YOURNAME) - merge all the commits from your development branch to master (resolve merge conflicts)
+5f. (git push origin master) - push to master
 
 
 
