@@ -23,7 +23,7 @@ CREATE TABLE patients (
     address_on_entry VARCHAR(50) NOT NULL,
     sex VARCHAR(10) NOT NULL,
     race VARCHAR(20),
-    language VARCHAR(50),
+    primary_language VARCHAR(50),
     birthday DATE NOT NULL,
     height FLOAT NOT NULL,
     weight FLOAT NOT NULL,
