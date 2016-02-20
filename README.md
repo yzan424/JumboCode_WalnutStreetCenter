@@ -5,3 +5,4 @@ Daniel Meyer
 Lexi Galantino
 Jordan Kemp
 Ian Luo
+Meet Patel
