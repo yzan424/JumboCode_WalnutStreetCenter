@@ -11,20 +11,21 @@
 */
 CREATE TABLE patients (
     /* basic patient information */
-    patient_id INTEGER PRIMARY KEY, /* MAY NOT BE INT */
+    patient_id INTEGER PRIMARY KEY, /* note: MAY NOT BE INT */
+    state_id VARCHAR(50),
     name_last VARCHAR(50) NOT NULL,
     name_first VARCHAR(50),
-    /*TODO: Make grouphome id that references grouphome table*/
     name_preferred VARCHAR(50),
+    birthday DATE NOT NULL,
     photo VARBINARY(MAX), /* TODO: ensure photo type in interface i.e. jpeg*/
     phone VARCHAR(20),
+    program INTEGER REFERENCES programs,
+    area INTEGER,
     address_current VARCHAR(50) NOT NULL,
-    address_former VARCHAR(50),
     address_on_entry VARCHAR(50) NOT NULL,
     sex VARCHAR(10) NOT NULL,
     race VARCHAR(20),
     primary_language VARCHAR(50),
-    birthday DATE NOT NULL,
     height FLOAT NOT NULL,
     weight FLOAT NOT NULL,
     build VARCHAR(20),
@@ -48,8 +49,8 @@ CREATE TABLE patients (
 
     /* medical info */
     physician_id INTEGER REFERENCES physicians,
-    diagnoses VARCHAR(200),
-    allergies VARCHAR(200),
+    diagnoses VARCHAR(200), /* table? */
+    allergies VARCHAR(200), /* table? */
     /*TODO: MEDICATIONS reference a table? */
 
     /* identifying info */
@@ -58,28 +59,57 @@ CREATE TABLE patients (
     response_to_search VARCHAR(500),
     movement_pattern VARCHAR(200),
     places_frequented VARCHAR(200),
-    /*TODO: relevant capabilities, limitations, and preferences????*/
+    travel_method VARCHAR(50),
+    carries_ID BOOLEAN,
+    surrounding_awareness VARCHAR(50),
     probable_dress VARCHAR(200),
-    last_known_location VARCHAR(100),
-    time_last_known_location TIMESTAMP, /* note: extract date from this */
+    location_last_seen VARCHAR(100),
+    time_last_seen TIMESTAMP, /* note: extract date from this */
 
     last_update DATE NOT NULL
 );
 
+/* DOES NOT COVER ALL providers, only primary */
 CREATE TABLE physicians (
     physician_id SERIAL PRIMARY KEY,
-    name_first VARCHAR(50),
-    name_last VARCHAR(50),
+    full_name  VARCHAR(50),
+    specialization VARCHAR(30),
     address VARCHAR(50),
-    phone VARCHAR(20)
+    phone VARCHAR(20),
+    fax VARCHAR(20)
 );
 
+/* separate form */
+CREATE TABLE  appointments (
+       
+);
 
-/* extract this info from primary contact of contacts table
+CREATE TABLE programs (
+       program_id SERIAL PRIMARY KEY,
+       address VARCHAR() NOT NULL,
+       manager_id INTEGER REFERENCES managers NOT NULL
+);
+    
+CREATE TABLE diagnoses (
+
+);
+
+CREATE TABLE medications (
+       patient_id INTEGER REFERENCES patients NOT NULL,
+       med_name VARCHAR(50) NOT NULL,
+       dose VARCHAR(20),
+       frequency VARCHAR(50),
+       route VARCHAR(30),
+       purpose VARCHAR(30),
+       provider VARCHAR(30)
+);           
+
+CREATE TABLE contacts
+
     Contact person
     Contact person phone
     Contact person address
-*/
+
 
 /*
 Linked fields:
