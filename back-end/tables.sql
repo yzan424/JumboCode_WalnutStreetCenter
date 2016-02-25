@@ -33,6 +33,7 @@ CREATE TABLE patients (
     eyes VARCHAR(20),
     distinguishing_marks VARCHAR(100),
     competency_status VARCHAR(100),
+    /* TODO: add check boxes to patient info*/
 
     /* legal guardian info */
     guardian_name VARCHAR(50),
@@ -49,7 +50,7 @@ CREATE TABLE patients (
 
     /* medical info */
     physician_id INTEGER REFERENCES physicians,
-    diagnoses VARCHAR(200), /* table? */
+    diagnoses VARCHAR(200), /* Note: Leave as a text field*/
     allergies VARCHAR(200), /* table? */
     /*TODO: MEDICATIONS reference a table? */
 
@@ -70,8 +71,11 @@ CREATE TABLE patients (
 );
 
 /* DOES NOT COVER ALL providers, only primary */
-CREATE TABLE physicians (
-    physician_id SERIAL PRIMARY KEY,
+/*
+    Note: Have separate table containing {patient_id, doctor_id}
+*/
+CREATE TABLE doctors (
+    doctor_id SERIAL PRIMARY KEY,
     full_name  VARCHAR(50),
     specialization VARCHAR(30),
     address VARCHAR(50),
@@ -94,6 +98,7 @@ CREATE TABLE diagnoses (
 
 );
 
+/* TODO: We probably do not need this table */
 CREATE TABLE medications (
        patient_id INTEGER REFERENCES patients NOT NULL,
        med_name VARCHAR(50) NOT NULL,
@@ -105,11 +110,28 @@ CREATE TABLE medications (
 );           
 
 CREATE TABLE contacts
-
+/* ADDED field = date added???*/
     Contact person
     Contact person phone
     Contact person address
 
+/* TODO: In preservation table, Date is monthly*/
+
+/* TODO: Do NOT make each type of exam their own table, leave as a blank varchar
+ * field
+ */
+
+/* 
+ * TODO: Make table of walnut street staff with same fields as contacts table
+ * plus group home and position and email
+ */
+
+ /*TODO: Include blood type */
+
+/* Note: HRC Approval dates ALL expire after one year
+         ALL Guardian signatures expire after one year
+         ALL Training dates expire after one year
+*/
 
 /*
 Linked fields:
