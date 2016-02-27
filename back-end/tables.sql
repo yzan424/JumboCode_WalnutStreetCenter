@@ -88,6 +88,12 @@ CREATE TABLE patients (
     carries_ID BOOLEAN,
     surrounding_awareness VARCHAR(200),
 
+    /* table references */
+    /*TODO Remove these*/
+    self_medication_id INTEGER REFERENCES self_medication,
+    individual_support_plan_id INTEGER REFERENCES individual_support_plans,
+    medical_treatment_plan_id INTEGER REFERENCES medical_treatment_plans,
+
     last_update DATE NOT NULL
 );
 /* DOES NOT COVER ALL providers, only primary */
@@ -125,7 +131,10 @@ CREATE TABLE staff (
     address
     phone
 );
+/* TODO: Group Home table */
 CREATE TABLE health_insurance_and_other (
+    health_insurance_and_other_id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES patients,
     source TEXT,
     type_of TEXT,
     id_number TEXT,
@@ -135,12 +144,16 @@ CREATE TABLE health_insurance_and_other (
 );
 /* Note: In preservation table, Date is monthly*/
 CREATE TABLE self_preservation (
+    self_preservation_id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES patients,
     assessment TEXT,
     cause_of_failure TEXT,
     determination_basis TEXT,
     date_occurred DATE
 );
 CREATE TABLE legal_competency (
+    legal_competency_id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES patients,
     status TEXT,
     type_of TEXT,
     adjudication_date DATE,
@@ -148,6 +161,8 @@ CREATE TABLE legal_competency (
     date_requested DATE
 );
 CREATE TABLE service_providers (
+    service_providers_id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES patients,
     start_date DATE,
     stop_date DATE,
     program TEXT,
@@ -157,19 +172,97 @@ CREATE TABLE service_providers (
 /* Note: HRC Approval dates ALL expire after one year
          ALL Guardian signatures expire after one year
          ALL Training dates expire after one year     */
-
-/* separate form */
 CREATE TABLE  appointments (
+    appointment_id SERIAL PRIMARY KEY,
     appointment_type
+    patient_id INTEGER REFERENCES patients,
     last_appointment DATE,
     frequency INTEGER, /*  Note: stored in months*/
     next_appointment TIMESTAMP,
     new_medication BOOLEAN,
     contact
 );
+CREATE TABLE protocols (
+    protocol_id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES patients,
+    name TEXT,
+    description TEXT,
+    last_training_date DATE,
+    next_training_date TIMESTAMP,
+    guardian_signature_date DATE,
+    physician_signature_date DATE
+);
+CREATE TABLE self_medication (
+    self_medication_id SERIAL PRIMARY KEY,
+    hrc_approval_date DATE,
+    last_training_date DATE,
+    next_training_date TIMESTAMP,
+    assessment_score FLOAT,
+    plan_type TEXT,
+    physician_signature_date DATE
+);
+CREATE TABLE supportive_protective_devices (
+    supportive_protective_devices_id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES patients,
+    device_type TEXT,
+    hrc_approval_date DATE, /* Expiration date one year later */
+    hrc_submission_date DATE, /* get rid of this??? */
+    physician_signature BOOLEAN,
+    nurse_signature BOOLEAN
+);
+CREATE TABLE individual_support_plans (
+    individual_support_plan_id SERIAL PRIMARY KEY,
+    last_isp_date DATE NOT NULL, /* Note: Several dates derive from this */
+    comments TEXT
+);
+CREATE TABLE tracking (
+    tracking_id SERIAL PRIMARY KEY,
+    tracking_name TEXT, /*TODO: Find better name*/
+    description TEXT,
+    most_recent DATE,
+    next_due INTEGER /* In months */
+);
+CREATE TABLE medical_treatment_plan (
+    medical_treatment_plan_id SERIAL PRIMARY KEY,
+    guardian_signature_date DATE,
+    last_training_date DATE,
+    next_training_date TIMESTAMP,
+    medications TEXT,
+    diagnoses TEXT,
+    symptoms TEXT
+);
+/* TODO: Are patient_ids primary keys? */
+CREATE TABLE  behavior_assessments (
+    behavior_assessment_id SERIAL PRIMARY KEY,
+    patient_id UNIQUE INTEGER REFERENCES patients,
+    assessment_date DATE,
+    behaviors TEXT,
+    summary TEXT
+);
+CREATE TABLE restrictive_practices (
+    restrictive_practices_id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES patients,
+    practice_type TEXT,
+    hrc_approval_date DATE,
+    hrc_submission_date DATE,
+    description TEXT
+);
+CREATE TABLE behavior_support_plans (
+    patient_id INTEGER REFERENCES patients,
+    guardian_signature_date DATE,
 
-/*
-Linked fields:
-Training program/school ID
-Physician ID
-*/
+    last_residential_training_date DATE,
+    next_residential_training_date TIMESTAMP,
+    last_day_training_date DATE,
+    next_day_training_date TIMESTAMP,
+    tier TEXT
+);
+CREATE TABLE rogers_monitor (
+    patient_id UNIQUE INTEGER REFERENCES patients,
+    next_court_date DATE,
+    last_court_date DATE,
+    guardian_signature_date DATE,
+    last_training_date DATE,
+    next_training_date TIMESTAMP,
+    medications TEXT
+);
