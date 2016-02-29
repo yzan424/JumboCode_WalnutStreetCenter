@@ -1,103 +1,97 @@
 /* vim: set foldmarker=CREATE,); foldlevel=0 foldmethod=marker nospell:*/
-/*
-    Note(s): 
+/* CREATE Note(s): 
         check all NOT NULL fields
         check if all addresses are necessary
         what do we do about sex?
         DATE format YYYY-MM-DD
         height in inches 
         weight in pounds
-*/
+);*/
 CREATE TABLE patients (
     /* basic patient information */
     patient_id INTEGER PRIMARY KEY, /* note: MAY NOT BE INT */
-    state_id VARCHAR(20),
-    name_last VARCHAR(50) NOT NULL,
-    name_first VARCHAR(50),
-    name_preferred VARCHAR(50),
+    state_id TEXT,
+    name_last TEXT NOT NULL,
+    name_first TEXT,
+    name_preferred TEXT,
     birthday DATE NOT NULL,
-    birthplace VARCHAR(50),
+    birthplace TEXT,
     social_security VARCHAR(9),
-    citizenship VARCHAR(20),
+    citizenship TEXT,
     phone VARCHAR(10),
     phone_on_entry VARCHAR(10),
     group_home INTEGER REFERENCES grouphomes,
     day_service BOOLEAN,
-    training_program_or_school_address VARCHAR(50),
-    training_program_or_school_phone VARCHAR(50),
-    area_office INTEGER,
+    training_program_or_school_address TEXT,
+    training_program_or_school_phone TEXT,
+    area_office TEXT,
     record_location TEXT,
     address_current TEXT,
     address_former TEXT,
     sex VARCHAR(10),
-    race VARCHAR(20),
-    blood_type VARCHAR(5),
-    religion VARCHAR(20),
-    marital_status VARCHAR(20),
-    primary_language VARCHAR(50),
-    height FLOAT NOT NULL,
-    weight FLOAT NOT NULL,
-    build VARCHAR(20),
-    hair VARCHAR(20),
-    eyes VARCHAR(20),
-    distinguishing_marks VARCHAR(100),
-    competency_status VARCHAR(100),
+    race TEXT,
+    blood_type VARCHAR(3),
+    religion TEXT,
+    marital_status TEXT,
+    primary_language TEXT,
+    height FLOAT,
+    weight FLOAT,
+    build TEXT,
+    hair TEXT,
+    eyes TEXT,
+    distinguishing_marks TEXT,
+    competency_status TEXT,
     eligibility_date DATE,
-    area_meaningful_tie VARCHAR(50),
-    referral_source VARCHAR(50),
-    accompanied_by VARCHAR(50),
-    /* TODO: add check boxes to patient info*/
+    area_meaningful_tie TEXT,
+    referral_source TEXT,
+    accompanied_by TEXT,
 
     /* legal guardian info */
-    guardian_name VARCHAR(50),
-    guardian_phone VARCHAR(20),
-    guardian_address VARCHAR(50),
-    father_name VARCHAR(50),
+    guardian_name TEXT,
+    guardian_phone VARCHAR(10),
+    guardian_address TEXT,
+    father_name TEXT,
     father_birthday DATE,
-    father_birthplace VARCHAR(50),
+    father_birthplace TEXT,
     father_alive BOOLEAN,
-    mother_maiden_name VARCHAR(50),
+    mother_maiden_name TEXT,
     mother_birthday DATE,
-    mother_birthplace VARCHAR(50),
+    mother_birthplace TEXT,
     mother_alive BOOLEAN,
-    parents_marital_status VARCHAR(20),
+    parents_marital_status TEXT,
 
     /* family info */
-    family_phone VARCHAR(50),
-    family_address VARCHAR(50),
+    family_phone VARCHAR(10),
+    family_address TEXT,
 
     /* work */
-    work_phone VARCHAR(20),
-    work_address VARCHAR(50),
+    work_phone VARCHAR(10),
+    work_address TEXT,
 
     /* medical info */
     physician_id INTEGER REFERENCES physicians,
-    diagnoses VARCHAR(800), 
-    allergies VARCHAR(500), 
+    diagnoses TEXT,
+    allergies TEXT,
     alzheimers_dementia BOOLEAN,
     down_syndrome BOOLEAN,
     vision_problem BOOLEAN,
 
     /* identifying info */
-    self_protection VARCHAR(200),
-    behavior VARCHAR(200),
-    response_to_search VARCHAR(200),
-    movement_pattern VARCHAR(200),
-    places_frequented VARCHAR(200),
-    travel_method VARCHAR(200),
+    self_protection TEXT,
+    behavior TEXT,
+    response_to_search TEXT,
+    movement_pattern TEXT,
+    places_frequented TEXT,
+    travel_method TEXT,
     carries_ID BOOLEAN,
-    surrounding_awareness VARCHAR(200),
-
-    /* table references */
-    /*TODO Remove these*/
-    self_medication_id INTEGER REFERENCES self_medication,
-    individual_support_plan_id INTEGER REFERENCES individual_support_plans,
-    medical_treatment_plan_id INTEGER REFERENCES medical_treatment_plans,
+    surrounding_awareness TEXT,
 
     last_update DATE NOT NULL
 );
 /* DOES NOT COVER ALL providers, only primary */
 /* TODO: Have separate table containing {patient_id, doctor_id} */
+CREATE TABLE doctor_list (
+);
 CREATE TABLE doctors (
     doctor_id SERIAL PRIMARY KEY,
     full_name  VARCHAR(50),
@@ -108,30 +102,39 @@ CREATE TABLE doctors (
 );
 CREATE TABLE programs (
        program_id SERIAL PRIMARY KEY,
-       address VARCHAR() NOT NULL,
-       manager_id INTEGER REFERENCES managers NOT NULL
+       address TEXT NOT NULL
 );
 CREATE TABLE contacts (
-    name
-    patient_id
-    relation
-    address
-    phone
-    date_added
-    date_removed
-    removal_reason
+    contact_id SERIAL PRIMARY KEY,
+    name TEXT,
+    patient_id INTEGER REFERENCES patients,
+    relation TEXT,
+    address TEXT,
+    phone VARCHAR(10),
+    date_added DATE,
+    date_removed DATE,
+    removal_reason TEXT,
     primary_contact BOOLEAN
 );
 CREATE TABLE staff (
-    name
-    group_home 
+    staff_id SERIAL PRIMARY KEY,
+    name TEXT,
     email_address TEXT,
-    director_id
-    position
-    address
-    phone
+    director_id REFERENCES directors,
+    position TEXT,
+    program_id INTEGER REFERENCES programs,
+    address TEXT,
+    phone VARCHAR(10)
 );
-/* TODO: Group Home table */
+CREATE TABLE directors (
+    director_id SERIAL PRIMARY KEY,
+    name TEXT,
+    email_address TEXT,
+    position TEXT,
+    address TEXT,
+    phone VARCHAR(10)
+);
+
 CREATE TABLE health_insurance_and_other (
     health_insurance_and_other_id SERIAL PRIMARY KEY,
     patient_id INTEGER REFERENCES patients,
@@ -174,29 +177,28 @@ CREATE TABLE service_providers (
          ALL Training dates expire after one year     */
 CREATE TABLE  appointments (
     appointment_id SERIAL PRIMARY KEY,
-    appointment_type
+    appointment_type TEXT NOT NULL,
     patient_id INTEGER REFERENCES patients,
     last_appointment DATE,
     frequency INTEGER, /*  Note: stored in months*/
     next_appointment TIMESTAMP,
     new_medication BOOLEAN,
-    contact
+    doctor_id INTEGER REFERENCES doctors,
+    staff_id INTEGER REFERENCES staff
 );
 CREATE TABLE protocols (
     protocol_id SERIAL PRIMARY KEY,
     patient_id INTEGER REFERENCES patients,
     name TEXT,
     description TEXT,
-    last_training_date DATE,
-    next_training_date TIMESTAMP,
+    appointment_id INTEGER REFERENCES appointments,
     guardian_signature_date DATE,
     physician_signature_date DATE
 );
 CREATE TABLE self_medication (
-    self_medication_id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES patients NOT NULL UNIQUE,
     hrc_approval_date DATE,
-    last_training_date DATE,
-    next_training_date TIMESTAMP,
+    appointment_id INTEGER REFERENCES appointments,
     assessment_score FLOAT,
     plan_type TEXT,
     physician_signature_date DATE
@@ -212,6 +214,7 @@ CREATE TABLE supportive_protective_devices (
 );
 CREATE TABLE individual_support_plans (
     individual_support_plan_id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES patients NOT NULL,
     last_isp_date DATE NOT NULL, /* Note: Several dates derive from this */
     comments TEXT
 );
@@ -224,17 +227,16 @@ CREATE TABLE tracking (
 );
 CREATE TABLE medical_treatment_plan (
     medical_treatment_plan_id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES patients,
     guardian_signature_date DATE,
-    last_training_date DATE,
-    next_training_date TIMESTAMP,
+    appointment_id INTEGER REFERENCES appointments,
     medications TEXT,
     diagnoses TEXT,
     symptoms TEXT
 );
 /* TODO: Are patient_ids primary keys? */
 CREATE TABLE  behavior_assessments (
-    behavior_assessment_id SERIAL PRIMARY KEY,
-    patient_id UNIQUE INTEGER REFERENCES patients,
+    patient_id INTEGER REFERENCES patients NOT NULL UNIQUE,
     assessment_date DATE,
     behaviors TEXT,
     summary TEXT
@@ -250,19 +252,16 @@ CREATE TABLE restrictive_practices (
 CREATE TABLE behavior_support_plans (
     patient_id INTEGER REFERENCES patients,
     guardian_signature_date DATE,
-
-    last_residential_training_date DATE,
-    next_residential_training_date TIMESTAMP,
-    last_day_training_date DATE,
-    next_day_training_date TIMESTAMP,
+    /* TODO: Make sure we can reference these like this*/
+    residential_appointment_id INTEGER REFERENCES appointments,
+    day_appointment_id INTEGER REFERENCES appointments,
     tier TEXT
 );
 CREATE TABLE rogers_monitor (
-    patient_id UNIQUE INTEGER REFERENCES patients,
+    patient_id INTEGER REFERENCES patients NOT NULL UNIQUE,
     next_court_date DATE,
     last_court_date DATE,
     guardian_signature_date DATE,
-    last_training_date DATE,
-    next_training_date TIMESTAMP,
+    appointment_id INTEGER REFERENCES appointments,
     medications TEXT
 );
