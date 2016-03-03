@@ -45,6 +45,9 @@ CREATE TABLE patients (
     area_meaningful_tie TEXT,
     referral_source TEXT,
     accompanied_by TEXT,
+    /* work */
+    work_phone VARCHAR(10),
+    work_address TEXT,
 
     /* legal guardian info */
     guardian_name TEXT,
@@ -64,12 +67,9 @@ CREATE TABLE patients (
     family_phone VARCHAR(10),
     family_address TEXT,
 
-    /* work */
-    work_phone VARCHAR(10),
-    work_address TEXT,
 
     /* medical info */
-    physician_id INTEGER REFERENCES physicians,
+    physician_id INTEGER REFERENCES physicians, /* TODO: Remove in ORM, replace w/ relation */
     diagnoses TEXT,
     allergies TEXT,
     alzheimers_dementia BOOLEAN,
@@ -195,7 +195,7 @@ CREATE TABLE protocols (
     guardian_signature_date DATE,
     physician_signature_date DATE
 );
-CREATE TABLE self_medication (
+CREATE TABLE self_medication ( /* TODO: Make subclass of patients */
     patient_id INTEGER REFERENCES patients NOT NULL UNIQUE,
     hrc_approval_date DATE,
     appointment_id INTEGER REFERENCES appointments,
@@ -212,7 +212,7 @@ CREATE TABLE supportive_protective_devices (
     physician_signature BOOLEAN,
     nurse_signature BOOLEAN
 );
-CREATE TABLE individual_support_plans (
+CREATE TABLE individual_support_plans ( /* TODO: Make subclass of patients */
     individual_support_plan_id SERIAL PRIMARY KEY,
     patient_id INTEGER REFERENCES patients NOT NULL,
     last_isp_date DATE NOT NULL, /* Note: Several dates derive from this */
@@ -225,7 +225,7 @@ CREATE TABLE tracking (
     most_recent DATE,
     next_due INTEGER /* In months */
 );
-CREATE TABLE medical_treatment_plan (
+CREATE TABLE medical_treatment_plan ( /* TODO: Make subclass of patients */
     medical_treatment_plan_id SERIAL PRIMARY KEY,
     patient_id INTEGER REFERENCES patients,
     guardian_signature_date DATE,
@@ -234,8 +234,7 @@ CREATE TABLE medical_treatment_plan (
     diagnoses TEXT,
     symptoms TEXT
 );
-/* TODO: Are patient_ids primary keys? */
-CREATE TABLE  behavior_assessments (
+CREATE TABLE  behavior_assessments ( /* TODO: Make subclass of patients */
     patient_id INTEGER REFERENCES patients NOT NULL UNIQUE,
     assessment_date DATE,
     behaviors TEXT,
@@ -249,7 +248,7 @@ CREATE TABLE restrictive_practices (
     hrc_submission_date DATE,
     description TEXT
 );
-CREATE TABLE behavior_support_plans (
+CREATE TABLE behavior_support_plans ( /* TODO: Make subclass of patients */
     patient_id INTEGER REFERENCES patients,
     guardian_signature_date DATE,
     /* TODO: Make sure we can reference these like this*/
@@ -257,7 +256,7 @@ CREATE TABLE behavior_support_plans (
     day_appointment_id INTEGER REFERENCES appointments,
     tier TEXT
 );
-CREATE TABLE rogers_monitor (
+CREATE TABLE rogers_monitor ( /* TODO: Make subclass of patients */
     patient_id INTEGER REFERENCES patients NOT NULL UNIQUE,
     next_court_date DATE,
     last_court_date DATE,
