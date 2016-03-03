@@ -1,0 +1,19 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Profile</title>
+  <meta name="description" content="">
+</head>
+
+<body>
+    <h1>This is my profile</h1>
+    {% for key, value in profile_fields.items %}
+    <div id="{{key}}">
+        <p><b>{{key}}</b>: {{value}}</p>
+    </div>
+    {% endfor %}
+</body>
+</html>
