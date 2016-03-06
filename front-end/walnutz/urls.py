@@ -19,5 +19,6 @@ from nutzserver.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^backend/profile/$', backend),
+    url(r'^backend/profile/(?P<profile_id>\d+)/$', backend),
+    url(r'^profile/$', profile),
 ]
