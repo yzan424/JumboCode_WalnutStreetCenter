@@ -9,11 +9,41 @@
 </head>
 
 <body>
-    <h1>This is my profile</h1>
-    {% for key in profile_data.keys %}
-    <div id="{{key}}">
-        <p><b>{{key.keys}}</b>: {{key.values}} </p>
+    <div id="basic_info">
+        <h1>Basic Info</h1>
+        {% for key, value in basic_info.items %}
+        <div id="{{key}}">
+            <p><b>{{key}}</b>: {{value}} </p>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+
+    <div id="legal_guardian">
+        <h1>Legal Guardian Information</h1>
+        {% for key, value in legal_guardian.items %}
+        <div id="{{key}}">
+            <p><b>{{key}}</b>: {{value}} </p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="medical">
+        <h1>Medical Information</h1>
+        {% for key, value in medical.items %}
+        <div id="{{key}}">
+            <p><b>{{key}}</b>: {{value}} </p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="identifying">
+        <h1>Identifying Information</h1>
+        {% for key, value in identifying.items %}
+        <div id="{{key}}">
+            <p><b>{{key}}</b>: {{value}} </p>
+        </div>
+        {% endfor %}
+    </div>
+
 </body>
 </html>
