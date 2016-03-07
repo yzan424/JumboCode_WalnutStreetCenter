@@ -98,6 +98,8 @@ def backend(request, profile_id):
 def get_request(request, profile_id, template):
 	profile_data = requests.get(backendGET + profile_id)
 	profile_data = json.loads(profile_data.json())
+    
+    print("hello")
 
 	return render(request, template, context={'basic_info': profile_data['basic_info'], 'legal_guardian': profile_data['legal_guardian'], 'medical': profile_data['medical'], 'identifying': profile_data['identifying'] })
 

@@ -10,9 +10,9 @@
 
 <body>
     <h1>This is my profile</h1>
-    {% for key, value in profile_fields.items %}
+    {% for key in profile_data.keys %}
     <div id="{{key}}">
-        <p><b>{{key}}</b>: {{value}}</p>
+        <p><b>{{key.keys}}</b>: {{key.values}} </p>
     </div>
     {% endfor %}
 </body>
