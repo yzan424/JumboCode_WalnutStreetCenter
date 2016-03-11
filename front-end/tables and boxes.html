@@ -24,6 +24,14 @@
       .apptday{
         font-weight: bold;
       }
+      
+      .box{
+        
+      }
+      
+      .box-label{
+        font-weight: bold;
+      }
     </style>
    </head>
 
@@ -80,7 +88,7 @@
         </div>
       </div>
 
-      <h2>Past</h2>
+      <h2>Scheduled</h2>
 
       <div class="row">
         <div class="col-xs-8">
@@ -92,34 +100,42 @@
                 <th>Category</th>
                 <th>Type</th>
                 <th>Contact</th>
+                <th>Contact Phone</th>
+                <th>Address</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="apptday"  colspan=5>Feb 1, 2016</td>
+                <td class="apptday"  colspan=7>Feb 1, 2016</td>
               </tr>
               <tr>
-                <td>8:00 AM</td>
+                <td>8:00 AM - 10:00 AM</td>
                 <td>Jordan Kilian</td>
                 <td>Appointment</td>
-                <td>Skin Cancer</td>
-                <td>Janet Lois</td>
+                <td>Eye Exam</td>
+                <td>Brendan Courtney</td>
+                <td>808-532-1233</td>
+                <td>32 Aligator St. Medford MA</td>
               </tr>
               <tr>
-                <td>9:00 AM</td>
-                <td>Susie Fields</td>
+                <td>1:00 PM - 5:00 PM</td>
+                <td>Sufulufugus Jamie</td>
                 <td>Training</td>
-                <td>Medical Treatment Plan</td>
-                <td>Jenn Thompson</td>
+                <td>Medication Plan</td>
+                <td>Clinician Joyce</td>
+                <td>808-432-3312</td>
+                <td>53 Winthrop St. Medford MA </td>
               </tr>
               <tr>
-                <td class="apptday"  colspan=5>January 29, 2016</td>
+                <td class="apptday"  colspan=7>January 29, 2016</td>
               </tr>
                <tr>
                 <td></td>
-                <td>Susie Fields</td>
+                <td>Heather Curry</td>
                 <td>Consent</td>
-                <td>Door Lock, HRC Approval</td>
+                <td>Restrictive Practice, Guardian Consent</td>
+                <td></td>
+                <td></td>
                 <td></td>
               </tr>
             </tbody>
@@ -171,7 +187,27 @@
           </table>
         </div>
       </div>
-    </div>
+    
+      <div class="page-header">
+        <h1>Boxes!</h1>
+      </div>
+      
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Physician Information <button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+            </div>
+            <div class="panel-body">
+              <p class="box-label">Name</p>
+              <p>Katalina Smuckers</p>
+              <p class="box-label">Address</p>
+              <p>32 Aligator St. <br> Medford MA 02155 </p>
+              <p class="box-label">Phone</p>
+              <p>808-627-3412</p>
+            </div>
+        </div>
+      </div>
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
