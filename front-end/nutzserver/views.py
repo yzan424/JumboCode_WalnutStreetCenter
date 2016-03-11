@@ -105,10 +105,11 @@ def profile(request, profile_id):
     return get_request(request, profile_id, "profile.html")
 
 def update(request, profile_id):
-	if request.method == 'GET':
-		return get_request(request, profile_id, "update.html")
-	# elif request.method == 'POST'
-	# 	requests.post(backendPOST + profile_id, data={'basic_info': request['basic_info'],
-	# 										  'legal_guardian': profile_data['legal_guardian'],
-	# 										  'medical': profile_data['medical'],
-	# 										  'identifying': profile_data['identifying']} )
+    if request.method == 'GET':
+        return get_request(request, profile_id, "update.html")
+    elif request.method == 'POST':
+        requests.post(backendPOST + profile_id, data={'basic_info': request['basic_info'],
+                                              'legal_guardian': profile_data['legal_guardian'],
+                                              'medical': profile_data['medical'],
+                                              'identifying': profile_data['identifying']} )
+
