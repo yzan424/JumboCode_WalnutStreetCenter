@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from nutzserver.models import *
+from django.template import *
 import json, requests
 
 
@@ -99,16 +100,42 @@ def get_request(request, profile_id, template):
     profile_data = requests.get(backendGET + profile_id + '/')
     profile_data = json.loads(profile_data.json())
 
-    return render(request, template, context={'basic_info': profile_data['basic_info'], 'legal_guardian': profile_data['legal_guardian'], 'medical': profile_data['medical'], 'identifying': profile_data['identifying']})
+    return render(request, template, context={'id': profile_id, 'basic_info': profile_data['basic_info'], 'legal_guardian': profile_data['legal_guardian'], 'medical': profile_data['medical'], 'identifying': profile_data['identifying']})
 
 def profile(request, profile_id):
     return get_request(request, profile_id, "profile.html")
 
 def update(request, profile_id):
-	if request.method == 'GET':
-		return get_request(request, profile_id, "update.html")
-	# elif request.method == 'POST'
-	# 	requests.post(backendPOST + profile_id, data={'basic_info': request['basic_info'],
-	# 										  'legal_guardian': profile_data['legal_guardian'],
-	# 										  'medical': profile_data['medical'],
-	# 										  'identifying': profile_data['identifying']} )
+    if request.method == 'GET':
+        return get_request(request, profile_id, "update.html")
+    elif request.method == 'POST':
+
+
+        emfprofile = {}
+        emfprofile['id'] = profile_id
+        emfprofile['basic_info'] = {}
+        emfprofile['legal_guardian'] = {}
+        emfprofile['medical'] = {}
+        emfprofile['identifying'] = {}
+
+        for elems in request.POST:
+                if elems != 'csrfmiddlewaretoken':
+                        category, key = elems.split('_', 1)
+                if category == 'basic':
+                        emfprofile['basic_info'][key] = request.POST[elems]
+                elif category == 'legal':
+                        emfprofile['legal_guardian'][key] = request.POST[elems]
+                elif category == 'medical':
+                        emfprofile['medical'][key] = request.POST[elems]
+                elif category == 'identifying':
+                        emfprofile['identifying'][key] = request.POST[elems]
+                else:
+                        print("We dun fucked up")
+
+
+
+
+        requests.post(backendPOST + profile_id + '/', data=emfprofile )
+
+        #in production redirect to the profile page
+        return JsonResponse(json.dumps(emfprofile), safe=False)

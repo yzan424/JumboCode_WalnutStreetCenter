@@ -9,11 +9,81 @@
 </head>
 
 <body>
-<!--     <h1>This is my profile</h1>
-    {% for key, value in profile_fields.items %}
-    <div id="{{key}}">
-        <p><b>{{key}}</b>: {{value}}</p>
-    </div>
-    {% endfor %} -->
+    <h1>This is my profile</h1>
+    	<form action="/update/{{id}}/" method="post">
+    		{% csrf_token %}
+    		<div id="basic_info">
+    			<h1>Basic Info</h1>
+			    {% for key, value in basic_info.items %}
+			    <div id="{{key}">
+			        <p><b>{{key}}</b>: 
+			        {% if value == True or value == False %}
+			        <select name="basic_{{key}}">
+			        	<option {% if value == True %} selected=selected {% endif %} value="True">True</option>
+			        	<option {% if value == False %} selected=selected  {% endif %} value="False">False</option>
+	 		        </select>
+			        {% else %}
+			        <input type="text" name="basic_{{key}}" value="{{value}}"><br>
+			        {% endif %}
+			        </p>
+			    </div>
+			    {% endfor %}
+		    </div>
+
+		    <div id="legal_guardian">
+    			<h1>Legal Guardian</h1>
+			    {% for key, value in legal_guardian.items %}
+			    <div id="{{key}">
+			        <p><b>{{key}}</b>: 
+			        {% if value == True or value == False %}
+			        <select name="legal_{{key}}">
+			        	<option {% if value == True %} selected=selected {% endif %} value="True">True</option>
+			        	<option {% if value == False %} selected=selected  {% endif %} value="False">False</option>
+	 		        </select>
+			        {% else %}
+			        <input type="text" name="legal_{{key}}" value="{{value}}"><br>
+			        {% endif %}
+			        </p>
+			    </div>
+			    {% endfor %}
+		    </div>
+
+    		<div id="medical">
+    			<h1>Medical</h1>
+			    {% for key, value in medical.items %}
+			    <div id="{{key}">
+			        <p><b>{{key}}</b>: 
+			        {% if value == True or value == False %}
+			        <select name="medical_{{key}}">
+			        	<option {% if value == True %} selected=selected {% endif %} value="True">True</option>
+			        	<option {% if value == False %} selected=selected  {% endif %} value="False">False</option>
+	 		        </select>
+			        {% else %}
+			        <input type="text" name="medical_{{key}}" value="{{value}}"><br>
+			        {% endif %}
+			        </p>
+			    </div>
+			    {% endfor %}
+		    </div>
+
+		  	<div id="identifying">
+    			<h1>Identifying</h1>
+			    {% for key, value in identifying.items %}
+			    <div id="{{key}">
+			        <p><b>{{key}}</b>: 
+			        {% if value == True or value == False %}
+			        <select name="identifying_{{key}}">
+			        	<option {% if value == True %} selected=selected {% endif %} value="True">True</option>
+			        	<option {% if value == False %} selected=selected  {% endif %} value="False">False</option>
+	 		        </select>
+			        {% else %}
+			        <input type="text" name="identifying_{{key}}" value="{{value}}"><br>
+			        {% endif %}
+			        </p>
+			    </div>
+			    {% endfor %}
+		    </div>
+		      <input type="submit">
+	    </form>
 </body>
 </html>
