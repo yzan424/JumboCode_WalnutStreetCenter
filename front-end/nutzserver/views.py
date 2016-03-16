@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login
 from nutzserver.models import *
 from django.template import *
 import json, requests
@@ -139,3 +141,29 @@ def update(request, profile_id):
 
         #in production redirect to the profile page
         return JsonResponse(json.dumps(emfprofile), safe=False)
+
+
+
+def my_view(request):
+    if request.method == 'GET':
+        return render(request, 'signin.html')
+    else:
+        username = request.POST['username']
+        password = request.POST['password']
+        print(username, password)
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+            # Redirect to a success page.
+                return HttpResponseRedirect('/')
+            else:
+                print("Disabled Account")
+                return render(request, 'signin.html', context={ 'error': 'Disabled Account'})
+                # Return a 'disabled account' error message
+                ...
+        else:
+            print("Invalid Login")
+            return render(request, 'signin.html', context={})
+            # Return an 'invalid login' error message.
+            ...
