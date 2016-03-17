@@ -144,7 +144,7 @@ def update(request, profile_id):
 
 
 
-def my_view(request):
+def login(request):
     if request.method == 'GET':
         return render(request, 'signin.html')
     else:
