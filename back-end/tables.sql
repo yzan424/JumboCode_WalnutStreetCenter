@@ -7,7 +7,7 @@
         height in inches 
         weight in pounds
 );*/
-CREATE TABLE patients (
+CREATE TABLE basic_info (
     /* basic patient information */
     patient_id INTEGER PRIMARY KEY, /* note: MAY NOT BE INT */
     state_id TEXT,
@@ -45,11 +45,12 @@ CREATE TABLE patients (
     area_meaningful_tie TEXT,
     referral_source TEXT,
     accompanied_by TEXT,
-    /* work */
     work_phone VARCHAR(10),
-    work_address TEXT,
-
-    /* legal guardian info */
+    work_address TEXT
+);
+CREATE TABLE legal_guardian_and_family_info (
+    /* legal guardian and family info */
+    patient_id INTEGER PRIMARY KEY REFERENCES basic_info,
     guardian_name TEXT,
     guardian_phone VARCHAR(10),
     guardian_address TEXT,
@@ -62,21 +63,21 @@ CREATE TABLE patients (
     mother_birthplace TEXT,
     mother_alive BOOLEAN,
     parents_marital_status TEXT,
-
-    /* family info */
     family_phone VARCHAR(10),
-    family_address TEXT,
-
-
-    /* medical info */
+    family_address TEXT
+);
+CREATE TABLE medical_info (
+    patient_id INTEGER PRIMARY KEY REFERENCES basic_info,
     physician_id INTEGER REFERENCES physicians, /* TODO: Remove in ORM, replace w/ relation */
     diagnoses TEXT,
     allergies TEXT,
     alzheimers_dementia BOOLEAN,
     down_syndrome BOOLEAN,
-    vision_problem BOOLEAN,
-
+    vision_problem BOOLEAN
+);
+CREATE TABLE identifying_info (
     /* identifying info */
+    patient_id INTEGER PRIMARY KEY REFERENCES basic_info,
     self_protection TEXT,
     behavior TEXT,
     response_to_search TEXT,
@@ -178,6 +179,7 @@ CREATE TABLE service_providers (
 CREATE TABLE  appointments (
     appointment_id SERIAL PRIMARY KEY,
     appointment_type TEXT NOT NULL,
+    address TEXT,
     patient_id INTEGER REFERENCES patients,
     last_appointment DATE,
     frequency INTEGER, /*  Note: stored in months*/
