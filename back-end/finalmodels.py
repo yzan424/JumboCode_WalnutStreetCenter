@@ -13,12 +13,15 @@ patient_doctor = Table('patient_doctor', Base.metadata,
 class patient(Base):
     __tablename__ = 'patient'
     id = Column(Integer, primary_key=True)
-    program_id = Column(Integer, ForeignKey('program.id'))
+
+    program_id = Column(Integer, ForeignKey('program.id'), unique=True)
     program = relationship("program", back_populates="patients")
     doctors = relationship("doctor",
                             secondary=patient_doctor,
                             back_populates="patients")
+    primary_physician = Column(Integer, ForeignKey('doctor.id'), unique=True)
 
+    """ Many-one relations """
     contacts = relationship("contact", back_populates="patient")
     health_insurance_and_other = relationship("health_insurance_and_other",
                                               back_populates = "patient")
@@ -31,10 +34,36 @@ class patient(Base):
     tracking = relationship("tracking", back_populates = "patient")
     restrictive_practices = relationship("restrictive_practice", 
                                          back_populates="patient")
+
+    """ Unique one-to-one relations """
+    basic_info = relationship("basic_info", 
+            uselist=False, back_populates="patient")
+    legal_guardian_and_family_info = relationship("legal_guardian_and_family_info",
+            uselist=False, back_populates="patient")
+    medical_info = relationship("medical_info", 
+            uselist=False, back_populates="patient")
+    identifying_info = relationship("identifying_info", 
+            uselist=False, back_populates="patient")
+    self_medication = relationship("self_medication", 
+            uselist=False, back_populates="patient")
+    individual_support_plan = relationship("individual_support_plan", 
+            uselist=False, back_populates="patient")
+    medical_treatment_plan = relationship("medical_treatment_plan", 
+            uselist=False, back_populates="patient")
+    behavior_assessment = relationship("behavior_assessment", 
+            uselist=False, back_populates="patient")
+    behavior_support_plan = relationship("behavior_support_plan", 
+            uselist=False, back_populates="patient")
+    rogers_monitor = relationship("rogers_monitor", 
+            uselist=False, back_populates="patient")
+
+    """ Non-unique one-to-one relations """
 #;
 class basic_info(Base):
     __tablename__ = 'basic_info'
-    patient_id = Column(Integer, ForeignKey('patient.id'), primary_key=True)
+    id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer, ForeignKey('patient.id'), unique=True, nullable=False)
+    patient = relationship("patient", back_populates="basic_info")
     state_id = Column(String)
     name_first = Column(String)
     name_last = Column(String)
@@ -74,7 +103,10 @@ class basic_info(Base):
 #;
 class legal_guardian_and_family_info(Base):
     __tablename__ = 'legal_guardian_and_family_info'
-    patient_id = Column(Integer, ForeignKey('patient.id'), primary_key=True)
+    id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer, ForeignKey('patient.id'), unique=True, nullable=False)
+    patient = relationship("patient",
+            back_populates="legal_guardian_and_family_info")
     guardian_name = Column(String)
     guardian_phone = Column(String)
     guardian_address = Column(String)
@@ -93,7 +125,9 @@ class legal_guardian_and_family_info(Base):
 # TODO: Add many-many relation between medical_info and doctors
 class medical_info(Base):
     __tablename__ = 'medical_info'
-    patient_id = Column(Integer, ForeignKey('patient.id'), primary_key=True)
+    id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer, ForeignKey('patient.id'), unique=True, nullable=False)
+    patient = relationship("patient", back_populates="medical_info")
     diagnoses = Column(String)
     allergies = Column(String)
     alzheimers_dementia = Column(Boolean)
@@ -102,7 +136,10 @@ class medical_info(Base):
 #;
 class identifying_info(Base):
     __tablename__ = 'identifying_info'
-    patient_id = Column(Integer, ForeignKey('patient.id'), primary_key=True)
+    id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer, ForeignKey('patient.id'), unique=True, nullable=False)
+    patient = relationship("patient", back_populates="identifying_info")
+
     self_protection = Column(String)
     behavior = Column(String)
     response_to_search = Column(String)
@@ -115,7 +152,9 @@ class identifying_info(Base):
 #;
 class self_medication(Base):
     __tablename__ = 'self_medication'
-    patient_id = Column(Integer, ForeignKey('patient.id'), primary_key=True)
+    id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer, ForeignKey('patient.id'), unique=True, nullable=False)
+    patient = relationship("patient", back_populates="self_medication")
     hrc_approval_date = Column(Date)
     appointment_id = Column(Integer, ForeignKey('appointment.id'))
 
@@ -125,13 +164,17 @@ class self_medication(Base):
 #;
 class individual_support_plan(Base):
     __tablename__ = 'individual_support_plan'
-    patient_id = Column(Integer, ForeignKey('patient.id'), primary_key=True)
+    id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer, ForeignKey('patient.id'), unique=True, nullable=False)
+    patient = relationship("patient", back_populates="individual_support_plan")
     last_isp_date = Column(Date, nullable=False)
     comments = Column(String)
 #;
 class medical_treatment_plan(Base):
     __tablename__ = 'medical_treatment_plan'
-    patient_id = Column(Integer, ForeignKey('patient.id'), primary_key=True)
+    id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer, ForeignKey('patient.id'), unique=True, nullable=False)
+    patient = relationship("patient", back_populates="medical_treatment_plan")
     guardian_signature_date = Column(Date)
     appointment_id = Column(Integer, ForeignKey('appointment.id'))
     medications = Column(String)
@@ -140,20 +183,28 @@ class medical_treatment_plan(Base):
 #;
 class behavior_assessment(Base):
     __tablename__ = 'behavior_assessment'
-    patient_id = Column(Integer, ForeignKey('patient.id'), primary_key=True)
+    id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer, ForeignKey('patient.id'), unique=True, nullable=False)
+    patient = relationship("patient", back_populates="behavior_assessment")
     assessment_date = Column(Date)
     behaviors = Column(String)
     summary = Column(String)
 #;
 class behavior_support_plan(Base):
-    patient_id = Column(Integer, ForeignKey('patient.id'), primary_key=True)
+    __tablename__ = 'behavior_support_plan'
+    id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer, ForeignKey('patient.id'), unique=True, nullable=False)
+    patient = relationship("patient", back_populates="behavior_support_plan")
     guardian_signature_date = Column(Date)
     residential_appointment_id = Column(Integer, ForeignKey('appointment.id'))
     day_appointment_id = Column(Integer, ForeignKey('appointment.id'))
     tier = Column(String)
 #;
 class rogers_monitor(Base):
-    patient_id = Column(Integer, ForeignKey('patient.id'), primary_key=True)
+    __tablename__ = 'rogers_monitor'
+    id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer, ForeignKey('patient.id'), unique=True, nullable=False)
+    patient = relationship("patient", back_populates="rogers_monitor")
     next_court_date = Column(Date)
     last_court_date = Column(Date)
     guardian_signature_date = Column(Date)
