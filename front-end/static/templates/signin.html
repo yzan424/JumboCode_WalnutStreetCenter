@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Sign In</title>
+  <meta name="description" content="">
+</head>
+<body>
+	<h1>Hello. Please Sign In</h1>
+	<form method="POST" action="/signin/" class="form-signin">
+		{% csrf_token %}
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="name" class="sr-only">Username</label>
+        <input type="name" name="username" id="name" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>{% for value in error %}
+        <p>{{value}}</p>
+        {% endfor %}
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+     </form>
+
+
+</body>
+</html> 
