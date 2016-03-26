@@ -1,0 +1,3 @@
+from flask.ext import restless
+
+manager = restless.APIManager(app, flask_sqlalchemy_db=db)
