@@ -9,40 +9,10 @@
 </head>
 
 <body>
-    <div id="basic_info">
-        <h1>Basic Info</h1>
-        {% for key, value in basic_info.items %}
-        <div id="{{key}}">
-            <p><b>{{key}}</b>: {{value}} </p>
-        </div>
-        {% endfor %}
-    </div>
-
-    <div id="legal_guardian">
-        <h1>Legal Guardian Information</h1>
-        {% for key, value in legal_guardian.items %}
-        <div id="{{key}}">
-            <p><b>{{key}}</b>: {{value}} </p>
-        </div>
-        {% endfor %}
-    </div>
-
-    <div id="medical">
-        <h1>Medical Information</h1>
-        {% for key, value in medical.items %}
-        <div id="{{key}}">
-            <p><b>{{key}}</b>: {{value}} </p>
-        </div>
-        {% endfor %}
-    </div>
-
-    <div id="identifying">
-        <h1>Identifying Information</h1>
-        {% for key, value in identifying.items %}
-        <div id="{{key}}">
-            <p><b>{{key}}</b>: {{value}} </p>
-        </div>
-        {% endfor %}
+    <div id="Diagnoses">
+        <h2>Diagnoses</h2>
+        <p>Diagnoses: {{medical_info.diagnoses}}</p>
+        <p><input type="checkbox" {% if medical_info.alzheimers_dementia == True %}checked {% endif %}>Alzheimers</p>
     </div>
 
 </body>
