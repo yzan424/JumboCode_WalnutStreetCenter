@@ -1,0 +1,31 @@
+#firstrow {
+	padding-top: 15px;
+	padding-left: 3%;
+	padding-right: 3%;
+	background-color: #f2f2f2;
+}
+
+#secondrow {
+	font-size: 14px;
+	padding-top: 10px;
+}
+
+#thirdrow {
+	padding-top: 10px;
+	color: white;
+	font-size: 16px;
+}
+.patient_name {
+	text-align: center;
+	font-size: 25px;
+	font-weight: bold;
+	color: #33cccc;
+}
+.grayed {
+	background-color: #f2f2f2;
+}
+
+.darkgrayed {
+	background-color: #A9A9A9;
+	padding-top: 10px;
+}
