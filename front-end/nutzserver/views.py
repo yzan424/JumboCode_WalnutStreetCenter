@@ -330,15 +330,18 @@ def backend(request, profile_id):
         # TODO: Probably should return something else    
         return JsonResponse({"success": True})
 
-
-def get_request(request, profile_id, template):
-    profile_data = requests.get(backendGET + profile_id + '/')
-    profile_data = json.loads(profile_data.json())
-
-    return render(request, template, context={'id': profile_id, 'basic_info': profile_data['basic_info'], 'legal_guardian': profile_data['legal_guardian'], 'medical': profile_data['medical'], 'identifying': profile_data['identifying']})
-
 def profile(request, profile_id):
-    return get_request(request, profile_id, "profile.html")
+    medical_info = requests.get(backendGET + profile_id + '?data=medical')
+    basic_info = requests.get(backendGET + profile_id + '?data=basic')
+    self_preservation = requests.get(backendGET + profile_id + '?data=self_preservation')
+    identifying = requests.get(backendGET + profile_id + '?data=identifying') 
+
+    medical_info = json.loads(medical_info.json())
+    basic_info = json.loads(basic_info.json())
+    self_preservation = json.loads(self_preservation.json())
+    identifying = json.loads(identifying.json())
+
+    return render(request, "profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying})
 
 def update(request, profile_id):
     if request.method == 'GET':
