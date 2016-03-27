@@ -238,7 +238,7 @@ def backend(request, profile_id):
                 "individual_support_plan_id": 17,
                 "patient_id": profile_id,
                 "last_isp_date": "1/1/2012",
-                "Comments": ""
+                "comments": ""
             }
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
@@ -345,6 +345,19 @@ def profile(request, profile_id):
     legal_guardian = json.loads(legal_guardian.json())
 
     return render(request, "profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian})
+
+def protocol(request, profile_id):
+    protocols = requests.get(backendGET + profile_id + '?data=protocols')
+    isp = requests.get(backendGET + profile_id + '?data=isp')
+    supportive = requests.get(backendGET + profile_id + '?data=supportive')
+    tracking = requests.get(backendGET + profile_id + '?data=tracking')  
+
+    protocols = json.loads(protocols.json())
+    isp = json.loads(isp.json())
+    supportive = json.loads(supportive.json())
+    tracking = json.loads(tracking.json())
+
+    return render(request, "protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking})
 
 def update(request, profile_id):
     if request.method == 'GET':

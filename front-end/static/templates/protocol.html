@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div id="protocols">
+        {% for item in protocols %}
+            <h3>Name: {{item.name}}</h3>
+            <p>Description: {{item.description}}</p>
+            <p>Guardian Signature: {{item.guardian_signature_date}}</p>
+            <p>Physician Signature: {{item.physician_signature_date}}</p>
+        {% endfor %}
+        </div>
+
+        <div id="isp">
+            <h2>ISP</h2>
+            <p>Last ISP: {{isp.last_isp_date}}</p>
+            <p>Comments: {{isp.comments}}</p>
+        </div>
+
+        <div id="supportive">
+        <h2>Supportive and Protective Devices</h2>
+        {% for item in supportive %}
+            <h3>{{item.device_type}}</h3>
+            <p>HRC Approval Date: {{item.hrc_approval_date}}</p>
+            <p>HRC Submission Date: {{item.hrc_submission_date}}</p>
+            <p>Physician Signature: {{item.physician_signature}}</p>
+            <p>Nurse Signature: {{item.nurse_signature}}</p>
+        {% endfor %}
+        </div>
+
+        <div id="tracking">
+            <h2>Tracking</h2>
+            {% for item in tracking %}
+                <h3>{{item.tracking_name}}</h3>
+                <p>Description: {{item.description}}</p>
+                <p>Most Recent: {{item.most_recent}}</p>
+                <p>Timeframe: Every {{item.next_due}} month(s)</p>
+            {% endfor %}
+        </div>
+
+    </body>
+</html>
