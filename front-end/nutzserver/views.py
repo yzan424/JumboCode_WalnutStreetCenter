@@ -68,6 +68,7 @@ def backend(request, profile_id):
                 "guardian_address": "7th Avenue New York, NY",
                 "father_name": "John Doe Sr.",
                 "father_birthday": "1/1/2018",
+                "father_birthplace": "Kansas",
                 "father_alive": True,
                 "mother_maiden_name": "Maiden",
                 "mother_birthday": "1/17/2014",
@@ -335,13 +336,15 @@ def profile(request, profile_id):
     basic_info = requests.get(backendGET + profile_id + '?data=basic')
     self_preservation = requests.get(backendGET + profile_id + '?data=self_preservation')
     identifying = requests.get(backendGET + profile_id + '?data=identifying') 
+    legal_guardian = requests.get(backendGET + profile_id + '?data=legal_guardian') 
 
     medical_info = json.loads(medical_info.json())
     basic_info = json.loads(basic_info.json())
     self_preservation = json.loads(self_preservation.json())
     identifying = json.loads(identifying.json())
+    legal_guardian = json.loads(legal_guardian.json())
 
-    return render(request, "profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying})
+    return render(request, "profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian})
 
 def update(request, profile_id):
     if request.method == 'GET':
