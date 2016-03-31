@@ -1,4 +1,4 @@
-class legal_guardian_and_family_info(db.model):
+class legal_Family_Info(db.model):
     __tablename__ = 'legal_guardian_and_family_info'
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id), unique=True, nullable=False)
