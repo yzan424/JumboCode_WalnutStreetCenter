@@ -24,6 +24,9 @@ class Patient(db.Model):
     __tablename__ = 'patient'
     id = db.Column(db.Integer, primary_key=True)
 
+    name_first = db.Column(db.String)
+    name_last = db.Column(db.String)
+    
     """ Many-to-many relations """
     program = db.relationship(
         'Program',
@@ -75,8 +78,6 @@ class BasicInfo(db.Model):
     __tablename__ = 'basic_info'
     id = db.Column(db.Integer, primary_key=True)
     state_id = db.Column(db.String)
-    name_first = db.Column(db.String)
-    name_last = db.Column(db.String)
     name_preferred = db.Column(db.String)
     birthday = db.Column(db.Date)
     birthplace = db.Column(db.String)
