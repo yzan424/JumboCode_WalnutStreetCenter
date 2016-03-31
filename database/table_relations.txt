@@ -1,0 +1,67 @@
+This is a list of relationships between tables in the schema for the Walnut
+Street Center patient database. In databases these are called functional
+dependencies and are needed for the process of normalization. These functional
+dependencies help maintain the integrity of the database and ensure that no
+conflicting data is inserted into the database.
+Every element in these relations derives from a table name that can be found in
+the schema under back-end/models.py denoted by the __tablename__ under a class.
+
+Key:
+    ---     many-to-many (e.g. patients can have many doctors, doctors can have 
+                               many patients)
+    <--     one-to-many (e.g. a patient has one or more contacts)
+    <->     one-to-one (e.g. a patient has one and only one set of basic info)
+
+Note: A one to one relationship is the equivalent of them being in the same
+      table. I may have separated for organization of information.
+      Also note that some of these relationships are transitive, so there may
+      exist a relationship that exists by traversing another.
+      (e.g. patient <-> self_medication <-> appointment)
+
+patient <-> basic_info    
+patient --> program    
+patient <-> legal_guardian_and_family_info    
+patient <-> medical_info    
+patient <-> identifying_info    
+
+patient <-> self_medication    
+
+patient <-> individual_support_plan    
+patient <-> medical_treatment_plan    
+patient <-> behavior_assessment    
+patient <-> behavior_support_plan    
+patient <-> rogers_monitor    
+
+
+
+
+patient <-- contact    
+patient <-- health_insurance_and_other    
+patient <-- self_preservation    
+patient <-- legal_competency    
+patient <-- service_provider    
+patient <-- supportive_protective_device    
+patient <-- tracking    
+patient <-- restrictive_practice    
+
+patient --- doctor
+
+staff <-- program     
+patient <--program
+director <-- staff    
+
+rogers_monitor <-> appointment    TODO
+medical_treatment_plan <-> appointment    TODO
+self_medication --> appointment    TODO NOTE: How do we handle appointment references?
+behavior_support_plan --> appointment // Has 2 appointment references    TODO
+                      --> appointment 
+
+appointment --> {patient, doctor, staff}
+appointment --> patient    TODO
+appointment --> doctor    TODO
+appointment --> staff    TODO
+
+one of the appointments is a protocol
+one appointment to one protocol
+protocol <-> appointment    TODO
+
