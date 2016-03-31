@@ -12,31 +12,64 @@ ProgramPatient = db.Table(
     db.Column('program_id', db.Integer, db.ForeignKey("program.id"))
 )
 
+DoctorPatient = db.Table(
+    'doctor_patient',
+    db.Model.metadata,
+    db.Column('patient_id', db.Integer, db.ForeignKey("patient.id")),    
+    db.Column('doctor_id', db.Integer, db.ForeignKey("doctor.id"))
+)
+
 class Patient(db.Model):
     
     __tablename__ = 'patient'
     id = db.Column(db.Integer, primary_key=True)
 
+    """ Many-to-many relations """
     program = db.relationship(
         'Program',
         secondary=ProgramPatient,
         backref='patients',
     )
     primary_physician_id = db.Column(db.Integer, db.ForeignKey('doctor.id'), unique=True)
-
-    """ Many-one relations """
-#    contacts = db.relationship(
-#        "Contact",
-#        backref='patient')
-
+    primary_physician = db.relationship(
+        'Doctor',
+        primaryjoin = 'Patient.primary_physician_id==Doctor.id',
+        backref = 'main_patients'
+    )
+    doctors = db.relationship(
+        'Doctor',
+        secondary = DoctorPatient,
+        backref = 'patients'
+    )
+    
+    
     """ Unique one-to-one relations """
     basic_info_id = db.Column(db.Integer, db.ForeignKey('basic_info.id'))
     basic_info = db.relationship(
         'BasicInfo',        
-        uselist=False, backref='patient'
+        primaryjoin = 'Patient.basic_info_id==BasicInfo.id',
+        backref='patient'
     )
 
-#;
+    legal_family_info_id = db.Column(db.Integer, db.ForeignKey('legal_family_info.id')) 
+    legal_family_info = db.relationship(
+        'LegalFamilyInfo',        
+        primaryjoin = 'Patient.legal_family_info_id==LegalFamilyInfo.id',
+        backref='patient'
+    )
+    medical_info_id = db.Column(db.Integer, db.ForeignKey('medical_info.id')) 
+    medical_info = db.relationship(
+        'MedicalInfo',        
+        primaryjoin = 'Patient.medical_info_id==MedicalInfo.id',
+        backref='patient'
+    )
+    identifying_info_id = db.Column(db.Integer, db.ForeignKey('identifying_info.id'))
+    identifying_info = db.relationship(
+        'IdentifyingInfo',
+        primaryjoin = 'Patient.identifying_info_id==IdentifyingInfo.id',
+        backref = 'patient'
+    )
+
 class BasicInfo(db.Model):
 
     __tablename__ = 'basic_info'
@@ -79,6 +112,49 @@ class BasicInfo(db.Model):
     work_address = db.Column(db.String)
 #;
 
+class LegalFamilyInfo(db.Model):
+    __tablename__ = 'legal_family_info'
+    id = db.Column(db.Integer, primary_key=True)
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), unique=True, nullable=False)
+    guardian_name = db.Column(db.String)
+    guardian_phone = db.Column(db.String)
+    guardian_address = db.Column(db.String)
+    father_name = db.Column(db.String)
+    father_birthday = db.Column(db.Date)
+    father_birthplace = db.Column(db.String)
+    father_alive = db.Column(db.Boolean)
+    mother_maiden_name = db.Column(db.String)
+    mother_birthday = db.Column(db.Date)
+    mother_birthplace = db.Column(db.String)
+    mother_alive = db.Column(db.Boolean)
+    parents_martial_status = db.Column(db.String)
+    family_phone = db.Column(db.String(10))
+    family_address = db.Column(db.String)
+
+class MedicalInfo(db.Model):
+    __tablename__ = 'medical_info'
+    id = db.Column(db.Integer, primary_key=True)
+    diagnoses = db.Column(db.String)
+    allergies = db.Column(db.String)
+    alzheimers_dementia = db.Column(db.Boolean)
+    down_syndrome = db.Column(db.Boolean)
+    vision_problem = db.Column(db.Boolean)
+#;
+
+class IdentifyingInfo(db.Model):
+    __tablename__ = 'identifying_info'
+    id = db.Column(db.Integer, primary_key=True)
+    self_protection = db.Column(db.String)
+    behavior = db.Column(db.String)
+    response_to_search = db.Column(db.String)
+    movement_pattern = db.Column(db.String)
+    places_frequented = db.Column(db.String)
+    travel_method = db.Column(db.String)
+    carries_ID = db.Column(db.Boolean)
+    surrounding_awareness = db.Column(db.String)
+    last_update = db.Column(db.Date)
+#;
+
 #TODO: change things like bloodtype, sex, most things to enum. want to be able to change all at once.
 #;
 class Contact(db.Model):
@@ -104,10 +180,7 @@ class Program(db.Model):
     __tablename__ = 'program'
     id = db.Column(db.Integer, primary_key=True)
     address = db.Column(db.String, nullable=False)
-#    patients = db.relationship(
-#        "patient", back_populates="program")
-#    staff = relationship("staff", back_populates="program")
-#;
+
 
 class Staff(db.Model):
     __tablename__ = 'staff'
@@ -136,7 +209,4 @@ class Doctor(db.Model):
     address = db.Column(db.String)
     phone = db.Column(db.String(10))
     fax = db.Column(db.String(10))
-    patients = db.relationship(
-        "Patient",
-        backref="doctors"
-    )
+
