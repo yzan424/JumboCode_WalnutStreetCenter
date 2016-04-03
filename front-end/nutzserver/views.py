@@ -331,7 +331,7 @@ def backend(request, profile_id, data):
         # TODO: Probably should return something else    
         return JsonResponse({"success": True})
 
-def profile(request, profile_id):
+def profile(request, profile_id, edit):
     medical_info = requests.get(backendGET + profile_id + '/medical')
     basic_info = requests.get(backendGET + profile_id + '/basic')
     self_preservation = requests.get(backendGET + profile_id + '/self_preservation')
@@ -343,10 +343,13 @@ def profile(request, profile_id):
     self_preservation = json.loads(self_preservation.json())
     identifying = json.loads(identifying.json())
     legal_guardian = json.loads(legal_guardian.json())
+        
+    if edit == False:
+        return render(request, "profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian})
+    else:
+        return render(request, "update_profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian})        
 
-    return render(request, "profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian})
-
-def protocol(request, profile_id):
+def protocol(request, profile_id, edit):
     protocols = requests.get(backendGET + profile_id + '/protocols')
     isp = requests.get(backendGET + profile_id + '/isp')
     supportive = requests.get(backendGET + profile_id + '/supportive')
@@ -357,9 +360,12 @@ def protocol(request, profile_id):
     supportive = json.loads(supportive.json())
     tracking = json.loads(tracking.json())
 
-    return render(request, "protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking})
+    if edit == False:
+        return render(request, "protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking})
+    else:
+        return render(request, "update_protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking})        
 
-def behavior(request, profile_id):
+def behavior(request, profile_id, edit):
     medical_treatment_plan = requests.get(backendGET + profile_id + '/medical_treatment_plan')
     behavior = requests.get(backendGET + profile_id + '/behavior')
     behavior_support_plans = requests.get(backendGET + profile_id + '/behavior_support_plans')
@@ -371,11 +377,14 @@ def behavior(request, profile_id):
     behavior_support_plans = json.loads(behavior_support_plans.json())
     restrictive = json.loads(restrictive.json())
     rogers_monitor = json.loads(rogers_monitor.json())
+        
+    if edit == False:
+        return render(request, "behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor})
+    else:
+        return render(request, "update_behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor})        
 
-    return render(request, "behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor})
 
-
-def support(request, profile_id):
+def support(request, profile_id, edit):
     legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian')
     insurance = requests.get(backendGET + profile_id + '/insurance')
     legal_status = requests.get(backendGET + profile_id + '/legal_competency')
@@ -383,8 +392,37 @@ def support(request, profile_id):
     legal_guardian = json.loads(legal_guardian.json())
     insurance = json.loads(insurance.json())
     legal_status = json.loads(legal_status.json())
+        
+    if edit == False:
+        return render(request, "support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status})
+    else:
+        return render(request, "update_support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status})        
 
-    return render(request, "support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status})
+def edit(request, page, profile_id):
+    if page == 'profile':
+        if request.method == 'GET':
+            return profile(request, profile_id, True)
+        else:
+            # send the new stuffs to the backend
+            return HttpResponseRedirect("/profile/" + "")
+    elif page == "protocol":
+        if request.method == "GET":
+            return protocol(request, profile_id, True)
+        else:
+            # send new info
+            pass
+            #redirect
+    elif page == "behavior":
+        if request.method == "GET":
+            return behavior(request, profile_id, True)
+        else:
+            pass
+    elif page == "support":
+        if request.method == "GET":
+            return support(request, profile_id, True)
+        else:
+            pass
+
 
 def login(request):
     if request.method == 'GET':

@@ -20,10 +20,11 @@ from nutzserver.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^backend/profile/(?P<profile_id>\d+)/(?P<data>\w+)/$', backend),
-    url(r'^profile/(?P<profile_id>\d+)/$', profile),
-    url(r'^protocol/(?P<profile_id>\d+)/$', protocol),
-    url(r'^support/(?P<profile_id>\d+)/$', support),
-    url(r'^behavior/(?P<profile_id>\d+)/$', behavior),
+    url(r'^profile/(?P<profile_id>\d+)/$', profile, {'edit': False}),
+    url(r'^protocol/(?P<profile_id>\d+)/$', protocol, {'edit': False}),
+    url(r'^support/(?P<profile_id>\d+)/$', support, {'edit': False}),
+    url(r'^behavior/(?P<profile_id>\d+)/$', behavior, {'edit': False}),
+    url(r'^edit/(?P<page>\w+)/(?P<profile_id>\d+)/$', edit),
     url(r'^signin/$', login),
 
 ]
