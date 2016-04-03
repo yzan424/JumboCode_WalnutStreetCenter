@@ -359,41 +359,6 @@ def protocol(request, profile_id):
 
     return render(request, "protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking})
 
-def update(request, profile_id):
-    if request.method == 'GET':
-        return get_request(request, profile_id, "update.html")
-    elif request.method == 'POST':
-
-
-        emfprofile = {}
-        emfprofile['id'] = profile_id
-        emfprofile['basic_info'] = {}
-        emfprofile['legal_guardian'] = {}
-        emfprofile['medical'] = {}
-        emfprofile['identifying'] = {}
-
-        for elems in request.POST:
-                if elems != 'csrfmiddlewaretoken':
-                        category, key = elems.split('_', 1)
-                if category == 'basic':
-                        emfprofile['basic_info'][key] = request.POST[elems]
-                elif category == 'legal':
-                        emfprofile['legal_guardian'][key] = request.POST[elems]
-                elif category == 'medical':
-                        emfprofile['medical'][key] = request.POST[elems]
-                elif category == 'identifying':
-                        emfprofile['identifying'][key] = request.POST[elems]
-                else:
-                        print("We dun fucked up")
-
-
-
-
-        requests.post(backendPOST + profile_id + '/', data=emfprofile )
-
-        #in production redirect to the profile page
-        return JsonResponse(json.dumps(emfprofile), safe=False)
-
 def behavior(request, profile_id):
     medical_treatment_plan = requests.get(backendGET + profile_id + '?data=medical_treatment_plan')
     behavior = requests.get(backendGET + profile_id + '?data=behavior')
