@@ -11,12 +11,12 @@ backendGET = 'http://localhost:8000/backend/profile/'
 backendPOST = 'http://localhost:8000/backend/profile/'
 
 # Create your views here.
-def backend(request, profile_id):
+def backend(request, profile_id, data):
     if request.method == 'GET':
         #create our response object
-        if request.GET['data'] == "basic":
+        if data == "basic":
             # this is the basic info, we return this under demographics
-            # Here's how to access this info: http://localhost:8000/backend/profile/1?data=basic
+            # Here's how to access this info: http://localhost:8000/backend/profile/1/basic
             result = {
                 "patient_id": profile_id,
                 "state_id": "MA",
@@ -59,8 +59,8 @@ def backend(request, profile_id):
             }
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "legal_guardian":
-            # Access: http://localhost:8000/backend/profile/1?data=legal_guardian
+        elif data == "legal_guardian":
+            # Access: http://localhost:8000/backend/profile/1/legal_guardian
             result = {
                 "patient_id": profile_id,
                 "guardian_name": "John Cena",
@@ -80,8 +80,8 @@ def backend(request, profile_id):
             }
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "medical":
-            # Access: http://localhost:8000/backend/profile/1?data=medical
+        elif data == "medical":
+            # Access: http://localhost:8000/backend/profile/1/medical
             result = {
                 "patient_id": profile_id,
                 "physician_id": 17,
@@ -93,8 +93,8 @@ def backend(request, profile_id):
             }
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "identifying":
-            # Access: http://localhost:8000/backend/profile/1?data=identifying
+        elif data == "identifying":
+            # Access: http://localhost:8000/backend/profile/1/identifying
             result = {
                 "patient_id": profile_id,
                 "self_protection": "Knows martial arts",
@@ -109,8 +109,8 @@ def backend(request, profile_id):
             }
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "self_preservation":
-            # Access: http://localhost:8000/backend/profile/1?data=self_preservation
+        elif data == "self_preservation":
+            # Access: http://localhost:8000/backend/profile/1/self_preservation
             result = [{
                 "patient_id": profile_id,
                 "self_preservation_id": 18,
@@ -128,8 +128,8 @@ def backend(request, profile_id):
             }]
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "insurance":
-            # Access: http://localhost:8000/backend/profile/1?data=insurance
+        elif data == "insurance":
+            # Access: http://localhost:8000/backend/profile/1/insurance
             result = [{
                 "patient_id": profile_id,
                 "health_insurance_and_other_id": "123123123123123",
@@ -151,8 +151,8 @@ def backend(request, profile_id):
             }]
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "legal_competency":
-            # Access: http://localhost:8000/backend/profile/1?data=legal_competency
+        elif data == "legal_competency":
+            # Access: http://localhost:8000/backend/profile/1/legal_competency
             result = [{
                 "patient_id": profile_id,
                 "legal_competency_id": 17,
@@ -172,8 +172,8 @@ def backend(request, profile_id):
             }]
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "service_providers":
-            # Access: http://localhost:8000/backend/profile/1?data=service_providers
+        elif data == "service_providers":
+            # Access: http://localhost:8000/backend/profile/1/service_providers
             result = [{
                 "patient_id": profile_id,
                 "service_providers_id": 15,
@@ -189,8 +189,8 @@ def backend(request, profile_id):
             }]
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "protocols":
-            # Access: http://localhost:8000/backend/profile/1?data=protocols
+        elif data == "protocols":
+            # Access: http://localhost:8000/backend/profile/1/protocols
             result = [{
                 "protocol_id": 2,
                 "patient_id": profile_id,
@@ -211,8 +211,8 @@ def backend(request, profile_id):
             }]
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "supportive":
-            # Access: http://localhost:8000/backend/profile/1?data=supportive
+        elif data == "supportive":
+            # Access: http://localhost:8000/backend/profile/1/supportive
             result = [{
                 "supportive_protective_devices_id": 17,
                 "patient_id": profile_id,
@@ -232,8 +232,8 @@ def backend(request, profile_id):
             }]
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "isp":
-            # Access: http://localhost:8000/backend/profile/1?data=isp
+        elif data == "isp":
+            # Access: http://localhost:8000/backend/profile/1/isp
             result = {
                 "individual_support_plan_id": 17,
                 "patient_id": profile_id,
@@ -242,8 +242,8 @@ def backend(request, profile_id):
             }
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "tracking":
-            # Access: http://localhost:8000/backend/profile/1?data=tracking
+        elif data == "tracking":
+            # Access: http://localhost:8000/backend/profile/1/tracking
             result = [{
                 "tracking_id": 12,
                 "tracking_name": "GPS",
@@ -261,8 +261,8 @@ def backend(request, profile_id):
             }]
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "medical_treatment_plan":
-            # Access: http://localhost:8000/backend/profile/1?data=medical_treatment_plan
+        elif data == "medical_treatment_plan":
+            # Access: http://localhost:8000/backend/profile/1/medical_treatment_plan
             result = {
                 "medical_treatment_plan_id": 12,
                 "patient_id": profile_id,
@@ -274,8 +274,8 @@ def backend(request, profile_id):
             }
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "behavior":
-            # Access: http://localhost:8000/backend/profile/1?data=behavior
+        elif data == "behavior":
+            # Access: http://localhost:8000/backend/profile/1/behavior
             result = {
                 "patient_id": profile_id,
                 "assessment_date": "1/1/2012",
@@ -284,8 +284,8 @@ def backend(request, profile_id):
             }
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "restrictive":
-            # Access: http://localhost:8000/backend/profile/1?data=restrictive
+        elif data == "restrictive":
+            # Access: http://localhost:8000/backend/profile/1/restrictive
             result = [{
                 "patient_id": profile_id,
                 "restrictive_practices_id": 15,
@@ -304,8 +304,8 @@ def backend(request, profile_id):
             }]
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "behavior_support_plans":
-            # Access: http://localhost:8000/backend/profile/1?data=behavior_support_plans
+        elif data == "behavior_support_plans":
+            # Access: http://localhost:8000/backend/profile/1/behavior_support_plans
             result = {
                 "patient_id": profile_id,
                 "guardian_signature_date": "1/1/2013",
@@ -315,8 +315,8 @@ def backend(request, profile_id):
             }
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif request.GET['data'] == "rogers_monitor":
-            # Access: http://localhost:8000/backend/profile/1?data=rogers_monitor
+        elif data == "rogers_monitor":
+            # Access: http://localhost:8000/backend/profile/1/rogers_monitor
             result = {
                 "patient_id": profile_id,
                 "next_court_date": "1/1/2012",
@@ -332,11 +332,11 @@ def backend(request, profile_id):
         return JsonResponse({"success": True})
 
 def profile(request, profile_id):
-    medical_info = requests.get(backendGET + profile_id + '?data=medical')
-    basic_info = requests.get(backendGET + profile_id + '?data=basic')
-    self_preservation = requests.get(backendGET + profile_id + '?data=self_preservation')
-    identifying = requests.get(backendGET + profile_id + '?data=identifying') 
-    legal_guardian = requests.get(backendGET + profile_id + '?data=legal_guardian') 
+    medical_info = requests.get(backendGET + profile_id + '/medical')
+    basic_info = requests.get(backendGET + profile_id + '/basic')
+    self_preservation = requests.get(backendGET + profile_id + '/self_preservation')
+    identifying = requests.get(backendGET + profile_id + '/identifying') 
+    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian') 
 
     medical_info = json.loads(medical_info.json())
     basic_info = json.loads(basic_info.json())
@@ -347,10 +347,10 @@ def profile(request, profile_id):
     return render(request, "profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian})
 
 def protocol(request, profile_id):
-    protocols = requests.get(backendGET + profile_id + '?data=protocols')
-    isp = requests.get(backendGET + profile_id + '?data=isp')
-    supportive = requests.get(backendGET + profile_id + '?data=supportive')
-    tracking = requests.get(backendGET + profile_id + '?data=tracking')  
+    protocols = requests.get(backendGET + profile_id + '/protocols')
+    isp = requests.get(backendGET + profile_id + '/isp')
+    supportive = requests.get(backendGET + profile_id + '/supportive')
+    tracking = requests.get(backendGET + profile_id + '/tracking')  
 
     protocols = json.loads(protocols.json())
     isp = json.loads(isp.json())
@@ -360,11 +360,11 @@ def protocol(request, profile_id):
     return render(request, "protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking})
 
 def behavior(request, profile_id):
-    medical_treatment_plan = requests.get(backendGET + profile_id + '?data=medical_treatment_plan')
-    behavior = requests.get(backendGET + profile_id + '?data=behavior')
-    behavior_support_plans = requests.get(backendGET + profile_id + '?data=behavior_support_plans')
-    restrictive = requests.get(backendGET + profile_id + '?data=restrictive')
-    rogers_monitor = requests.get(backendGET + profile_id + '?data=rogers_monitor')
+    medical_treatment_plan = requests.get(backendGET + profile_id + '/medical_treatment_plan')
+    behavior = requests.get(backendGET + profile_id + '/behavior')
+    behavior_support_plans = requests.get(backendGET + profile_id + '/behavior_support_plans')
+    restrictive = requests.get(backendGET + profile_id + '/restrictive')
+    rogers_monitor = requests.get(backendGET + profile_id + '/rogers_monitor')
 
     medical_treatment_plan = json.loads(medical_treatment_plan.json())
     behavior = json.loads(behavior.json())
@@ -376,9 +376,9 @@ def behavior(request, profile_id):
 
 
 def support(request, profile_id):
-    legal_guardian = requests.get(backendGET + profile_id + '?data=legal_guardian')
-    insurance = requests.get(backendGET + profile_id + '?data=insurance')
-    legal_status = requests.get(backendGET + profile_id + '?data=legal_competency')
+    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian')
+    insurance = requests.get(backendGET + profile_id + '/insurance')
+    legal_status = requests.get(backendGET + profile_id + '/legal_competency')
 
     legal_guardian = json.loads(legal_guardian.json())
     insurance = json.loads(insurance.json())
@@ -409,3 +409,5 @@ def login(request):
             return render(request, 'signin.html', context={})
             # Return an 'invalid login' error message.
             ...
+
+
