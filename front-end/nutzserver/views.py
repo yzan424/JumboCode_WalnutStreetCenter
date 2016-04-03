@@ -394,7 +394,32 @@ def update(request, profile_id):
         #in production redirect to the profile page
         return JsonResponse(json.dumps(emfprofile), safe=False)
 
+def behavior(request, profile_id):
+    medical_treatment_plan = requests.get(backendGET + profile_id + '?data=medical_treatment_plan')
+    behavior = requests.get(backendGET + profile_id + '?data=behavior')
+    behavior_support_plans = requests.get(backendGET + profile_id + '?data=behavior_support_plans')
+    restrictive = requests.get(backendGET + profile_id + '?data=restrictive')
+    rogers_monitor = requests.get(backendGET + profile_id + '?data=rogers_monitor')
 
+    medical_treatment_plan = json.loads(medical_treatment_plan.json())
+    behavior = json.loads(behavior.json())
+    behavior_support_plans = json.loads(behavior_support_plans.json())
+    restrictive = json.loads(restrictive.json())
+    rogers_monitor = json.loads(rogers_monitor.json())
+
+    return render(request, "behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor})
+
+
+def support(request, profile_id):
+    legal_guardian = requests.get(backendGET + profile_id + '?data=legal_guardian')
+    insurance = requests.get(backendGET + profile_id + '?data=insurance')
+    legal_status = requests.get(backendGET + profile_id + '?data=legal_competency')
+
+    legal_guardian = json.loads(legal_guardian.json())
+    insurance = json.loads(insurance.json())
+    legal_status = json.loads(legal_status.json())
+
+    return render(request, "support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status})
 
 def login(request):
     if request.method == 'GET':

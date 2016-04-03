@@ -1,0 +1,63 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Support</title>
+  <meta name="description" content="">
+</head>
+
+<body>
+    <div id="medical_treatment_plan">
+        <h1>Medical Treatment Plan</h1>
+        {% for key, value in medical_treatment_plan.items %}
+        <div id="{{key}}">
+            <p><b>{{key}}</b>: {{value}} </p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="behavior">
+        <h1>Behavior</h1>
+        {% for key, value in behavior.items %}
+        <div id="{{key}}">
+            <p><b>{{key}}</b>: {{value}} </p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="restrictive">
+        <h1>Restrictive</h1>
+
+ 		<p><b>{% for key, value in restrictive.0.items %}
+	       	||{{key}} 
+	 	{% endfor %}</b></p>
+	 	
+        {% for item in restrictive %}
+	        <p>|| {% for key, value in item.items %}
+	            {{value}} || 
+	        {% endfor %}
+	    {% endfor %}</p>
+    </div>
+
+    <div id="behavior_support_plans">
+        <h1>Behavior Support Plans</h1>
+        {% for key, value in behavior_support_plans.items %}
+            <div id="{{key}}">
+                <p><b>{{key}}</b>: {{value}} </p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="rogers_monitor">
+        <h1>Rogers Monitor</h1>
+        {% for key, value in rogers_monitor.items %}
+            <div id="{{key}}">
+                <p><b>{{key}}</b>: {{value}} </p>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
