@@ -9,6 +9,7 @@ import json, requests
 
 backendGET = 'http://localhost:8000/backend/profile/'
 backendPOST = 'http://localhost:8000/backend/profile/'
+backendPUT = 'http://localhost:8000/backend/profile/'
 
 # Create your views here.
 def backend(request, profile_id, data):
@@ -327,16 +328,16 @@ def backend(request, profile_id, data):
             }
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-    elif request.method == 'POST':
+    else:
         # TODO: Probably should return something else    
         return JsonResponse({"success": True})
 
 def profile(request, profile_id, edit):
-    medical_info = requests.get(backendGET + profile_id + '/medical')
-    basic_info = requests.get(backendGET + profile_id + '/basic')
-    self_preservation = requests.get(backendGET + profile_id + '/self_preservation')
-    identifying = requests.get(backendGET + profile_id + '/identifying') 
-    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian') 
+    medical_info = requests.get(backendGET + profile_id + '/medical/')
+    basic_info = requests.get(backendGET + profile_id + '/basic/')
+    self_preservation = requests.get(backendGET + profile_id + '/self_preservation/')
+    identifying = requests.get(backendGET + profile_id + '/identifying/') 
+    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian/') 
 
     medical_info = json.loads(medical_info.json())
     basic_info = json.loads(basic_info.json())
@@ -350,10 +351,10 @@ def profile(request, profile_id, edit):
         return render(request, "update_profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian})        
 
 def protocol(request, profile_id, edit):
-    protocols = requests.get(backendGET + profile_id + '/protocols')
+    protocols = requests.get(backendGET + profile_id + '/protocols/')
     isp = requests.get(backendGET + profile_id + '/isp')
-    supportive = requests.get(backendGET + profile_id + '/supportive')
-    tracking = requests.get(backendGET + profile_id + '/tracking')  
+    supportive = requests.get(backendGET + profile_id + '/supportive/')
+    tracking = requests.get(backendGET + profile_id + '/tracking/')  
 
     protocols = json.loads(protocols.json())
     isp = json.loads(isp.json())
@@ -366,11 +367,11 @@ def protocol(request, profile_id, edit):
         return render(request, "update_protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking})        
 
 def behavior(request, profile_id, edit):
-    medical_treatment_plan = requests.get(backendGET + profile_id + '/medical_treatment_plan')
-    behavior = requests.get(backendGET + profile_id + '/behavior')
-    behavior_support_plans = requests.get(backendGET + profile_id + '/behavior_support_plans')
-    restrictive = requests.get(backendGET + profile_id + '/restrictive')
-    rogers_monitor = requests.get(backendGET + profile_id + '/rogers_monitor')
+    medical_treatment_plan = requests.get(backendGET + profile_id + '/medical_treatment_plan/')
+    behavior = requests.get(backendGET + profile_id + '/behavior/')
+    behavior_support_plans = requests.get(backendGET + profile_id + '/behavior_support_plans/')
+    restrictive = requests.get(backendGET + profile_id + '/restrictive/')
+    rogers_monitor = requests.get(backendGET + profile_id + '/rogers_monitor/')
 
     medical_treatment_plan = json.loads(medical_treatment_plan.json())
     behavior = json.loads(behavior.json())
@@ -385,9 +386,9 @@ def behavior(request, profile_id, edit):
 
 
 def support(request, profile_id, edit):
-    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian')
-    insurance = requests.get(backendGET + profile_id + '/insurance')
-    legal_status = requests.get(backendGET + profile_id + '/legal_competency')
+    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian/')
+    insurance = requests.get(backendGET + profile_id + '/insurance/')
+    legal_status = requests.get(backendGET + profile_id + '/legal_competency/')
 
     legal_guardian = json.loads(legal_guardian.json())
     insurance = json.loads(insurance.json())
@@ -404,7 +405,70 @@ def edit(request, page, profile_id):
             return profile(request, profile_id, True)
         else:
             # send the new stuffs to the backend
-            return HttpResponseRedirect("/profile/" + "")
+            print(request.POST)
+            print('\n')
+            updated_medical_info = {}
+            updated_basic_info = {}
+            updated_self_preservation = []
+            new_self_preservation = []
+            updated_identifying = {}
+            updated_legal_guardian = {}
+
+
+            for keys, values in request.POST.items():
+                if (keys.split('.'))[0] == "basic_info":
+                    updated_basic_info[keys.split('.')[1]] = values
+                elif (keys.split('.'))[0] == "medical_info":
+                    updated_medical_info[keys.split('.')[1]] = values
+                elif (keys.split('.'))[0] == "identifying":
+                    updated_identifying[keys.split('.')[1]] = values
+                elif (keys.split('.'))[0] == "legal_guardian":
+                    updated_legal_guardian[keys.split('.')[1]] = values
+                elif (keys.split('.'))[0] == "self_preservation":
+                    self_preservation_id = keys.split('.')[2]
+                    dictKey = keys.split('.')[3]
+                    if (keys.split('.')[1] == "existing"):
+                        # these are just edits to existing things
+                        # create a new dictionary if it does not exist
+                        if not any(x['self_preservation_id'] == self_preservation_id for x in updated_self_preservation):
+                            updated_self_preservation.append({'self_preservation_id': self_preservation_id})
+
+                        for i in updated_self_preservation:
+                            if i['self_preservation_id'] == self_preservation_id:
+                                i[dictKey] = values
+                    else:
+                        # new entries to self_preservation
+                        # check if theres even anything in them
+                        if values != '':
+                            # these are just edits to existing things
+                            if not any(x['self_preservation_id'] == self_preservation_id for x in new_self_preservation):
+                                new_self_preservation.append({'self_preservation_id': self_preservation_id})
+
+                            for i in new_self_preservation:
+                                if i['self_preservation_id'] == self_preservation_id:
+                                    i[dictKey] = values
+
+            print("updated_identifying:", updated_identifying)
+            print("updated_medical_info:", updated_medical_info)
+            print("updated_basic_info:", updated_basic_info)
+            print("updated_self_prservation:", updated_self_preservation)
+            print("new_self_preservation:", new_self_preservation)
+            print("updated_legal_guardian:", updated_legal_guardian)
+
+            # send all the new stuff
+            requests.post(backendPOST + profile_id + '/identifying/', data=updated_identifying)
+            requests.post(backendPOST + profile_id + '/medical_info/', data=updated_medical_info)
+            requests.post(backendPOST + profile_id + '/basic/', data=updated_basic_info)
+            requests.post(backendPOST + profile_id + '/legal_guardian/', data=updated_legal_guardian)
+            for i in updated_self_preservation:
+                requests.post(backendPOST + profile_id + '/self_preservation/', data=i)           
+            for i in new_self_preservation:
+                i['patient_id'] = profile_id
+                i.pop('self_preservation_id', None)
+                print(i)
+                requests.put(backendPOST + 'self_preservation/' + profile_id, data=i) 
+
+            return HttpResponseRedirect("/profile/" + profile_id + '/')
     elif page == "protocol":
         if request.method == "GET":
             return protocol(request, profile_id, True)
