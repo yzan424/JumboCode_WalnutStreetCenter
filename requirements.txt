@@ -9,3 +9,5 @@ python-mimeparse==1.5.1
 six==1.10.0
 SQLAlchemy==1.0.12
 Werkzeug==0.11.5
+flask-sqlalchemy
+psycopg2
