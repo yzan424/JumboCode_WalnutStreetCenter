@@ -185,18 +185,19 @@ class Contact(db.Model):
 
 
 class Program(db.Model):
+
     __tablename__ = 'program'
     id = db.Column(db.Integer, primary_key=True)
     address = db.Column(db.String, nullable=False)
 
 
 class Staff(db.Model):
+
     __tablename__ = 'staff'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     email = db.Column(db.String)
-    # director_id = Column(Integer, ForeignKey('director.id'))
-    # director = relationship("director", back_populates="staff")
+    director_id = db.Column(db.Integer, db.ForeignKey('director.id'))
     position = db.Column(db.String)
     program_id = db.Column(db.Integer, db.ForeignKey('program.id'))
     program = db.relationship(
@@ -283,7 +284,7 @@ class Director(db.Model):
     position = db.Column(db.String)
     address = db.Column(db.String)
     phone = db.Column(db.String(10))
-    staff = db.relationship("staff", backref="director", lazy='dynamic')
+    staff = db.relationship("Staff", backref="director")
 
 
 class BehaviorAssessment(db.Model):
