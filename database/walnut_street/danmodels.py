@@ -132,7 +132,7 @@ class BasicInfo(db.Model):
 class LegalFamilyInfo(db.Model):
     __tablename__ = 'legal_family_info'
     id = db.Column(db.Integer, primary_key=True)
-    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), unique=True, nullable=False)
+    patient_id = db.Column(db.Integer, db.ForeignKey('Patient.id'), unique=True, nullable=False)
     guardian_name = db.Column(db.String)
     guardian_phone = db.Column(db.String)
     guardian_address = db.Column(db.String)
@@ -172,53 +172,53 @@ class IdentifyingInfo(db.Model):
 #;
 #TODO: change things like bloodtype, sex, most things to enum. want to be able to change all at once.
 
-class self_medication(db.Model):
+class SelfMedication(db.Model):
     __tablename__ = 'self_medication'
     id = db.Column(db.Integer, primary_key=True)
     hrc_approval_date = db.Column(db.Date)
-    appointment_id = db.Column(db.Integer, db.ForeignKey('appointment.id'))
+    appointment_id = db.Column(db.Integer, db.ForeignKey('Appointment.id'))
 
     assessment_score = db.Column(db.Float)
     plan_type = db.Column(db.String)
     physician_signature_date = db.Column(db.Date)
 #;
-class individual_support_plan(db.Model):
+class IndividualSupportPlan(db.Model):
     __tablename__ = 'individual_support_plan'
     id = db.Column(db.Integer, primary_key=True)
     last_isp_date = db.Column(db.Date, nullable=False)
     comments = db.Column(db.String)
 #;
-class medical_treatment_plan(db.Model):
+class MedicalTreatmentPlan(db.Model):
     __tablename__ = 'medical_treatment_plan'
     id = db.Column(db.Integer, primary_key=True)
     guardian_signature_date = db.Column(db.Date)
-    appointment_id = db.Column(db.Integer, db.ForeignKey('appointment.id'))
+    appointment_id = db.Column(db.Integer, db.ForeignKey('Appointment.id'))
     medications = db.Column(db.String)
     diagnoses = db.Column(db.String)
     symptoms = db.Column(db.String)
 #;
-class behavior_assessment(db.Model):
+class BehaviorAssessment(db.Model):
     __tablename__ = 'behavior_assessment'
     id = db.Column(db.Integer, primary_key=True)
     assessment_date = db.Column(db.Date)
     behaviors = db.Column(db.String)
     summary = db.Column(db.String)
 #;
-class behavior_support_plan(db.Model):
+class BehaviorSupportPlan(db.Model):
     __tablename__ = 'behavior_support_plan'
     id = db.Column(db.Integer, primary_key=True)
     guardian_signature_date = db.Column(db.Date)
-    residential_appointment_id = db.Column(db.Integer, db.ForeignKey('appointment.id'))
-    day_appointment_id = db.Column(db.Integer, db.ForeignKey('appointment.id'))
+    residential_appointment_id = db.Column(db.Integer, db.ForeignKey('Appointment.id'))
+    day_appointment_id = db.Column(db.Integer, db.ForeignKey('Appointment.id'))
     tier = db.Column(db.String)
 #;
-class rogers_monitor(db.Model):
+class RogersMonitor(db.Model):
     __tablename__ = 'rogers_monitor'
     id = db.Column(db.Integer, primary_key=True)
     next_court_date = db.Column(db.Date)
     last_court_date = db.Column(db.Date)
     guardian_signature_date = db.Column(db.Date)
-    appointment_id = db.Column(db.Integer, db.ForeignKey('appointment.id'))
+    appointment_id = db.Column(db.Integer, db.ForeignKey('Appointment.id'))
     medications = db.Column(db.String)
 #;
 
@@ -227,12 +227,7 @@ class Program(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     address = db.Column(db.String, nullable=False)
 #;
-ProgramStaff = db.Table(
-    'program_staff',
-    db.Model.metadata,
-    db.Column('program_id', db.Integer, db.ForeignKey("program.id")),
-    db.Column('staff_id', db.Integer, db.ForeignKey("staff.id"))
-)
+
 class Staff(db.Model):
     __tablename__ = 'staff'
     id = db.Column(db.Integer, primary_key=True)
@@ -240,7 +235,7 @@ class Staff(db.Model):
     email = db.Column(db.String)
 
     position = db.Column(db.String)
-    program_id = db.Column(db.Integer, db.ForeignKey('program.id'))
+    program_id = db.Column(db.Integer, db.ForeignKey('Program.id'))
     program = db.relationship(
         "Program",
         primaryjoin='Staff.program_id==Program.id',
@@ -249,7 +244,7 @@ class Staff(db.Model):
     address = db.Column(db.String)
     phone = db.Column(db.String(10))
 #;
-class director(db.Model):
+class Director(db.Model):
     __tablename__ = 'director'
     id = Column(Integer, primary_key=True)
     name = Column(String)
@@ -273,7 +268,7 @@ class Doctor(db.Model):
 class Contact(db.Model):
     __tablename__ = 'contact'
     id = db.Column(db.Integer, primary_key=True)
-    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    patient_id = db.Column(db.Integer, db.ForeignKey('Patient.id'))
     name = db.Column(db.String)
     relation = db.Column(db.String)
     address = db.Column(db.String)
@@ -283,10 +278,10 @@ class Contact(db.Model):
     primary_contact = db.Column(db.Boolean)
 #;
 
-class health_insurance_and_other(db.Model):
+class HealthInsuranceAndOther(db.Model):
     __tablename__ = 'health_insurance_and_other'
     id = db.Column(db.Integer, primary_key=True)
-    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    patient_id = db.Column(db.Integer, db.ForeignKey('Patient.id'))
     source = db.Column(db.String)
     type_of = db.Column(db.String)
     id_number = db.Column(db.String)
@@ -294,29 +289,29 @@ class health_insurance_and_other(db.Model):
     expiration_date = db.Column(db.Date)
     expired = db.Column(db.Boolean)
 #;
-class self_preservation(db.Model):
+class SelfPreservation(db.Model):
     __tablename__ = 'self_preservation'
     id = db.Column(db.Integer, primary_key=True)
-    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    patient_id = db.Column(db.Integer, db.ForeignKey('Patient.id'))
     assessment = db.Column(db.String)
     cause_of_failure = db.Column(db.String)
     determination_basis = db.Column(db.String)
     date_occurred = db.Column(db.Date)
 #;
-class legal_competency(db.Model):
+class LegalCompetency(db.Model):
     __tablename__ = 'legal_competency'
     id = db.Column(db.Integer, primary_key=True)
-    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    patient_id = db.Column(db.Integer, db.ForeignKey('Patient.id'))
     status = db.Column(db.String)
     type_of = db.Column(db.String)
     adjudication_date = db.Column(db.Date)
     requested_by = db.Column(db.String)
     date_requested = db.Column(db.Date)
 #;
-class service_provider(db.Model):
+class ServiceProvider(db.Model):
     __tablename__ = 'service_provider'
     id = db.Column(db.Integer, primary_key=True)
-    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    patient_id = db.Column(db.Integer, db.ForeignKey('Patient.id'))
     start_date = db.Column(db.Date)
     stop_date = db.Column(db.Date)
     program = db.Column(db.String)
