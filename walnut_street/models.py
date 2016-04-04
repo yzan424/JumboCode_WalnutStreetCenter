@@ -224,7 +224,7 @@ class HealthInsuranceAndOther(db.Model):
 
     __tablename__ = 'health_insurance_and_other'
     id = db.Column(db.Integer, primary_key=True)
-    patient_id = db.Column(db.Integer, db.ForeignKey('Patient.id'))
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
     source = db.Column(db.String)
     type_of = db.Column(db.String)
     id_number = db.Column(db.String)
@@ -237,7 +237,7 @@ class SelfPreservation(db.Model):
 
     __tablename__ = 'self_preservation'
     id = db.Column(db.Integer, primary_key=True)
-    patient_id = db.Column(db.Integer, db.ForeignKey('Patient.id'))
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
     assessment = db.Column(db.String)
     cause_of_failure = db.Column(db.String)
     determination_basis = db.Column(db.String)
@@ -245,9 +245,10 @@ class SelfPreservation(db.Model):
 
 
 class LegalCompetency(db.Model):
+
     __tablename__ = 'legal_competency'
     id = db.Column(db.Integer, primary_key=True)
-    patient_id = db.Column(db.Integer, db.ForeignKey('Patient.id'))
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
     status = db.Column(db.String)
     type_of = db.Column(db.String)
     adjudication_date = db.Column(db.Date)
@@ -258,7 +259,7 @@ class LegalCompetency(db.Model):
 class ServiceProvider(db.Model):
     __tablename__ = 'service_provider'
     id = db.Column(db.Integer, primary_key=True)
-    patient_id = db.Column(db.Integer, db.ForeignKey('Patient.id'))
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
     start_date = db.Column(db.Date)
     stop_date = db.Column(db.Date)
     program = db.Column(db.String)
@@ -267,16 +268,18 @@ class ServiceProvider(db.Model):
 
 
 class RogersMonitor(db.Model):
+
     __tablename__ = 'rogers_monitor'
     id = db.Column(db.Integer, primary_key=True)
     next_court_date = db.Column(db.Date)
     last_court_date = db.Column(db.Date)
     guardian_signature_date = db.Column(db.Date)
-    appointment_id = db.Column(db.Integer, db.ForeignKey('Appointment.id'))
+    appointment_id = db.Column(db.Integer, db.ForeignKey('appointment.id'))
     medications = db.Column(db.String)
 
 
 class Director(db.Model):
+
     __tablename__ = 'director'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -296,11 +299,12 @@ class BehaviorAssessment(db.Model):
 
 
 class BehaviorSupportPlan(db.Model):
+
     __tablename__ = 'behavior_support_plan'
     id = db.Column(db.Integer, primary_key=True)
     guardian_signature_date = db.Column(db.Date)
-    residential_appointment_id = db.Column(db.Integer, db.ForeignKey('Appointment.id'))
-    day_appointment_id = db.Column(db.Integer, db.ForeignKey('Appointment.id'))
+    residential_appointment_id = db.Column(db.Integer, db.ForeignKey('appointment.id'))
+    day_appointment_id = db.Column(db.Integer, db.ForeignKey('appointment.id'))
     tier = db.Column(db.String)
 
 
@@ -312,21 +316,29 @@ class IndividualSupportPlan(db.Model):
 
 
 class MedicalTreatmentPlan(db.Model):
+
     __tablename__ = 'medical_treatment_plan'
     id = db.Column(db.Integer, primary_key=True)
     guardian_signature_date = db.Column(db.Date)
-    appointment_id = db.Column(db.Integer, db.ForeignKey('Appointment.id'))
+    appointment_id = db.Column(db.Integer, db.ForeignKey('appointment.id'))
     medications = db.Column(db.String)
     diagnoses = db.Column(db.String)
     symptoms = db.Column(db.String)
 
 
 class SelfMedication(db.Model):
+
     __tablename__ = 'self_medication'
     id = db.Column(db.Integer, primary_key=True)
     hrc_approval_date = db.Column(db.Date)
-    appointment_id = db.Column(db.Integer, db.ForeignKey('Appointment.id'))
+    appointment_id = db.Column(db.Integer, db.ForeignKey('appointment.id'))
 
     assessment_score = db.Column(db.Float)
     plan_type = db.Column(db.String)
     physician_signature_date = db.Column(db.Date)
+
+
+class Appointment(db.Model):
+
+    __tablename__ = 'appointment'
+    id = db.Column(db.Integer, primary_key=True)
