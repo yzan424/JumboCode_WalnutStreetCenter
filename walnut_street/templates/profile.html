@@ -1,0 +1,105 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Profile</title>
+  <meta name="description" content="">
+</head>
+
+<body>
+    <div id="Diagnoses">
+        <h2>Diagnoses</h2>
+        <p>Diagnoses: {{profile.medical_info.diagnoses}}</p>
+        <p><input type="checkbox" {% if profile.medical_info.alzheimers_dementia %}checked {% endif %}>Alzheimers</p>
+        <p><input type="checkbox" {% if profile.medical_info.vision_problem %}checked{% endif %}>Vision Problem</p>
+        <p><input type="checkbox" {% if profile.medical_info.down_syndrome %}checked{% endif %}>Down Syndrome</p>
+    </div>
+    <div id="Allergies">
+        <h2>Allergies</h2>
+        <p>{{profile.medical_info.allergies}}</p>
+    </div>
+    <div id="physical_characteristics">
+        <h2>Physical Characteristics</h2>
+        <p>Weight: {{profile.basic_info.weight}}</p>
+        <p>Build: {{profile.basic_info.build}}</p>
+        <p>Height: {{profile.basic_info.height}}</p>
+        <p>Sex: {{profile.basic_info.sex}}</p>
+        <p>Birthday: {{profile.basic_info.birthday}}</p>
+        <p>Race: {{profile.basic_info.race}}</p>
+        <p>Eye Color: {{profile.basic_info.eyes}}</p>
+        <p>Hair color: {{profile.basic_info.hair}}</p>
+        <p>Blood Type: {{profile.basic_info.blood_type}}</p>
+    </div>
+    <div id="places">
+        <h2>Places</h2>
+        <h3>Address</h3>
+        <p>Current: {{profile.basic_info.address_current}}</p>
+        <p>Former: {{profile.basic_info.address_former}}</p>
+        <p>Day Program: {{profile.basic_info.training_program_or_school_address}}</p>
+        <p>Work: {{profile.basic_info.work_address}}</p>
+        <h3>Phone</h3>
+        <p>Current: {{profile.basic_info.phone}}</p>
+        <p>Day Program: {{profile.basic_info.training_program_or_school_phone}}</p>
+        <p>Work: {{profile.basic_info.work_phone}}</p>
+    </div>
+    <div id="identifying">
+        <h2>Identifying Information</h2>
+        <p>Program: {{profile.basic_info.training_program_or_school_address}}</p>
+        <p>SSN: {{profile.basic_info.social_security}}</p>
+        <p>Religion: {{profile.basic_info.religion}}</p>
+        <p>ID #: ???</p>
+        <p>Nickname: {{profile.basic_info.name_preferred}}</p>
+        <p>Citizenship: {{profile.basic_info.citizenship}}</p>
+        <p>Marital Status: {{profile.basic_info.marital_status}}</p>
+        <p>Language: {{profile.basic_info.primary_language}}</p>
+        <p>Behavior characteristics: {{profile.identifying_info.behavior}}</p>
+    </div>
+    <div id="self_sufficency">
+        <h2>Self Sufficency</h2>
+        <h3>Travel</h3>
+        <p>Places frequented: {{profile.identifying_info.places_frequented}}</p>
+        <p>Travel Method: {{profile.identifying_info.travel_method}}</p>
+        <p>Surrounding Recognition: {{profile.identifying_info.surrounding_awareness}}</p>
+        <p>Carries ID: {{profile.identifying_info.carries_ID}}</p>
+        <h3>Lost</h3>
+        <p>Ability to Protect Self: {{profile.identifying_info.self_protection}}</p>
+        <p>Response to Search Efforts: {{profile.identifying_info.response_to_search}}</p>
+        <p>Pattern of Movement if previously lost: {{profile.identifying_info.movement_pattern}}</p>
+    </div>
+    <div id="parent">
+        <h2>Parent History</h2>
+        <p>Parents Marital Status: {{profile.legal_family_info.parents_marital_status}}</p>
+        <h3>Father</h3>
+        <p>Name: {{profile.legal_family_info.father_name}}</p>
+        <p>Birthdate: {{profile.legal_family_info.father_birthday}}</p>
+        <p>Birth place: {{profile.legal_family_info.father_birthplace}}</p>
+        <p>Alive: {{profile.legal_family_info.father_alive}}</p>
+        <h3>Mother</h3>
+        <p>Name: {{profile.legal_family_info.mother_maiden_name}}</p>
+        <p>Birthdate: {{profile.legal_family_info.mother_birthday}}</p>
+        <p>Birth place: {{profile.legal_family_info.mother_birthplace}}</p>
+        <p>Alive: {{profile.legal_family_info.mother_alive}}</p>
+    </div>
+    <div id="historical">
+        <h3>Historical</h3>
+        <p>Accompanied by: {{profile.basic_info.accompanied_by}}</p>
+        <p>Area of meaningful tie: {{profile.basic_info.area_meaningful_tie}}</p>
+        <p>Referral Source: {{profile.basic_info.area_meaningful_tie}}</p>
+        <p>Birthplace: {{profile.basic_info.birthplace}}</p>
+    </div>
+    <div id="self_preservation">
+        <h3>Self Preservation</h3>
+        {% for item in self_preservation %}
+            <div>
+                <p>Date: {{item.date_occured}}</p>
+                <p>Assessment: {{item.assessment}}</p>
+                <p>Cause of Failure: {{item.cause_of_failure}}</p>
+                <p>Determination Basis: {{item.determination_basis}}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
