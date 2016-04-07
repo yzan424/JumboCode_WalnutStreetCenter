@@ -463,10 +463,9 @@ def edit(request, page, profile_id):
             for i in updated_self_preservation:
                 requests.post(backendPOST + profile_id + '/self_preservation/', data=i)           
             for i in new_self_preservation:
-                i['patient_id'] = profile_id
                 i.pop('self_preservation_id', None)
                 print(i)
-                requests.put(backendPOST + 'self_preservation/' + profile_id, data=i) 
+                requests.put(backendPOST + "/self_preservation/", data=i) 
 
             return HttpResponseRedirect("/profile/" + profile_id + '/')
     elif page == "protocol":
