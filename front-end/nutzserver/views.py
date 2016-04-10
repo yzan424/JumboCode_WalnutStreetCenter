@@ -486,6 +486,69 @@ def edit(request, page, profile_id):
         else:
             pass
 
+def new(request):
+    if request.method == "GET":
+        return render(request, "new_profile.html")
+    elif request.method == "POST":
+        print(request.POST)
+        print('\n')
+        new_medical_info = {}
+        new_basic_info = {}
+        new_self_preservation = []
+        new_identifying = {}
+        new_legal_guardian = {}
+
+
+        for keys, values in request.POST.items():
+            if values != "":
+                if (keys.split('.'))[0] == "basic_info":
+                    new_basic_info[keys.split('.')[1]] = values
+                elif (keys.split('.'))[0] == "medical_info":
+                    new_medical_info[keys.split('.')[1]] = values
+                elif (keys.split('.'))[0] == "identifying":
+                    new_identifying[keys.split('.')[1]] = values
+                elif (keys.split('.'))[0] == "legal_guardian":
+                    new_legal_guardian[keys.split('.')[1]] = values
+                elif (keys.split('.'))[0] == "self_preservation":
+                    self_preservation_id = keys.split('.')[1]
+                    dictKey = keys.split('.')[2]
+                    # new entries to self_preservation
+                    # check if theres even anything in them
+                    if values != '':
+                        # these are just edits to existing things
+                        if not any(x['self_preservation_id'] == self_preservation_id for x in new_self_preservation):
+                            new_self_preservation.append({'self_preservation_id': self_preservation_id})
+
+                        for i in new_self_preservation:
+                            if i['self_preservation_id'] == self_preservation_id:
+                                i[dictKey] = values
+
+        print("new_identifying:", new_identifying)
+        print("new_medical_info:", new_medical_info)
+        print("new_basic_info:", new_basic_info)
+        print("new_self_prservation:", new_self_preservation)
+        print("new_legal_guardian:", new_legal_guardian)
+
+        # send all the new stuff
+        #TODO: where do i get the resulting  id
+        # do i do it before or after?
+        if new_identifying != {}:
+            requests.put(backendPUT + 'identifying/', data=new_identifying)
+        if new_medical_info != {}:
+            requests.put(backendPUT + 'medical_info/', data=new_medical_info)
+        if new_basic_info != {}:
+            requests.put(backendPUT + 'basic/', data=new_basic_info)
+        if new_legal_guardian != {}:
+            requests.put(backendPUT + 'legal_guardian/', data=new_legal_guardian)
+      
+        for i in new_self_preservation:
+            i.pop('self_preservation_id', None)
+            print(i)
+            requests.put(backendPUT + "/self_preservation/", data=i) 
+
+        profile_id = "1"
+
+        return HttpResponseRedirect("/profile/" + profile_id + '/')
 
 def login(request):
     if request.method == 'GET':

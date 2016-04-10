@@ -1,0 +1,118 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Profile</title>
+  <meta name="description" content="">
+</head>
+
+<body>
+    <form action="/new/" method="post">
+            {% csrf_token %}
+        <div id="Basic">
+        <p>First Name<input type="text" name="basic_info.name_first"></p>
+        <p>Last Name<input type="text" name="basic_info.name_last"></p>
+        </div>
+        <div id="Diagnoses">
+            <h2>Diagnoses</h2>
+            <p>Diagnoses: <input type="text" name="medical_info.diagnoses"></p>
+            <p><input type="checkbox" name="medical_info.alzheimers_dementia" {% if medical_info.alzheimers_dementia == True %}checked {% endif %}>Alzheimers</p>
+            <p><input type="checkbox" name="medical_info.vision_problem" {% if medical_info.vision_problem == True %}checked {% endif %}>Vision Problem</p>
+            <p><input type="checkbox" name="medical_info.down_syndrome" {% if medical_info.down_syndrome == True %}checked {% endif %}>Down Syndrome</p>
+        </div>
+        <div id="Allergies">
+            <h2>Allergies</h2>
+            <p>Allergies: <input type="text" name="medical_info.allergies"></p>
+        </div>
+        <div id="physical_characteristics">
+            <h2>Physical Characteristics</h2>
+            <p>Weight: <input type="text" name="basic_info.weight"></p>
+            <p>Build: <input type="text" name="basic_info.build"></p>
+            <p>Height: <input type="text" name="basic_info.height"></p>
+            <p>Sex: <input type="text" name="basic_info.sex"></p>
+            <p>Birthday: <input type="text" name="basic_info.birthday"></p>
+            <p>Race: <input type="text" name="basic_info.race"></p>
+            <p>Eye Color: <input type="text" name="basic_info.eyes"></p>
+            <p>Hair color: <input type="text" name="basic_info.hair"></p>
+            <p>Blood Type: <input type="text" name="basic_info.blood_type"></p>
+        </div>
+        <div id="places">
+            <h2>Places</h2>
+            <h3>Address</h3>
+            <p>Current: <input type="text" name="basic_info.address_current"></p>
+            <p>Former: <input type="text" name="basic_info.address_former"></p>
+            <p>Day Program: <input type="text" name="basic_info.training_program_or_school_address"></p>
+            <p>Work: <input type="text" name="basic_info.work_address"></p>
+            <h3>Phone</h3>
+            <p>Current: <input type="text" name="basic_info.phone"></p>
+            <p>Day Program: <input type="text" name="basic_info.training_program_or_school_phone"></p>
+            <p>Work: <input type="text" name="basic_info.work_phone"></p>
+        </div>
+        <div id="identifying">
+            <h2>Identifying Information</h2>
+            <p>Program: <input type="text" name="basic_info.training_program_or_school_address"></p>
+            <p>SSN: <input type="text" name="basic_info.social_security"></p>
+            <p>Religion: <input type="text" name="basic_info.religion"></p>
+            <p>ID #: ???</p>
+            <p>Nickname: <input type="text" name="basic_info.name_preferred"></p>
+            <p>Citizenship: <input type="text" name="basic_info.citizenship"></p>
+            <p>Marital Status: <input type="text" name="basic_info.marital_status"></p>
+            <p>Language: <input type="text" name="basic_info.primary_language"></p>
+            <p>Behavior characteristics: <input type="text" name="identifying.behavior"></p>
+        </div>
+        <div id="self_sufficency">
+            <h2>Self Sufficency</h2>
+            <h3>Travel</h3>
+            <p>Places frequented: <input type="text" name="identifying.places_frequented"></p>
+            <p>Travel Method: <input type="text" name="identifying.travel_method"></p>
+            <p>Surrounding Recognition: <input type="text" name="identifying.surrounding_awareness"></p>
+            <p>Carries ID: <input type="text" name="identifying.carries_ID"></p>
+            <h3>Lost</h3>
+            <p>Ability to Protect Self: <input type="text" name="identifying.self_protection"></p>
+            <p>Response to Search Efforts: <input type="text" name="identifying.response_to_search"></p>
+            <p>Pattern of Movement if previously lost: <input type="text" name="identifying.movement_pattern"></p>
+        </div>
+        <div id="parent">
+            <h2>Parent History</h2>
+            <p>Parents Marital Status: <input type="text" name="legal_guardian.parents_marital_status"></p>
+            <h3>Father</h3>
+            <p>Name: <input type="text" name="legal_guardian.father_name"></p>
+            <p>Birthdate: <input type="text" name="legal_guardian.father_birthday"></p>
+            <p>Birth place: <input type="text" name="legal_guardian.father_birthplace"></p>
+            <p>Alive: <input type="text" name="legal_guardian.father_alive"></p>
+            <h3>Mother</h3>
+            <p>Name: <input type="text" name="legal_guardian.mother_maiden_name"></p>
+            <p>Birthdate: <input type="text" name="legal_guardian.mother_birthday"></p>
+            <p>Birth place: <input type="text" name="legal_guardian.mother_birthplace"></p>
+            <p>Alive: <input type="text" name="legal_guardian.mother_alive"></p>
+        </div>
+        <div id="historical">
+            <h3>Historical</h3>
+            <p>Accompanied by: <input type="text" name="basic_info.accompanied_by"></p>
+            <p>Area of meaningful tie: <input type="text" name="basic_info.area_meaningful_tie"></p>
+            <p>Referral Source: <input type="text" name="basic_info.area_meaningful_tie"></p>
+            <p>Birthplace: <input type="text" name="basic_info.birthplace"></p>
+        </div>
+        <div id="self_preservation">
+            <h3>Self Preservation</h3>
+                <!-- These are new self_preservation entries -->
+                <div>
+                    <p>Date: <input type="text" name="self_preservation.0.date_occured"></p>
+                    <p>Assessment: <input type="text" name="self_preservation.0.assessment"></p>
+                    <p>Cause of Failure: <input type="text" name="self_preservation.0.cause_of_failure"></p>
+                    <p>Determination Basis: <input type="text" name="self_preservation.0.determination_basis"></p>
+                </div>
+                <div>
+                    <p>Date: <input type="text" name="self_preservation.1.date_occured"></p>
+                    <p>Assessment: <input type="text" name="self_preservation.1.assessment"></p>
+                    <p>Cause of Failure: <input type="text" name="self_preservation.1.cause_of_failure"></p>
+                    <p>Determination Basis: <input type="text" name="self_preservation.1.determination_basis"></p>
+                </div>
+
+        </div>
+        <input type="submit"></input>
+    </form>
+</body>
+</html>

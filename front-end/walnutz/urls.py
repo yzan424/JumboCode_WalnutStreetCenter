@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^support/(?P<profile_id>\d+)/$', support, {'edit': False}),
     url(r'^behavior/(?P<profile_id>\d+)/$', behavior, {'edit': False}),
     url(r'^edit/(?P<page>\w+)/(?P<profile_id>\d+)/$', edit),
+    url(r'^new/$', new),
     url(r'^signin/$', login),
 
 ]
