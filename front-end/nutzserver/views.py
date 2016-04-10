@@ -483,7 +483,7 @@ def edit(request, page, profile_id):
             updated_tracking = []
             new_tracking = []
 
-            for keys, values in request.POST.items:
+            for keys, values in request.POST.items():
                 if (keys.split('.'))[0] == "protocols":
                     protocols_id = keys.split('.')[2]
                     dictKey = keys.split('.')[2]
@@ -589,7 +589,7 @@ def edit(request, page, profile_id):
             new_restrictive = []
             updated_rogers_monitor = {}
 
-            for keys, values in request.POST.items:
+            for keys, values in request.POST.items():
                 if (keys.split('.'))[0] == "medical_treatment_plan":
                     updated_medical_treatment_plan[keys.split('.')[1]] = values
                 elif (keys.split('.'))[0] == "behavior":
@@ -649,6 +649,8 @@ def edit(request, page, profile_id):
             updated_legal_status = []
             new_legal_status = []
 
+            for keys, values in request.POST.items():
+
                 if (keys.split('.'))[0] == "insurance":
                     insurance_id = keys.split('.')[2]
                     dictKey = keys.split('.')[2]
@@ -659,36 +661,36 @@ def edit(request, page, profile_id):
                         for i in updated_insurance:
                             if i['insurance_id'] == insurance_id:
                                 i[dictKey] = values
-                    else:
-                        if values != '':
-                            if  not any(x['insurance_id'] == insurance_id for x in new_insurance):
-                                new_insurance.append({'insurance_id': insurance_id})
+                            else:
+                                if values != '':
+                                    if  not any(x['insurance_id'] == insurance_id for x in new_insurance):
+                                        new_insurance.append({'insurance_id': insurance_id})
 
-                            for i in new_insurance:
-                                if i['insurance_id'] == insurance_id:
-                                    i[dictKey] = values
-                elif (keys.split('.'))[0] == "legal_guardian":
-                    updated_legal_guardian[keys.split('.')[1]] = values
-                elif (keys.split('.'))[0] == "legal_status":
-                    legal_status_id = keys.split('.')[2]
-                    dictKey = keys.split('.')[2]
-                    if (keys.split('.')[1] == "existing"):
-                        if not any(x['legal_status_id'] ==  legal_status_id for x in updated_legal_status):
-                            updated_legal_status.append({'legal_status_id': legal_status_id})
+                                    for i in new_insurance:
+                                        if i['insurance_id'] == insurance_id:
+                                            i[dictKey] = values
+                    elif (keys.split('.'))[0] == "legal_guardian":
+                        updated_legal_guardian[keys.split('.')[1]] = values
+                    elif (keys.split('.'))[0] == "legal_status":
+                        legal_status_id = keys.split('.')[2]
+                        dictKey = keys.split('.')[2]
+                        if (keys.split('.')[1] == "existing"):
+                            if not any(x['legal_status_id'] ==  legal_status_id for x in updated_legal_status):
+                                updated_legal_status.append({'legal_status_id': legal_status_id})
 
-                        for i in updated_legal_status:
-                            if i['legal_status_id'] == legal_status_id:
-                                i[dictKey] = values
-                    else:
-                        if values != '':
-                            if  not any(x['legal_status_id'] == legal_status_id for x in new_legal_status):
-                                new_legal_status.apped({'legal_status_id': legal_status_id})
-
-                            for i in new_legal_status:
+                            for i in updated_legal_status:
                                 if i['legal_status_id'] == legal_status_id:
                                     i[dictKey] = values
+                        else:
+                            if values != '':
+                                if  not any(x['legal_status_id'] == legal_status_id for x in new_legal_status):
+                                    new_legal_status.apped({'legal_status_id': legal_status_id})
 
-            print("updated_insurance:", updated_insurance
+                                for i in new_legal_status:
+                                    if i['legal_status_id'] == legal_status_id:
+                                        i[dictKey] = values
+
+            print("updated_insurance:", updated_insurance)
             print("updated_legal_guardian:", legal_guardian)
             print("updated_legal_status:", updated_legal_status)
 
