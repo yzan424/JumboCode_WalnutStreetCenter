@@ -7,12 +7,13 @@ from . import models
 from . import app
 
 
+#appointments table NOT ready for production
 manager = restless.APIManager(app, flask_sqlalchemy_db=models.db)
 default_methods = ('GET', 'PUT', 'POST', 'DELETE')
 json_endpoint_models = [
     models.Patient, models.BasicInfo, models.LegalFamilyInfo, models.MedicalInfo,
     models.IdentifyingInfo, models.Contact, models.Program, models.Staff,
-    models.Doctor,
+    models.Doctor, models.Appointment, models.Director, 
 ]
 
 
