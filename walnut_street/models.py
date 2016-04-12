@@ -56,7 +56,8 @@ class Patient(db.Model):
     basic_info_id = db.Column(db.Integer, db.ForeignKey('basic_info.id'))
     basic_info = db.relationship(
         'BasicInfo',
-        primaryjoin='Patient.basic_info_id==BasicInfo.patient_id',
+        # TODO: Change primary joins to Patient.id to other tables
+        primaryjoin='Patient.id==BasicInfo.patient_id',
         backref='patient'
     )
 
@@ -66,13 +67,13 @@ class Patient(db.Model):
     )
     legal_family_info = db.relationship(
         'LegalFamilyInfo',
-        primaryjoin='Patient.legal_family_info_id==LegalFamilyInfo.patient_id',
+        primaryjoin='Patient.id==LegalFamilyInfo.patient_id',
         backref='patient'
     )
     medical_info_id = db.Column(db.Integer, db.ForeignKey('medical_info.id'))
     medical_info = db.relationship(
         'MedicalInfo',
-        primaryjoin='Patient.medical_info_id==MedicalInfo.patient_id',
+        primaryjoin='Patient.id==MedicalInfo.patient_id',
         backref='patient'
     )
     identifying_info_id = db.Column(
@@ -81,7 +82,7 @@ class Patient(db.Model):
     )
     identifying_info = db.relationship(
         'IdentifyingInfo',
-        primaryjoin='Patient.identifying_info_id==IdentifyingInfo.patient_id',
+        primaryjoin='Patient.id==IdentifyingInfo.patient_id',
         backref='patient',
         uselist=False
     )
