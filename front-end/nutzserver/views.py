@@ -7,7 +7,7 @@ from django.template import *
 import json, requests
 
 
-backendGET = 'http://localhost:8000/backend/profile/'
+backendGET = 'http://127.0.0.1:5000/api/patient/'
 backendPOST = 'http://localhost:8000/backend/profile/'
 backendPUT = 'http://localhost:8000/backend/profile/'
 
