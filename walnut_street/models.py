@@ -56,7 +56,7 @@ class Patient(db.Model):
     basic_info_id = db.Column(db.Integer, db.ForeignKey('basic_info.id'))
     basic_info = db.relationship(
         'BasicInfo',
-        primaryjoin='Patient.basic_info_id==BasicInfo.id',
+        primaryjoin='Patient.basic_info_id==BasicInfo.patient_id',
         backref='patient'
     )
 
@@ -66,13 +66,13 @@ class Patient(db.Model):
     )
     legal_family_info = db.relationship(
         'LegalFamilyInfo',
-        primaryjoin='Patient.legal_family_info_id==LegalFamilyInfo.id',
+        primaryjoin='Patient.legal_family_info_id==LegalFamilyInfo.patient_id',
         backref='patient'
     )
     medical_info_id = db.Column(db.Integer, db.ForeignKey('medical_info.id'))
     medical_info = db.relationship(
         'MedicalInfo',
-        primaryjoin='Patient.medical_info_id==MedicalInfo.id',
+        primaryjoin='Patient.medical_info_id==MedicalInfo.patient_id',
         backref='patient'
     )
     identifying_info_id = db.Column(
@@ -81,7 +81,7 @@ class Patient(db.Model):
     )
     identifying_info = db.relationship(
         'IdentifyingInfo',
-        primaryjoin='Patient.identifying_info_id==IdentifyingInfo.id',
+        primaryjoin='Patient.identifying_info_id==IdentifyingInfo.patient_id',
         backref='patient',
         uselist=False
     )
@@ -91,6 +91,12 @@ class BasicInfo(db.Model):
 
     __tablename__ = 'basic_info'
     id = db.Column(db.Integer, primary_key=True)
+    patient_id = db.Column(
+        db.Integer,
+        db.ForeignKey('patient.id'),
+        unique=True,
+        nullable=False
+    )
     state_id = db.Column(db.String)
     name_preferred = db.Column(db.String)
     birthday = db.Column(db.Date)
@@ -157,6 +163,12 @@ class MedicalInfo(db.Model):
 
     __tablename__ = 'medical_info'
     id = db.Column(db.Integer, primary_key=True)
+    patient_id = db.Column(
+        db.Integer,
+        db.ForeignKey('patient.id'),
+        unique=True,
+        nullable=False
+    )
     diagnoses = db.Column(db.String)
     allergies = db.Column(db.String)
     alzheimers_dementia = db.Column(db.Boolean)
@@ -168,6 +180,12 @@ class IdentifyingInfo(db.Model):
 
     __tablename__ = 'identifying_info'
     id = db.Column(db.Integer, primary_key=True)
+    patient_id = db.Column(
+        db.Integer,
+        db.ForeignKey('patient.id'),
+        unique=True,
+        nullable=False
+    )
     self_protection = db.Column(db.String)
     behavior = db.Column(db.String)
     response_to_search = db.Column(db.String)
@@ -290,7 +308,7 @@ class RogersMonitor(db.Model):
     next_court_date = db.Column(db.Date)
     last_court_date = db.Column(db.Date)
     guardian_signature_date = db.Column(db.Date)
-    appointment_id = db.Column(db.Integer, db.ForeignKey('appointment.id'))
+    # TODO appointment_id = db.Column(db.Integer, db.ForeignKey('appointment.id'))
     medications = db.Column(db.String)
 
 
@@ -320,6 +338,8 @@ class BehaviorSupportPlan(db.Model):
     __tablename__ = 'behavior_support_plan'
     id = db.Column(db.Integer, primary_key=True)
     guardian_signature_date = db.Column(db.Date)
+    #TODO
+    """
     residential_appointment_id = db.Column(
         db.Integer,
         db.ForeignKey('appointment.id')
@@ -328,6 +348,7 @@ class BehaviorSupportPlan(db.Model):
         db.Integer,
         db.ForeignKey('appointment.id')
     )
+    """
     tier = db.Column(db.String)
 
 
@@ -343,10 +364,12 @@ class MedicalTreatmentPlan(db.Model):
     __tablename__ = 'medical_treatment_plan'
     id = db.Column(db.Integer, primary_key=True)
     guardian_signature_date = db.Column(db.Date)
+    #TODO
+    """
     appointment_id = db.Column(
         db.Integer,
         db.ForeignKey('appointment.id')
-    )
+    ) """
     medications = db.Column(db.String)
     diagnoses = db.Column(db.String)
     symptoms = db.Column(db.String)
@@ -357,11 +380,13 @@ class SelfMedication(db.Model):
     __tablename__ = 'self_medication'
     id = db.Column(db.Integer, primary_key=True)
     hrc_approval_date = db.Column(db.Date)
+    #TODO
+    """
     appointment_id = db.Column(
         db.Integer,
         db.ForeignKey('appointment.id')
     )
-
+    """
     assessment_score = db.Column(db.Float)
     plan_type = db.Column(db.String)
     physician_signature_date = db.Column(db.Date)
