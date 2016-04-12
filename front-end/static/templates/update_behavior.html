@@ -9,55 +9,64 @@
 </head>
 
 <body>
-    <div id="medical_treatment_plan">
-        <h1>Medical Treatment Plan</h1>
-        {% for key, value in medical_treatment_plan.items %}
-        <div id="{{key}}">
-            <p><b>{{key}}</b>: {{value}} </p>
+    <form action="/edit/behavior/1/" method="post">
+            {% csrf_token %}
+        <div id="medical_treatment_plan">
+            <h2>Medical Treatment Plan</h2>
+            <p>Medical Treatment Plan ID: <input type="text" name"medical_treatment_plan.medical_treatment_plan_id" value="{{medical_treatment_plan.medical_treatment_plan_id}}"></p>
+            <p>Guardian Signature Date: <input type="text" name"medical_treatment_plan.guardian_signature_date" value="{{medical_treatment_plan.guardian_signature_date}}"></p>
+            <p>Appointment ID: <input type="text" name"medical_treatment_plan.appointment_id" value="{{medical_treatment_plan.appointment_id}}"></p>
+            <p> Medications: <input type="text" name"medical_treatment_plan.medications" value="{{medical_treatment_plan.medications}}"></p>
+            <p> Diagnoses: <input type="text" name"medical_treatment_plan.diagnoses" value="{{medical_treatment_plan.diagnoses}}"></p>
+            <p> Symptoms: <input type="text" name"medical_treatment_plan.symptoms" value="{{medical_treatment_plant.symptoms}}"></p>
         </div>
-        {% endfor %}
-    </div>
-
-    <div id="behavior">
-        <h1>Behavior</h1>
-        {% for key, value in behavior.items %}
-        <div id="{{key}}">
-            <p><b>{{key}}</b>: {{value}} </p>
+        <div id="behavior">
+            <h2>Behavior</h2>
+            <p>Assesment Date: <input type="text" name"behavior.assessment" value="{{behavior.assessment}}"></p>
+            <p>Behavior: <input type="text" name"behavior.behavior" value="{{behavior.behavior}}"></p>
+            <p>Summary: : <input type="text" name"behavior.summary" value="{{behavior.summary}}"></p>
+       </div> 
+       <div id="behavior_support_plan">
+            <h2>Behavior Support Plan</h2>
+            <p>Guardian Signature Date:  <input type="text" name"behavior_support_plans.guardian_signature_date" value="{{behavior_support_plans.guardian_signature_date}}"></p>
+            <p>Residential Appointment ID: <input type="text" name"behavior_support_plans.residential_appointment_id" value="{{behavior_support_plans.residential_appointment_id}}"></p>
+            <p>Day Appointment ID: <input type="text" name"behavior_support_plans.day_appointment_id" value="{{behavior_support_plans.day_appointment_id}}"></p>
+            <p>Tier:  <input type="text" name"behavior_support_plans.tier" value="{{behavior_support_plans.tier}}"></p>
         </div>
-        {% endfor %}
-    </div>
-
-    <div id="restrictive">
-        <h1>Restrictive</h1>
-
-        <p><b>{% for key, value in restrictive.0.items %}
-            ||{{key}} 
-        {% endfor %}</b></p>
-        
-        {% for item in restrictive %}
-            <p>|| {% for key, value in item.items %}
-                {{value}} || 
-            {% endfor %}
-        {% endfor %}</p>
-    </div>
-
-    <div id="behavior_support_plans">
-        <h1>Behavior Support Plans</h1>
-        {% for key, value in behavior_support_plans.items %}
-            <div id="{{key}}">
-                <p><b>{{key}}</b>: {{value}} </p>
-            </div>
-        {% endfor %}
-    </div>
-
-    <div id="rogers_monitor">
-        <h1>Rogers Monitor</h1>
-        {% for key, value in rogers_monitor.items %}
-            <div id="{{key}}">
-                <p><b>{{key}}</b>: {{value}} </p>
-            </div>
-        {% endfor %}
-    </div>
-
+        <div id="restrictive">
+            <h2>Restrictive</h2>
+            {% for item in restrictive %}
+                <div>
+                    <p>Restrictive Practices ID: <input type="text" name="restrictive.existing.{{item.restrictive_id}}.restrictive_practices_id" value="{{item.restrictive_practices_id}}"></p>
+                    <p>Practice Type: <input type="text" name="restrictive.existing.{{item.practice_type}}.practice_type" value="{{item.practice_type}}"></p>
+                    <p>HRC Approval Date: <input type="text" name="restrictive.existing.{{item.hrc_approval_date}}.hrc_approval_date" value="{{item.hrc_approval_date}}"></p>
+                    <p>HRC Submission Date: <input type="text" name="restrictive.existing.{{item.hrc_submission_date}}.hrc_submission_date" value="{{item.hrc_submission_date}}"></p>
+                    <p>Description: <input type="text" name="restrictive.existing.{{item.description}}.description" value="{{item.restrictive}}"></p>  
+                </div>
+            {% endfor %}    
+                <!-- These are new entries -->
+                <div>
+                    <p>Date: <input type="text" name="restrictive.new.0.restrictive_practices_id" value="{{item.restrictive_practices_id}}"></p>
+                    <p>Assessment: <input type="text" name="restrictive.new.0.practice_type" value="{{item.practice_type}}"></p>
+                    <p>Cause of Failure: <input type="text" name="restrictive.new.0.hrc_approval_date" value="{{item.hrc_approval_date}}"></p>
+                    <p>Determination Basis: <input type="text" name="restrictive.new.0.hrc_submission_date" value="{{item.hrc_submission_date}}"></p>
+                </div>
+                <div>
+                    <p>Date: <input type="text" name="restrictive.new.1.restrictive_practices_id" value="{{item.restrictive_practices_id}}"></p>
+                    <p>Assessment: <input type="text" name="restrictive.new.0.practice_type" value="{{item.practice_type}}"></p>
+                    <p>Cause of Failure: <input type="text" name="restrictive.new.1.hrc_approval_date" value="{{item.hrc_approval_date}}"></p>
+                    <p>Determination Basis: <input type="text" name="restrictive.new.1.hrc_submission_date" value="{{item.hrc_submission_date}}"></p>
+                </div>
+        </div>
+        <div id="rogers_monitor">
+            <h2>Rogers Monitor</h2>
+            <p>Next Court Date:  <input type="text" name"rogers_monitor.next_court_date" value="{{rogers_monitor.next_court_date}}"></p>
+            <p>Last Court Date:  <input type="text" name"rogers_monitor.last_court_date" value="{{rogers_monitor.last_court_date}}"></p>
+            <p>Guardian Signature Date:  <input type="text" name"rogers_monitor.guardian_signature_date" value="{{rogers_monitor.guardian_signature_date}}"></p>
+            <p>Appointment ID:  <input type="text" name"rogers_monitor.appointment_id" value="{{rogers_monitor.appointment_id}}"></p>
+            <p>Medications:  <input type="text" name"rogers_monitor.medications" value="{{rogers_monitor.medications}}"></p>
+        </div>
+        <input type="submit"></input>
+    </form>
 </body>
 </html>

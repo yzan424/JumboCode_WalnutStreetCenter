@@ -7,9 +7,9 @@ from django.template import *
 import json, requests
 
 
-backendGET = 'http://127.0.0.1:5000/api/patient/'
-backendPOST = 'http://localhost:8000/backend/profile/'
-backendPUT = 'http://localhost:8000/backend/profile/'
+backendGET = 'http://52.88.243.201:5000/api/patient/'
+backendPOST = 'http://52.88.243.201:5000/api/patient/'
+backendPUT = 'http://52.88.243.201:5000/api/patient/'
 
 # Create your views here.
 def backend(request, profile_id, data):
@@ -472,19 +472,247 @@ def edit(request, page, profile_id):
         if request.method == "GET":
             return protocol(request, profile_id, True)
         else:
-            # send new info
-            pass
-            #redirect
+            print(request.POST)
+            print('\n')
+            updated_protocols = []
+            new_protocols = []
+            updated_isp = {}
+            updated_supportive = []
+            new_supportive = []
+            updated_tracking = []
+            new_tracking = []
+
+            for keys, values in request.POST.items():
+                if (keys.split('.'))[0] == "protocols":
+                    protocols_id = keys.split('.')[2]
+                    dictKey = keys.split('.')[2]
+                    if (keys.split('.')[1] == "existing"):
+                        if not any(x['protocols_id'] ==  protocols_id for x in updated_protocols):
+                            updated_protocols.append({'protocols_id': protocols_id})
+
+                        for i in updated_protocols:
+                            if i['protocols_id'] == protocols_id:
+                                i[dictKey] = values
+                    else:
+                        if values != '':
+                            if  not any(x['protocols_id'] == protocols_id for x in new_protocols):
+                                new_protocols.append({'protocols_id': protocols_id})
+
+                            for i in new_protocols:
+                                if i['protocols_id'] == protocols_id:
+                                    i[dictKey] = values
+                elif (keys.split('.'))[0] == "isp":
+                    updated_isp[keys.split('.')[1]] = values
+                elif (keys.split('.'))[0] == "supportive":
+                    supportive_id = keys.split('.')[2]
+                    dictKey = keys.split('.')[2]
+                    if (keys.split('.')[1] == "existing"):
+                        if not any(x['supportive_id'] ==  supportive_id for x in updated_supportive):
+                            updated_supportive.append({'supportive_id': supportive_id})
+
+                        for i in updated_supportive:
+                            if i['supportive_id'] == supportive_id:
+                                i[dictKey] = values
+                    else:
+                        if values != '':
+                            if  not any(x['supportive_id'] == supportive_id for x in new_supportive):
+                                new_supportive.apped({'supportive_id': supportive_id})
+
+                            for i in new_supportive:
+                                if i['supportive_id'] == supportive_id:
+                                    i[dictKey] = values
+                elif (keys.split('.'))[0] == "tracking":
+                    tracking_id = keys.split('.')[2]
+                    dictKey = keys.split('.')[2]
+                    if (keys.split('.')[1] == "existing"):
+                        if not any(x['tracking_id'] ==  tracking_id for x in updated_tracking):
+                            updated_tracking.append({'tracking_id': tracking_id})
+
+                        for i in updated_tracking:
+                            if i['tracking_id'] == tracking_id:
+                                i[dictKey] = values
+                    else:
+                        if values != '':
+                            if  not any(x['tracking_id'] == tracking_id for x in new_tracking):
+                                new_tracking.apped({'tracking_id': tracking_id})
+
+                            for i in new_tracking:
+                                if i['tracking_id'] == tracking_id:
+                                    i[dictKey] = values
+            print("updated_protocols:", updated_protocols)
+            print("updated_isp:", updated_isp)
+            print("updated_supportive:", updated_supportive)
+            print("updated_tracking:", updated_tracking)
+
+            requests.post(backendPOST + profile_id + '/protocols/', data=updated_protocols)
+            requests.post(backendPOST + profile_id + '/isp/', data=updated_isp)
+            requests.post(backendPOST + profile_id + '/supportive/', data=updated_supportive)
+            requests.post(backendPOST + profile_id + '/tracking/', data=updated_tracking)
+
+            for i in updated_protocols:
+                requests.post(backendPOST + profile_id + '/protocols/', data=i)
+            for i in new_protocols:
+                i['patient_id'] = profile_id
+                i.pop('protocols_id', None)
+                print(i)
+                requests.put(backendPOST + 'protocols/' + profile_id, data=i)
+
+            for i in updated_supportive:
+                requests.post(backendPOST + profile_id + '/supportive/', data=i)
+            for i in new_supportive:
+                i['patient_id'] = profile_id
+                i.pop('supportive_id', None)
+                print(i)
+                requests.put(backendPOST + 'supportive/' + profile_id, data=i)
+
+            for i in updated_tracking:
+                requests.post(backendPOST + profile_id + '/tracking/', data=i)
+            for i in new_tracking:
+                i['patient_id'] = profile_id
+                i.pop('tracking_id', None)
+                print(i)
+                requests.put(backendPOST + 'tracking/' + profile_id, data=i)
+            #I'm not sure if i need to mimic the above block for every array in this set
+
+            return HttpResponseRedirect("/protocol/" + profile_id + '/')
     elif page == "behavior":
         if request.method == "GET":
             return behavior(request, profile_id, True)
         else:
-            pass
+            print(request.POST)
+            print('\n')
+            updated_medical_treatment_plan = {}
+            updated_behavior = {}
+            updated_behavior_support_plans = {}
+            updated_restrictive = []
+            new_restrictive = []
+            updated_rogers_monitor = {}
+
+            for keys, values in request.POST.items():
+                if (keys.split('.'))[0] == "medical_treatment_plan":
+                    updated_medical_treatment_plan[keys.split('.')[1]] = values
+                elif (keys.split('.'))[0] == "behavior":
+                    updated_behavior[keys.split('.')[1]] = values
+                elif (keys.split('.'))[0] == "behavior_support_plans":
+                    updated_behavior_support_plans[keys.split('.')[1]] = values
+                elif (keys.split('.'))[0] == "updated_restrictive":
+                    restrictive_id = keys.split('.')[2]
+                    dictKey = keys.split('.')[2]
+                    if (keys.split('.')[1] == "existing"):
+                        if not any(x['restrictive_id'] ==  restrictive_id for x in updated_restrictive):
+                            updated_restrictive.append({'restrictive_id': restrictive_id})
+
+                        for i in updated_restrictive:
+                            if i['restrictive_id'] == restrictive_id:
+                                i[dictKey] = values
+                    else:
+                        if values != '':
+                            if  not any(x['restrictive_id'] == restrictive_id for x in new_restrictive):
+                                new_restrictive.apped({'restrictive_id': restrictive_id})
+
+                            for i in new_restrictive:
+                                if i['restrictive_id'] == restrictive_id:
+                                    i[dictKey] = values
+                elif (keys.split('.'))[0] == "updated_rogers_monitor":
+                    updated_rogers_monitor[keys.split('.')[1]] = values
+            print("updated_medical_treatment_plan:", updated_medical_treatment_plan)
+            print("updated_behavior:", updated_behavior)
+            print("updated_behavior_support_plans:", updated_behavior_support_plans)
+            print("updated_restrictive:", updated_restrictive)
+            print("updated_rogers_monitor", updated_rogers_monitor)
+
+            requests.post(backendPOST + profile_id + '/medical_treatment_plan/', data=updated_medical_treatment_plan)
+            requests.post(backendPOST + profile_id + '/behavior/', data=updated_behavior)
+            requests.post(backendPOST + profile_id + '/behavior_support_plans/', data=updated_behavior_support_plans)
+            requests.post(backendPOST + profile_id + '/rogers_monitor/', data=updated_rogers_monitor)
+
+            for i in updated_restrictive:
+                requests.post(backendPOST + profile_id + '/restrictive/', data=i)
+            for i in new_restrictive:
+                i['patient_id'] = profile_id
+                i.pop('restrictive_id', None)
+                print(i)
+                requests.put(backendPOST + 'restrictive/' + profile_id, data=i)
+
+            return HttpResponseRedirect("/behavior/" + profile_id + '/')
+
     elif page == "support":
         if request.method == "GET":
             return support(request, profile_id, True)
         else:
-            pass
+            print(get.POST)
+            print('\n')
+            updated_legal_guardian = {}
+            updated_insurance = []
+            new_insurance = []
+            updated_legal_status = []
+            new_legal_status = []
+
+            for keys, values in request.POST.items():
+
+                if (keys.split('.'))[0] == "insurance":
+                    insurance_id = keys.split('.')[2]
+                    dictKey = keys.split('.')[2]
+                    if (keys.split('.')[1] == "existing"):
+                        if not any(x['insurance_id'] ==  insurance_id for x in updated_insurance):
+                            updated_insurance.append({'insurance_id': insurance_id})
+
+                        for i in updated_insurance:
+                            if i['insurance_id'] == insurance_id:
+                                i[dictKey] = values
+                            else:
+                                if values != '':
+                                    if  not any(x['insurance_id'] == insurance_id for x in new_insurance):
+                                        new_insurance.append({'insurance_id': insurance_id})
+
+                                    for i in new_insurance:
+                                        if i['insurance_id'] == insurance_id:
+                                            i[dictKey] = values
+                    elif (keys.split('.'))[0] == "legal_guardian":
+                        updated_legal_guardian[keys.split('.')[1]] = values
+                    elif (keys.split('.'))[0] == "legal_status":
+                        legal_status_id = keys.split('.')[2]
+                        dictKey = keys.split('.')[2]
+                        if (keys.split('.')[1] == "existing"):
+                            if not any(x['legal_status_id'] ==  legal_status_id for x in updated_legal_status):
+                                updated_legal_status.append({'legal_status_id': legal_status_id})
+
+                            for i in updated_legal_status:
+                                if i['legal_status_id'] == legal_status_id:
+                                    i[dictKey] = values
+                        else:
+                            if values != '':
+                                if  not any(x['legal_status_id'] == legal_status_id for x in new_legal_status):
+                                    new_legal_status.apped({'legal_status_id': legal_status_id})
+
+                                for i in new_legal_status:
+                                    if i['legal_status_id'] == legal_status_id:
+                                        i[dictKey] = values
+
+            print("updated_insurance:", updated_insurance)
+            print("updated_legal_guardian:", legal_guardian)
+            print("updated_legal_status:", updated_legal_status)
+
+            requests.post(backendPOST + profile_id + '/insurance/', data=updated_insurance)
+            requests.post(backendPOST + profile_id + '/legal_guardian/', data=updated_legal_guardian)
+            requests.post(backendPOST + profile_id + '/legal_status/', data=updated_legal_status)
+
+            for i in updated_insurance:
+                requests.post(backendPOST + profile_id + '/insurance/', data=i)
+            for i in new_insurance:
+                i['patient_id'] = profile_id
+                i.pop('insurance_id', None)
+                print(i)
+                requests.put(backendPOST + 'insurance/' + profile_id, data=i)
+            for i in updated_legal_status:
+                requests.post(backendPOST + profile_id + '/legal_status/', data=i)
+            for i in new_legal_status:
+                i['patient_id'] = profile_id
+                i.pop('legal_status_id', None)
+                print(i)
+                requests.put(backendPOST + 'legal_status/' + profile_id, data=i)
+            
+            return HttpResponseRedirect("/support/" + profile_id + '/')
 
 def new(request):
     if request.method == "GET":
