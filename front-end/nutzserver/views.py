@@ -510,6 +510,7 @@ def edit(request, page, profile_id):
                         if not any(x['supportive_id'] ==  supportive_id for x in updated_supportive):
                             updated_supportive.append({'supportive_id': supportive_id})
 
+
                         for i in updated_supportive:
                             if i['supportive_id'] == supportive_id:
                                 i[dictKey] = values
@@ -574,6 +575,7 @@ def edit(request, page, profile_id):
                 requests.put(backendPOST + 'tracking/' + profile_id, data=i)
             #I'm not sure if i need to mimic the above block for every array in this set
 
+<<<<<<< HEAD
             return HttpResponseRedirect("/protocol/" + profile_id + '/')
     elif page == "behavior":
         if request.method == "GET":
@@ -688,6 +690,10 @@ def edit(request, page, profile_id):
                                 for i in new_legal_status:
                                     if i['legal_status_id'] == legal_status_id:
                                         i[dictKey] = values
+=======
+def emilystest(request):
+    return render(request, 'behavior.html')
+>>>>>>> emily
 
             print("updated_insurance:", updated_insurance)
             print("updated_legal_guardian:", legal_guardian)
