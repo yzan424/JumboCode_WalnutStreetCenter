@@ -107,6 +107,9 @@ def get_request(request, profile_id, template):
 def profile(request, profile_id):
     return get_request(request, profile_id, "profile.html")
 
+def behavior(request):
+    return render(request, 'behavior.html')
+
 def update(request, profile_id):
     if request.method == 'GET':
         return get_request(request, profile_id, "update.html")
@@ -142,7 +145,8 @@ def update(request, profile_id):
         #in production redirect to the profile page
         return JsonResponse(json.dumps(emfprofile), safe=False)
 
-
+def emilystest(request):
+    return render(request, 'behavior.html')
 
 def my_view(request):
     if request.method == 'GET':

@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^profile/(?P<profile_id>\d+)/$', profile),
     url(r'^update/(?P<profile_id>\d+)/', update),
     url(r'^signin/$', my_view),
+    url(r'^test/$', emilystest),
 
 ]
