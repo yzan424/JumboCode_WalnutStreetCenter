@@ -7,9 +7,9 @@ from django.template import *
 import json, requests
 
 
-backendGET = 'http://52.88.243.201:5000/api/patient/'
-backendPOST = 'http://52.88.243.201:5000/api/patient/'
-backendPUT = 'http://52.88.243.201:5000/api/patient/'
+backendGET = 'http://localhost:8000/backend/profile/'
+backendPOST = 'http://localhost:8000/backend/profile/'
+backendPUT = 'http://localhost:8000/backend/profile/'
 
 # Create your views here.
 def backend(request, profile_id, data):
@@ -384,7 +384,6 @@ def behavior(request, profile_id, edit):
     else:
         return render(request, "update_behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor})        
 
-
 def support(request, profile_id, edit):
     legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian/')
     insurance = requests.get(backendGET + profile_id + '/insurance/')
@@ -405,8 +404,6 @@ def edit(request, page, profile_id):
             return profile(request, profile_id, True)
         else:
             # send the new stuffs to the backend
-            print(request.POST)
-            print('\n')
             updated_medical_info = {}
             updated_basic_info = {}
             updated_self_preservation = []
@@ -516,7 +513,7 @@ def edit(request, page, profile_id):
                     else:
                         if values != '':
                             if  not any(x['supportive_id'] == supportive_id for x in new_supportive):
-                                new_supportive.apped({'supportive_id': supportive_id})
+                                new_supportive.append({'supportive_id': supportive_id})
 
                             for i in new_supportive:
                                 if i['supportive_id'] == supportive_id:
@@ -534,7 +531,7 @@ def edit(request, page, profile_id):
                     else:
                         if values != '':
                             if  not any(x['tracking_id'] == tracking_id for x in new_tracking):
-                                new_tracking.apped({'tracking_id': tracking_id})
+                                new_tracking.append({'tracking_id': tracking_id})
 
                             for i in new_tracking:
                                 if i['tracking_id'] == tracking_id:
@@ -544,10 +541,7 @@ def edit(request, page, profile_id):
             print("updated_supportive:", updated_supportive)
             print("updated_tracking:", updated_tracking)
 
-            requests.post(backendPOST + profile_id + '/protocols/', data=updated_protocols)
             requests.post(backendPOST + profile_id + '/isp/', data=updated_isp)
-            requests.post(backendPOST + profile_id + '/supportive/', data=updated_supportive)
-            requests.post(backendPOST + profile_id + '/tracking/', data=updated_tracking)
 
             for i in updated_protocols:
                 requests.post(backendPOST + profile_id + '/protocols/', data=i)
@@ -556,6 +550,7 @@ def edit(request, page, profile_id):
                 i.pop('protocols_id', None)
                 print(i)
                 requests.put(backendPOST + 'protocols/' + profile_id, data=i)
+
 
             for i in updated_supportive:
                 requests.post(backendPOST + profile_id + '/supportive/', data=i)
@@ -572,7 +567,7 @@ def edit(request, page, profile_id):
                 i.pop('tracking_id', None)
                 print(i)
                 requests.put(backendPOST + 'tracking/' + profile_id, data=i)
-            #I'm not sure if i need to mimic the above block for every array in this set
+          
 
             return HttpResponseRedirect("/protocol/" + profile_id + '/')
     elif page == "behavior":
@@ -595,9 +590,9 @@ def edit(request, page, profile_id):
                     updated_behavior[keys.split('.')[1]] = values
                 elif (keys.split('.'))[0] == "behavior_support_plans":
                     updated_behavior_support_plans[keys.split('.')[1]] = values
-                elif (keys.split('.'))[0] == "updated_restrictive":
+                elif (keys.split('.'))[0] == "restrictive":
                     restrictive_id = keys.split('.')[2]
-                    dictKey = keys.split('.')[2]
+                    dictKey = keys.split('.')[3]
                     if (keys.split('.')[1] == "existing"):
                         if not any(x['restrictive_id'] ==  restrictive_id for x in updated_restrictive):
                             updated_restrictive.append({'restrictive_id': restrictive_id})
@@ -608,12 +603,12 @@ def edit(request, page, profile_id):
                     else:
                         if values != '':
                             if  not any(x['restrictive_id'] == restrictive_id for x in new_restrictive):
-                                new_restrictive.apped({'restrictive_id': restrictive_id})
+                                new_restrictive.append({'restrictive_id': restrictive_id})
 
                             for i in new_restrictive:
                                 if i['restrictive_id'] == restrictive_id:
                                     i[dictKey] = values
-                elif (keys.split('.'))[0] == "updated_rogers_monitor":
+                elif (keys.split('.'))[0] == "rogers_monitor":
                     updated_rogers_monitor[keys.split('.')[1]] = values
             print("updated_medical_treatment_plan:", updated_medical_treatment_plan)
             print("updated_behavior:", updated_behavior)
@@ -635,7 +630,6 @@ def edit(request, page, profile_id):
                 requests.put(backendPOST + 'restrictive/' + profile_id, data=i)
 
             return HttpResponseRedirect("/behavior/" + profile_id + '/')
-
     elif page == "support":
         if request.method == "GET":
             return support(request, profile_id, True)
@@ -683,7 +677,7 @@ def edit(request, page, profile_id):
                         else:
                             if values != '':
                                 if  not any(x['legal_status_id'] == legal_status_id for x in new_legal_status):
-                                    new_legal_status.apped({'legal_status_id': legal_status_id})
+                                    new_legal_status.append({'legal_status_id': legal_status_id})
 
                                 for i in new_legal_status:
                                     if i['legal_status_id'] == legal_status_id:
