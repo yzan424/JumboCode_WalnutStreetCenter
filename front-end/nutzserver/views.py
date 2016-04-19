@@ -635,7 +635,7 @@ def edit(request, page, profile_id):
         if request.method == "GET":
             return support(request, profile_id, True)
         else:
-            print(get.POST)
+            print(request.POST)
             print('\n')
             updated_legal_guardian = {}
             updated_insurance = []
@@ -663,29 +663,29 @@ def edit(request, page, profile_id):
                                     for i in new_insurance:
                                         if i['insurance_id'] == insurance_id:
                                             i[dictKey] = values
-                    elif (keys.split('.'))[0] == "legal_guardian":
-                        updated_legal_guardian[keys.split('.')[1]] = values
-                    elif (keys.split('.'))[0] == "legal_status":
-                        legal_status_id = keys.split('.')[2]
-                        dictKey = keys.split('.')[2]
-                        if (keys.split('.')[1] == "existing"):
-                            if not any(x['legal_status_id'] ==  legal_status_id for x in updated_legal_status):
-                                updated_legal_status.append({'legal_status_id': legal_status_id})
+                elif (keys.split('.'))[0] == "legal_guardian":
+                    updated_legal_guardian[keys.split('.')[1]] = values
+                elif (keys.split('.'))[0] == "legal_status":
+                    legal_status_id = keys.split('.')[2]
+                    dictKey = keys.split('.')[2]
+                    if (keys.split('.')[1] == "existing"):
+                        if not any(x['legal_status_id'] ==  legal_status_id for x in updated_legal_status):
+                            updated_legal_status.append({'legal_status_id': legal_status_id})
 
-                            for i in updated_legal_status:
+                        for i in updated_legal_status:
+                            if i['legal_status_id'] == legal_status_id:
+                                i[dictKey] = values
+                    else:
+                        if values != '':
+                            if  not any(x['legal_status_id'] == legal_status_id for x in new_legal_status):
+                                new_legal_status.append({'legal_status_id': legal_status_id})
+
+                            for i in new_legal_status:
                                 if i['legal_status_id'] == legal_status_id:
                                     i[dictKey] = values
-                        else:
-                            if values != '':
-                                if  not any(x['legal_status_id'] == legal_status_id for x in new_legal_status):
-                                    new_legal_status.append({'legal_status_id': legal_status_id})
-
-                                for i in new_legal_status:
-                                    if i['legal_status_id'] == legal_status_id:
-                                        i[dictKey] = values
 
             print("updated_insurance:", updated_insurance)
-            print("updated_legal_guardian:", legal_guardian)
+            print("updated_legal_guardian:", updated_legal_guardian)
             print("updated_legal_status:", updated_legal_status)
 
             requests.post(backendPOST + profile_id + '/insurance/', data=updated_insurance)
