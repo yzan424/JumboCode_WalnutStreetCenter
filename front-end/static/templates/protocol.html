@@ -1,16 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-    </head>
-    <body>
-        <div id="protocols">
-        {% for item in protocols %}
-            <h3>Name: {{item.name}}</h3>
-            <p>Description: {{item.description}}</p>
-            <p>Guardian Signature: {{item.guardian_signature_date}}</p>
-            <p>Physician Signature: {{item.physician_signature_date}}</p>
-        {% endfor %}
+{% extends "base.html" %}
+  {% block content %}
+    <div class="container theme-showcase" role="main">
+        <div class= "row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <!--PROTOCOLS-->
+                        <h3 class="panel-title">Protocols<button type="button" class="btn btn-xs btn-default pull-right">Add New</button></h3>
+                        {% for item in protocols %}
+                            <h3>Name: {{item.name}}</h3>
+                            <p>Description: {{item.description}}</p>
+                            <p>Guardian Signature: {{item.guardian_signature_date}}</p>
+                            <p>Physician Signature: {{item.physician_signature_date}}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-xs-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                  <h3 class="panel-title">Transport<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="isp">
@@ -39,6 +53,5 @@
                 <p>Timeframe: Every {{item.next_due}} month(s)</p>
             {% endfor %}
         </div>
-
-    </body>
-</html>
+    </div>
+{% endblock %}
