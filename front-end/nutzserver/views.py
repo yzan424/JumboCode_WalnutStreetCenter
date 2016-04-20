@@ -7,7 +7,7 @@ from django.template import *
 import json, requests
 
 
-backendGET = 'http://localhost:8000/backend/profile/'
+backendGET = 'http://127.0.0.1:5000/api/patient/'
 backendPOST = 'http://localhost:8000/backend/profile/'
 backendPUT = 'http://localhost:8000/backend/profile/'
 
@@ -333,11 +333,11 @@ def backend(request, profile_id, data):
         return JsonResponse({"success": True})
 
 def profile(request, profile_id, edit):
-    medical_info = requests.get(backendGET + profile_id + '/medical')
-    basic_info = requests.get(backendGET + profile_id + '/basic')
+    medical_info = requests.get(backendGET + profile_id + '/medical_info')
+    basic_info = requests.get(backendGET + profile_id + '/basic_info')
     self_preservation = requests.get(backendGET + profile_id + '/self_preservation')
-    identifying = requests.get(backendGET + profile_id + '/identifying') 
-    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian') 
+    identifying = requests.get(backendGET + profile_id + '/identifying_info') 
+    legal_guardian = requests.get(backendGET + profile_id + '/legal_family_info') 
 
     medical_info = json.loads(medical_info.json())
     basic_info = json.loads(basic_info.json())
