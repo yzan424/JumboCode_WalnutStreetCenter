@@ -333,11 +333,11 @@ def backend(request, profile_id, data):
         return JsonResponse({"success": True})
 
 def profile(request, profile_id, edit):
-    medical_info = requests.get(backendGET + profile_id + '/medical/')
-    basic_info = requests.get(backendGET + profile_id + '/basic/')
-    self_preservation = requests.get(backendGET + profile_id + '/self_preservation/')
-    identifying = requests.get(backendGET + profile_id + '/identifying/') 
-    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian/') 
+    medical_info = requests.get(backendGET + profile_id + '/medical')
+    basic_info = requests.get(backendGET + profile_id + '/basic')
+    self_preservation = requests.get(backendGET + profile_id + '/self_preservation')
+    identifying = requests.get(backendGET + profile_id + '/identifying') 
+    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian') 
 
     medical_info = json.loads(medical_info.json())
     basic_info = json.loads(basic_info.json())
@@ -351,10 +351,10 @@ def profile(request, profile_id, edit):
         return render(request, "update_profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian})        
 
 def protocol(request, profile_id, edit):
-    protocols = requests.get(backendGET + profile_id + '/protocols/')
+    protocols = requests.get(backendGET + profile_id + '/protocols')
     isp = requests.get(backendGET + profile_id + '/isp')
-    supportive = requests.get(backendGET + profile_id + '/supportive/')
-    tracking = requests.get(backendGET + profile_id + '/tracking/')  
+    supportive = requests.get(backendGET + profile_id + '/supportive')
+    tracking = requests.get(backendGET + profile_id + '/tracking')  
 
     protocols = json.loads(protocols.json())
     isp = json.loads(isp.json())
@@ -367,11 +367,11 @@ def protocol(request, profile_id, edit):
         return render(request, "update_protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking})        
 
 def behavior(request, profile_id, edit):
-    medical_treatment_plan = requests.get(backendGET + profile_id + '/medical_treatment_plan/')
-    behavior = requests.get(backendGET + profile_id + '/behavior/')
-    behavior_support_plans = requests.get(backendGET + profile_id + '/behavior_support_plans/')
-    restrictive = requests.get(backendGET + profile_id + '/restrictive/')
-    rogers_monitor = requests.get(backendGET + profile_id + '/rogers_monitor/')
+    medical_treatment_plan = requests.get(backendGET + profile_id + '/medical_treatment_plan')
+    behavior = requests.get(backendGET + profile_id + '/behavior')
+    behavior_support_plans = requests.get(backendGET + profile_id + '/behavior_support_plans')
+    restrictive = requests.get(backendGET + profile_id + '/restrictive')
+    rogers_monitor = requests.get(backendGET + profile_id + '/rogers_monitor')
 
     medical_treatment_plan = json.loads(medical_treatment_plan.json())
     behavior = json.loads(behavior.json())
@@ -385,9 +385,9 @@ def behavior(request, profile_id, edit):
         return render(request, "update_behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor})        
 
 def support(request, profile_id, edit):
-    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian/')
-    insurance = requests.get(backendGET + profile_id + '/insurance/')
-    legal_status = requests.get(backendGET + profile_id + '/legal_competency/')
+    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian')
+    insurance = requests.get(backendGET + profile_id + '/insurance')
+    legal_status = requests.get(backendGET + profile_id + '/legal_competency')
 
     legal_guardian = json.loads(legal_guardian.json())
     insurance = json.loads(insurance.json())
@@ -453,18 +453,18 @@ def edit(request, page, profile_id):
             print("updated_legal_guardian:", updated_legal_guardian)
 
             # send all the new stuff
-            requests.post(backendPOST + profile_id + '/identifying/', data=updated_identifying)
-            requests.post(backendPOST + profile_id + '/medical_info/', data=updated_medical_info)
-            requests.post(backendPOST + profile_id + '/basic/', data=updated_basic_info)
-            requests.post(backendPOST + profile_id + '/legal_guardian/', data=updated_legal_guardian)
+            requests.post(backendPOST + profile_id + '/identifying', data=updated_identifying)
+            requests.post(backendPOST + profile_id + '/medical_info', data=updated_medical_info)
+            requests.post(backendPOST + profile_id + '/basic', data=updated_basic_info)
+            requests.post(backendPOST + profile_id + '/legal_guardian', data=updated_legal_guardian)
             for i in updated_self_preservation:
-                requests.post(backendPOST + profile_id + '/self_preservation/', data=i)           
+                requests.post(backendPOST + profile_id + '/self_preservation', data=i)           
             for i in new_self_preservation:
                 i.pop('self_preservation_id', None)
                 print(i)
-                requests.put(backendPOST + "/self_preservation/", data=i) 
+                requests.put(backendPOST + "/self_preservation", data=i) 
 
-            return HttpResponseRedirect("/profile/" + profile_id + '/')
+            return HttpResponseRedirect("/profile/" + profile_id)
     elif page == "protocol":
         if request.method == "GET":
             return protocol(request, profile_id, True)
@@ -542,10 +542,10 @@ def edit(request, page, profile_id):
             print("updated_supportive:", updated_supportive)
             print("updated_tracking:", updated_tracking)
 
-            requests.post(backendPOST + profile_id + '/isp/', data=updated_isp)
+            requests.post(backendPOST + profile_id + '/isp', data=updated_isp)
 
             for i in updated_protocols:
-                requests.post(backendPOST + profile_id + '/protocols/', data=i)
+                requests.post(backendPOST + profile_id + '/protocols', data=i)
             for i in new_protocols:
                 i['patient_id'] = profile_id
                 i.pop('protocols_id', None)
@@ -554,7 +554,7 @@ def edit(request, page, profile_id):
 
 
             for i in updated_supportive:
-                requests.post(backendPOST + profile_id + '/supportive/', data=i)
+                requests.post(backendPOST + profile_id + '/supportive', data=i)
             for i in new_supportive:
                 i['patient_id'] = profile_id
                 i.pop('supportive_id', None)
@@ -562,7 +562,7 @@ def edit(request, page, profile_id):
                 requests.put(backendPOST + 'supportive/' + profile_id, data=i)
 
             for i in updated_tracking:
-                requests.post(backendPOST + profile_id + '/tracking/', data=i)
+                requests.post(backendPOST + profile_id + '/tracking', data=i)
             for i in new_tracking:
                 i['patient_id'] = profile_id
                 i.pop('tracking_id', None)
@@ -570,7 +570,7 @@ def edit(request, page, profile_id):
                 requests.put(backendPOST + 'tracking/' + profile_id, data=i)
           
 
-            return HttpResponseRedirect("/protocol/" + profile_id + '/')
+            return HttpResponseRedirect("/protocol/" + profile_id)
     elif page == "behavior":
         if request.method == "GET":
             return behavior(request, profile_id, True)
@@ -617,20 +617,20 @@ def edit(request, page, profile_id):
             print("updated_restrictive:", updated_restrictive)
             print("updated_rogers_monitor", updated_rogers_monitor)
 
-            requests.post(backendPOST + profile_id + '/medical_treatment_plan/', data=updated_medical_treatment_plan)
-            requests.post(backendPOST + profile_id + '/behavior/', data=updated_behavior)
-            requests.post(backendPOST + profile_id + '/behavior_support_plans/', data=updated_behavior_support_plans)
-            requests.post(backendPOST + profile_id + '/rogers_monitor/', data=updated_rogers_monitor)
+            requests.post(backendPOST + profile_id + '/medical_treatment_plan', data=updated_medical_treatment_plan)
+            requests.post(backendPOST + profile_id + '/behavior', data=updated_behavior)
+            requests.post(backendPOST + profile_id + '/behavior_support_plans', data=updated_behavior_support_plans)
+            requests.post(backendPOST + profile_id + '/rogers_monitor', data=updated_rogers_monitor)
 
             for i in updated_restrictive:
-                requests.post(backendPOST + profile_id + '/restrictive/', data=i)
+                requests.post(backendPOST + profile_id + '/restrictive', data=i)
             for i in new_restrictive:
                 i['patient_id'] = profile_id
                 i.pop('restrictive_id', None)
                 print(i)
                 requests.put(backendPOST + 'restrictive/' + profile_id, data=i)
 
-            return HttpResponseRedirect("/behavior/" + profile_id + '/')
+            return HttpResponseRedirect("/behavior/" + profile_id)
     elif page == "support":
         if request.method == "GET":
             return support(request, profile_id, True)
@@ -688,26 +688,26 @@ def edit(request, page, profile_id):
             print("updated_legal_guardian:", updated_legal_guardian)
             print("updated_legal_status:", updated_legal_status)
 
-            requests.post(backendPOST + profile_id + '/insurance/', data=updated_insurance)
-            requests.post(backendPOST + profile_id + '/legal_guardian/', data=updated_legal_guardian)
-            requests.post(backendPOST + profile_id + '/legal_status/', data=updated_legal_status)
+            requests.post(backendPOST + profile_id + '/insurance', data=updated_insurance)
+            requests.post(backendPOST + profile_id + '/legal_guardian', data=updated_legal_guardian)
+            requests.post(backendPOST + profile_id + '/legal_status', data=updated_legal_status)
 
             for i in updated_insurance:
-                requests.post(backendPOST + profile_id + '/insurance/', data=i)
+                requests.post(backendPOST + profile_id + '/insurance', data=i)
             for i in new_insurance:
                 i['patient_id'] = profile_id
                 i.pop('insurance_id', None)
                 print(i)
                 requests.put(backendPOST + 'insurance/' + profile_id, data=i)
             for i in updated_legal_status:
-                requests.post(backendPOST + profile_id + '/legal_status/', data=i)
+                requests.post(backendPOST + profile_id + '/legal_status', data=i)
             for i in new_legal_status:
                 i['patient_id'] = profile_id
                 i.pop('legal_status_id', None)
                 print(i)
-                requests.put(backendPOST + 'legal_status/' + profile_id, data=i)
+                requests.put(backendPOST + 'legal_status' + profile_id, data=i)
             
-            return HttpResponseRedirect("/support/" + profile_id + '/')
+            return HttpResponseRedirect("/support/" + profile_id)
 
 def new(request):
     if request.method == "GET":
@@ -756,13 +756,13 @@ def new(request):
         #TODO: where do i get the resulting  id
         # do i do it before or after?
         if new_identifying != {}:
-            requests.put(backendPUT + 'identifying/', data=new_identifying)
+            requests.put(backendPUT + 'identifying', data=new_identifying)
         if new_medical_info != {}:
-            requests.put(backendPUT + 'medical_info/', data=new_medical_info)
+            requests.put(backendPUT + 'medical_info', data=new_medical_info)
         if new_basic_info != {}:
-            requests.put(backendPUT + 'basic/', data=new_basic_info)
+            requests.put(backendPUT + 'basic', data=new_basic_info)
         if new_legal_guardian != {}:
-            requests.put(backendPUT + 'legal_guardian/', data=new_legal_guardian)
+            requests.put(backendPUT + 'legal_guardian', data=new_legal_guardian)
       
         for i in new_self_preservation:
             i.pop('self_preservation_id', None)
@@ -771,7 +771,7 @@ def new(request):
 
         profile_id = "1"
 
-        return HttpResponseRedirect("/profile/" + profile_id + '/')
+        return HttpResponseRedirect("/profile/" + profile_id)
 
 def login(request):
     if request.method == 'GET':
