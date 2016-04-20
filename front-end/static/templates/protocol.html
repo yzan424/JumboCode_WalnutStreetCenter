@@ -7,12 +7,6 @@
                     <div class="panel-heading">
                         <!--PROTOCOLS-->
                         <h3 class="panel-title">Protocols<button type="button" class="btn btn-xs btn-default pull-right">Add New</button></h3>
-                        {% for item in protocols %}
-                            <h3>Name: {{item.name}}</h3>
-                            <p>Description: {{item.description}}</p>
-                            <p>Guardian Signature: {{item.guardian_signature_date}}</p>
-                            <p>Physician Signature: {{item.physician_signature_date}}</p>
-                        {% endfor %}
                     </div>
                     <div class="panel-body">
                         <div class="col-xs-4">
@@ -20,38 +14,96 @@
                                 <div class="panel-heading">
                                   <h3 class="panel-title">Transport<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
                                 </div>
+                                <div class="panel-body">
+                                    <!--{% for item in protocols %}-->
+                                        <p class="box-label"> Name </p>
+                                        <p> {{item.name}} <br> </p>
+                                        <p class="box-label"> Description </p>
+                                        <p> {{item.description}} <br> </p>
+                                        <p class="box-label"> Guardian Signature </p>
+                                        <p> {{item.guardian_signature_date}} <br></p>
+                                        <p class="box-label">Physician Signature</p>
+                                        <p> {{item.physician_signature_date}} <br> </p>
+                                    <!--{% endfor %}-->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div id="isp">
-            <h2>ISP</h2>
-            <p>Last ISP: {{isp.last_isp_date}}</p>
-            <p>Comments: {{isp.comments}}</p>
-        </div>
-
-        <div id="supportive">
-        <h2>Supportive and Protective Devices</h2>
-        {% for item in supportive %}
-            <h3>Type: {{item.device_type}}</h3>
-            <p>HRC Approval Date: {{item.hrc_approval_date}}</p>
-            <p>HRC Submission Date: {{item.hrc_submission_date}}</p>
-            <p>Physician Signature: {{item.physician_signature}}</p>
-            <p>Nurse Signature: {{item.nurse_signature}}</p>
-        {% endfor %}
-        </div>
-
-        <div id="tracking">
-            <h2>Tracking</h2>
-            {% for item in tracking %}
-                <h3>{{item.tracking_name}}</h3>
-                <p>Description: {{item.description}}</p>
-                <p>Most Recent: {{item.most_recent}}</p>
-                <p>Timeframe: Every {{item.next_due}} month(s)</p>
-            {% endfor %}
+        <div class= "row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1" style="padding:0px">
+                <!--ISP-->
+                <div class= "col-xs-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        <h3 class="panel-title">ISP<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                        </div>
+                        <div class="panel-body">
+                            <p class="box-label">Most Recent ISP</p>
+                            <p> {{isp.last_isp_date}} <br> </p>
+                            <p class="box-label">Comments</p>
+                            <p> {{isp.comments}} </p>
+                        </div>
+                    </div>
+                </div>
+                <!--SUPPORTIVE-->
+                <div class= "col-xs-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Supportive and Protective Devices <button type="button" class="btn btn-xs btn-default pull-right">Add New</button></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class= "col-xs-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Wheel Chair<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                    {% for item in supportive %}
+                                        <p class="box-label">HRC Approval Date</p>
+                                        <p> {{item.hrc_approval_date}} <br> </p>
+                                        <p class="box-label">HRC Submission Date</p>
+                                        <p> {{item.hrc_submission_date}} <br> </p>
+                                        <p class="box-label"> RN Signature </p>
+                                        <p> {{item.nurse_signature}} <br></p>
+                                        <p class="box-label"> MD Signature </p>
+                                        <p> {{item.physician_signature}} <br></p>
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class= "col-xs-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Tracking<button type="button" class="btn btn-xs btn-default pull-right">Add New</button></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class= "col-xs-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">DSHP<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                    {% for item in tracking %}
+                                        <p class="box-label">Description</p>
+                                        <p> {{item.description}} </p>
+                                        <p class="box-label">Most Recent</p>
+                                        <p> {{item.most_recent}} <br> </p>
+                                        <p class="box-label">Timeframe Due</p>
+                                        <p> Every {{item.next_due}} month(s) <br> </p>
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
