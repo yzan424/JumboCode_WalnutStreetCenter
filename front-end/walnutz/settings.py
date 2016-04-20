@@ -56,7 +56,7 @@ ROOT_URLCONF = 'walnutz.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['static/templates'],
+        'DIRS': ['static/templates', 'html'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

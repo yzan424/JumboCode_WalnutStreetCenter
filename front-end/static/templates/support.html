@@ -1,0 +1,50 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Support</title>
+  <meta name="description" content="">
+</head>
+
+<body>
+    <div id="legal_guardian">
+        <h1>Legal Guardian</h1>
+        {% for key, value in legal_guardian.items %}
+        <div id="{{key}}">
+            <p><b>{{key}}</b>: {{value}} </p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="insurance">
+        <h1>Insurance Information</h1>
+
+ 		<p><b>{% for key, value in insurance.0.items %}
+	       	{{key}}
+	 	{% endfor %}</b></p>
+	 	
+        {% for item in insurance %}
+	        <p>|| {% for key, value in item.items %}
+	            {{value}} || 
+	        {% endfor %}
+	    {% endfor %}</p>
+    </div>
+
+    <div id="legal_status">
+        <h1>Legal Status</h1>
+	 		<p><b>
+	 			{% for key, value in legal_status.0.items %}
+		       		{{key}}
+		 		{% endfor %}
+	 		</b></p>
+	        {% for item in legal_status %}
+		        <p>|| {% for key, value in item.items %}
+		            {{value}} || 
+		        {% endfor %}
+		    {% endfor %}</p>
+    </div>
+
+</body>
+</html>

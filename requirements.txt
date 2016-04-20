@@ -1,0 +1,13 @@
+Flask==0.10.1
+Flask-Restless==0.17.0
+itsdangerous==0.24
+Jinja2==2.8
+MarkupSafe
+mimerender==0.6.0
+python-dateutil==2.5.1
+python-mimeparse==1.5.1
+six==1.10.0
+SQLAlchemy==1.0.12
+Werkzeug==0.11.5
+flask-sqlalchemy
+psycopg2

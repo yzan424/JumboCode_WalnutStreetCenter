@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <form action="/edit/protocol/1/" method="post">
+            {% csrf_token %}
+        <div id="protocols">
+        {% for item in protocols %}
+            <h3>Name: <input type="text" value="{{item.name}}" name="protocols.existing.{{item.protocol_id}}.name"></h3>
+            <p>Description: <input type="text" value="{{item.description}}" name="protocols.existing.{{item.protocol_id}}.description"></p>
+            <p>Guardian Signature: <input type="text" value="{{item.guardian_signature_date}}" name="protocols.existing.{{item.protocol_id}}.guardian_signature_date"></p>
+            <p>Physician Signature: <input type="text" value="{{item.physician_signature_date}}" name="protocols.existing.{{item.protocol_id}}.physician_signature_date"></p>
+        {% endfor %}
+
+            <div>
+                <h3>Name: <input type="text" name="protocols.new.0.name"></h3>
+                <p>Description: <input type="text" name="protocols.new.0.description"></p>
+                <p>Guardian Signature: <input type="text" name="protocols.new.0.guardian_signature_date"></p>
+                <p>Physician Signature: <input type="text" name="protocols.new.0.physician_signature_date"></p>
+            </div>
+
+            <div>
+                <h3>Name: <input type="text" name="protocols.new.1.name"></h3>
+                <p>Description: <input type="text" name="protocols.new.1.description"></p>
+                <p>Guardian Signature: <input type="text" name="protocols.new.1.guardian_signature_date"></p>
+                <p>Physician Signature: <input type="text" name="protocols.new.1.physician_signature_date"></p>
+            </div>
+
+        </div>
+
+        <div id="isp">
+            <h2>ISP</h2>
+            <p>Last ISP: <input type="text" name="isp.last_isp_date" value="{{isp.last_isp_date}}"></p>
+            <p>Comments: <input type="text" name="isp.comments" value="{{isp.comments}}"></p>
+        </div>
+
+        <div id="supportive">
+        <h2>Supportive and Protective Devices</h2>
+        {% for item in supportive %}
+            <h3>Type: <input type="text" value="{{item.device_type}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.device_type"></h3>
+            <p>HRC Approval Date: <input type="text" value="{{item.hrc_approval_date}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.hrc_approval_date"></p>
+            <p>HRC Submission Date: <input type="text" value="{{item.hrc_submission_date}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.hrc_submission_date"></p>
+            <p>Physician Signature: <input type="text" value="{{item.physician_signature}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.physician_signature"></p>
+            <p>Nurse Signature: <input type="text" value="{{item.nurse_signature}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.nurse_signature"></p>
+        {% endfor %}
+        </div>
+            <div>
+                <h3>Type: <input type="text" name="supportive.new.0.device_type"></h3>
+                <p>HRC Approval Date: <input type="text" name="supportive.new.0.hrc_approval_date"></p>
+                <p>HRC Submission Date: <input type="text" name="supportive.new.0.hrc_submission_date"></p>
+                <p>Physician Signature: <input type="text" name="supportive.new.0.physician_signature"></p>
+                <p>Nurse Signature: <input type="text" name="supportive.new.0.nurse_signature"></p>
+            </div>
+            <div>
+                <h3>Type: <input type="text" name="supportive.new.1.device_type"></h3>
+                <p>HRC Approval Date: <input type="text" name="supportive.new.1.hrc_approval_date"></p>
+                <p>HRC Submission Date: <input type="text" name="supportive.new.1.hrc_submission_date"></p>
+                <p>Physician Signature: <input type="text" name="supportive.new.1.physician_signature"></p>
+                <p>Nurse Signature: <input type="text" name="supportive.new.1.nurse_signature"></p>
+            </div>
+
+        <div id="tracking">
+            <h2>Tracking</h2>
+            {% for item in tracking %}
+                <h3>Name: <input type="text" value="{{item.tracking_name}}" name="tracking.existing.{{item.tracking_id}}.tracking_name"></h3>
+                <p>Description: <input type="text" value="{{item.description}}" name="tracking.existing.{{item.tracking_id}}.description"></p>
+                <p>Most Recent: <input type="text" value="{{item.most_recent}}" name="tracking.existing.{{item.tracking_id}}.most_recent"></p>
+                <p>Timeframe: Every <input type="text" value="{{item.next_due}}" name="tracking.existing.{{item.tracking_id}}.next_due"> month(s)</p>
+            {% endfor %}
+
+            <div>
+                <h3>Name: <input type="text" name="tracking.new.0.tracking_name"></h3>
+                <p>Description: <input type="text" name="tracking.new.0.description"></p>
+                <p>Most Recent: <input type="text" name="tracking.new.0.most_recent"></p>
+                <p>Timeframe: Every <input type="text" name="tracking.new.0.next_due"> month(s)</p>
+            </div>
+            <div>
+                <h3>Name: <input type="text" name="tracking.new.1.tracking_name"></h3>
+                <p>Description: <input type="text" name="tracking.new.1.description"></p>
+                <p>Most Recent: <input type="text" name="tracking.new.1.most_recent"></p>
+                <p>Timeframe: Every <input type="text" name="tracking.new.1.next_due"> month(s)</p>
+            </div>
+
+        </div>
+        <input type="submit"></input>
+
+    </body>
+</html>

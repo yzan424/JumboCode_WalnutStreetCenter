@@ -9,39 +9,95 @@
 </head>
 
 <body>
-    <div id="basic_info">
-        <h1>Basic Info</h1>
-        {% for key, value in basic_info.items %}
-        <div id="{{key}}">
-            <p><b>{{key}}</b>: {{value}} </p>
-        </div>
-        {% endfor %}
+    <div id="Diagnoses">
+        <h2>Diagnoses</h2>
+        <p>Diagnoses: {{medical_info.diagnoses}}</p>
+        <p><input type="checkbox" {% if medical_info.alzheimers_dementia == True %}checked {% endif %}>Alzheimers</p>
+        <p><input type="checkbox" {% if medical_info.vision_problem == True %}checked {% endif %}>Vision Problem</p>
+        <p><input type="checkbox" {% if medical_info.down_syndrome == True %}checked {% endif %}>Down Syndrome</p>
     </div>
-
-    <div id="legal_guardian">
-        <h1>Legal Guardian Information</h1>
-        {% for key, value in legal_guardian.items %}
-        <div id="{{key}}">
-            <p><b>{{key}}</b>: {{value}} </p>
-        </div>
-        {% endfor %}
+    <div id="Allergies">
+        <h2>Allergies</h2>
+        <p>{{medical_info.allergies}}</p>
     </div>
-
-    <div id="medical">
-        <h1>Medical Information</h1>
-        {% for key, value in medical.items %}
-        <div id="{{key}}">
-            <p><b>{{key}}</b>: {{value}} </p>
-        </div>
-        {% endfor %}
+    <div id="physical_characteristics">
+        <h2>Physical Characteristics</h2>
+        <p>Weight: {{basic_info.weight}}</p>
+        <p>Build: {{basic_info.build}}</p>
+        <p>Height: {{basic_info.height}}</p>
+        <p>Sex: {{basic_info.sex}}</p>
+        <p>Birthday: {{basic_info.birthday}}</p>
+        <p>Race: {{basic_info.race}}</p>
+        <p>Eye Color: {{basic_info.eyes}}</p>
+        <p>Hair color: {{basic_info.hair}}</p>
+        <p>Blood Type: {{basic_info.blood_type}}</p>
     </div>
-
+    <div id="places">
+        <h2>Places</h2>
+        <h3>Address</h3>
+        <p>Current: {{basic_info.address_current}}</p>
+        <p>Former: {{basic_info.address_former}}</p>
+        <p>Day Program: {{basic_info.training_program_or_school_address}}</p>
+        <p>Work: {{basic_info.work_address}}</p>
+        <h3>Phone</h3>
+        <p>Current: {{basic_info.phone}}</p>
+        <p>Day Program: {{basic_info.training_program_or_school_phone}}</p>
+        <p>Work: {{basic_info.work_phone}}</p>
+    </div>
     <div id="identifying">
-        <h1>Identifying Information</h1>
-        {% for key, value in identifying.items %}
-        <div id="{{key}}">
-            <p><b>{{key}}</b>: {{value}} </p>
-        </div>
+        <h2>Identifying Information</h2>
+        <p>Program: {{basic_info.training_program_or_school_address}}</p>
+        <p>SSN: {{basic_info.social_security}}</p>
+        <p>Religion: {{basic_info.religion}}</p>
+        <p>ID #: ???</p>
+        <p>Nickname: {{basic_info.name_preferred}}</p>
+        <p>Citizenship: {{basic_info.citizenship}}</p>
+        <p>Marital Status: {{basic_info.marital_status}}</p>
+        <p>Language: {{basic_info.primary_language}}</p>
+        <p>Behavior characteristics: {{identifying.behavior}}</p>
+    </div>
+    <div id="self_sufficency">
+        <h2>Self Sufficency</h2>
+        <h3>Travel</h3>
+        <p>Places frequented: {{identifying.places_frequented}}</p>
+        <p>Travel Method: {{identifying.travel_method}}</p>
+        <p>Surrounding Recognition: {{identifying.surrounding_awareness}}</p>
+        <p>Carries ID: {{identifying.carries_ID}}</p>
+        <h3>Lost</h3>
+        <p>Ability to Protect Self: {{identifying.self_protection}}</p>
+        <p>Response to Search Efforts: {{identifying.response_to_search}}</p>
+        <p>Pattern of Movement if previously lost: {{identifying.movement_pattern}}</p>
+    </div>
+    <div id="parent">
+        <h2>Parent History</h2>
+        <p>Parents Marital Status: {{legal_guardian.parents_marital_status}}</p>
+        <h3>Father</h3>
+        <p>Name: {{legal_guardian.father_name}}</p>
+        <p>Birthdate: {{legal_guardian.father_birthday}}</p>
+        <p>Birth place: {{legal_guardian.father_birthplace}}</p>
+        <p>Alive: {{legal_guardian.father_alive}}</p>
+        <h3>Mother</h3>
+        <p>Name: {{legal_guardian.mother_maiden_name}}</p>
+        <p>Birthdate: {{legal_guardian.mother_birthday}}</p>
+        <p>Birth place: {{legal_guardian.mother_birthplace}}</p>
+        <p>Alive: {{legal_guardian.mother_alive}}</p>
+    </div>
+    <div id="historical">
+        <h3>Historical</h3>
+        <p>Accompanied by: {{basic_info.accompanied_by}}</p>
+        <p>Area of meaningful tie: {{basic_info.area_meaningful_tie}}</p>
+        <p>Referral Source: {{basic_info.area_meaningful_tie}}</p>
+        <p>Birthplace: {{basic_info.birthplace}}</p>
+    </div>
+    <div id="self_preservation">
+        <h3>Self Preservation</h3>
+        {% for item in self_preservation %}
+            <div>
+                <p>Date: {{item.date_occured}}</p>
+                <p>Assessment: {{item.assessment}}</p>
+                <p>Cause of Failure: {{item.cause_of_failure}}</p>
+                <p>Determination Basis: {{item.determination_basis}}</p>
+            </div>
         {% endfor %}
     </div>
 
