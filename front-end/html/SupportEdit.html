@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Edit Support</title>
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <style>
+      .box-label{
+        font-weight: bold;
+      }
+      
+      .col-xs-10{
+        vertical-align:middle;
+      }
+    </style>
+   </head>
+
+  <body role="document">
+    <div class="container theme-showcase" role="main">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Family/Guardian/Conservator</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Primary</th>
+                      <th>Name</th>
+                      <th>Relation</th>
+                      <th>Address</th>
+                      <th>Phone</th>
+                      <th>Date Added</th>
+                      <th>Date Removed</th>
+                      <th>Removal Reason</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><input type="radio" name="primSup" value="" style="margin-left: 15px;"></td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value= "John Smith">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value= "Father">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value= "555 N. West Street, Springfield, PA, 20239">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value="555-555-5555">
+                        </div>
+                      </td>
+                      <td>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                      </td>
+                      <td>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <textarea class="form-control" rows="2"></textarea>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><input type="radio" name="primSup" value="" style="margin-left: 15px;"></td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                      </td>
+                      <td>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <textarea class="form-control" rows="2"></textarea>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Insurance, Financial Support, Entitlements</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Source</th>
+                      <th>Type</th>
+                      <th>Identification Number</th>
+                      <th>Benefits</th>
+                      <th>Expiration Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value= "Government">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value="General">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value="123456787654">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value="$500 monthly">
+                        </div>
+                      </td>
+                      <!-- Needs to change color if expiration date has passed -->
+                      <td>
+                          <select name="month">
+                            <option value="01">Jan</option>
+                            <option value="02">Feb</option>
+                            <option value="03">Mar</option>
+                            <option value="04">Apr</option>
+                            <option value="05">May</option>
+                            <option value="06">Jun</option>
+                            <option value="07">Jul</option>
+                            <option value="08">Aug</option>
+                            <option value="09">Sep</option>
+                            <option value="10">Oct</option>
+                            <option value="11">Nov</option>
+                            <option value="12">Dec</option>
+                          </select>
+                          <input type="text" size="1" maxlength="2" placeholder=" day">
+                          <input type="text" size="1" maxlength="4" placeholder=" year">
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <!-- Needs to change color if expiration date has passed -->
+                      <td>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Legal Status</h3>
+          </div>
+          <div class="panel-body">
+            <p class = "box-label"> Legal Competency </p>
+            <div class="form-group">
+              <textarea class="form-control" rows="2"></textarea>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Status</th>
+                      <th>Type</th>
+                      <th>Date of Adjudication</th>
+                      <th>Requested By</th>
+                      <th>Date of Request</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  </body>
+</html>

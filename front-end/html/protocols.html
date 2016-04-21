@@ -1,18 +1,42 @@
-{% extends "base.html" %}
-  {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Protocols</title>
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    
+    <style>
+      .box-label{
+        font-weight: bold;
+      }    
+    </style>
+   </head>
+
+   <body role="document">
       <div class="container theme-showcase" role="main">
         <div class= "row">
           <div class="col-xs-12 col-md-10 col-md-offset-1">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Protocols<button type="button" class="btn btn-xs btn-default pull-right">Add New</button></h3>
+                <h3 class="panel-title">Protocols</h3>
               </div>
               <div class="panel-body">
-                <!-- Able to add more of these: -->
+                <!--- Able to add more of these: --->
                 <div class="col-xs-4">
-                  <div class="panel panel-default">
+                  <div class="panel panel-info">
                     <div class="panel-heading">
-                      <h3 class="panel-title">Transport<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                      <h3 class="panel-title">Transport</h3>
                     </div>
                     <div class="panel-body">
                       <p class="box-label"> Description</p>
@@ -35,7 +59,7 @@
             <div class= "col-xs-4">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">ISP<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                  <h3 class="panel-title">ISP</h3>
                 </div>
                 <div class="panel-body">
                   <p class="box-label">Most Recent ISP</p>
@@ -54,14 +78,14 @@
             <div class= "col-xs-8">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Supportive and Protective Devices <button type="button" class="btn btn-xs btn-default pull-right">Add New</button></h3>
+                  <h3 class="panel-title">Supportive and Protective Devices</h3>
                 </div>
                 <div class="panel-body">
-                  <!-- Able to add more of these: -->
+                  <!--- Able to add more of these: --->
                   <div class= "col-xs-6">
-                    <div class="panel panel-default">
+                    <div class="panel panel-info">
                       <div class="panel-heading">
-                        <h3 class="panel-title">Wheel Chair<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                        <h3 class="panel-title">Wheel Chair</h3>
                       </div>
                       <div class="panel-body">
                         <p class="box-label">HRC Approval Date</p>
@@ -87,7 +111,7 @@
             <div class= "col-xs-4">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Self Medication Protocol<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                  <h3 class="panel-title">Self Medication Protocol</h3>
                 </div>
                 <div class="panel-body">
                   <p class="box-label">HRC Approval</p>
@@ -106,14 +130,14 @@
             <div class= "col-xs-8">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Tracking<button type="button" class="btn btn-xs btn-default pull-right">Add New</button></h3>
+                  <h3 class="panel-title">Tracking</h3>
                 </div>
                 <div class="panel-body">
-                  <!-- Able to add more of these: -->
+                  <!--- Able to add more of these: --->
                   <div class= "col-xs-6">
-                    <div class="panel panel-default">
+                    <div class="panel panel-info">
                       <div class="panel-heading">
-                        <h3 class="panel-title">DSHP<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                        <h3 class="panel-title">DSHP</h3>
                       </div>
                       <div class="panel-body">
                         <p class="box-label">Description</p>
@@ -131,4 +155,13 @@
           </div>
         </div>
       </div>
-      {% endblock %}
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  </body>
+</html>
