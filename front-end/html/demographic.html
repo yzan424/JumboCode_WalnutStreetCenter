@@ -1,29 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Demographics</title>
-
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-    
-    <style>
-      .box-label{
-        font-weight: bold;
-      }    
-    </style>
-   </head>
-   
-   <body role="document">
+{% extends "base.html" %}
+  {% block content %}
       <div class="container theme-showcase" role="main">
         <div class= "row">
           <div class="col-xs-12 col-md-10 col-md-offset-1">
@@ -31,26 +7,31 @@
             <div class= "col-xs-4">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Diagnosis (Updated date)<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                  <h3 class="panel-title">Diagnosis (Updated date)</h3>
                   <!--- Figure out better way to do the updated date -->
                 </div>
                 <div class="panel-body">
-                  <p><input type="checkbox" checked>{{medical_info.diagnoses}} UNRESOLVED</p>
-                  <p><input type="checkbox" {% if medical_info.alzheimers_dementia == True %}checked {% endif %}>Alzheimers</p>
-                  <p><input type="checkbox" {% if medical_info.vision_problem == True %}checked {% endif %}>Vision Problem</p>
-                  <p><input type="checkbox" {% if medical_info.down_syndrome == True %}checked {% endif %}>Down Syndrome</p>
+                  <p> dx, dx, dx </p>
+                  <div class="checkbox disabled">
+                    <label><input type="checkbox" value="">Vision Problem</label>
+                  </div>
+                  <div class="checkbox disabled">
+                    <label><input type="checkbox" value="">Alzheimer's/Dementia</label>
+                  </div>
+                  <div class="checkbox disabled">
+                    <label><input type="checkbox" value="">Down Syndrome</label>
+                  </div>
                 </div>
               </div>
             </div>
             <div class= "col-xs-4">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Allergies (Updated date)<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                  <h3 class="panel-title">Diagnosis (Updated date)</h3>
                   <!--- Figure out better way to do the updated date -->
                 </div>
                 <div class="panel-body">
-                  <p>{{medical_info.allergies}} UNRESOLVED</p>
-                  <!---Possibly add NKA and NKDA as checkboxes -->
+                  <p> allergy, allergy, allergy </p>
                 </div>
               </div>
             </div>
@@ -61,151 +42,155 @@
             <div class="col-xs-4">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Physical Characteristics<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                  <h3 class="panel-title">Physical Characteristics</h3>
                 </div>
                 <div class="panel-body">
                   <table style="width:100%">
                     <tr>
-                      <td>Weight</td>
-                      <th>{{basic_info.weight}}</th>
+                      <div>
+                        <td>Weight<br>Updated date</td>
+                        <th> 30 lbs </th>
+                      </div>
                     </tr>
                     <tr>
-                      <td>last updated</td>
-                      <th>UNRESOLVED</th>
+                      <div>
+                        <td>Build</td>
+                        <th>Medium</th>
+                      </div>
                     </tr>
                     <tr>
-                      <td>Build</td>
-                      <th>{{basic_info.build}}</th>
+                      <div>
+                        <td>Height</td>
+                        <th>1 ft 3in</th>
+                      </div>
                     </tr>
                     <tr>
-                      <td>Height</td>
-                      <th>{{basic_info.height}}</th>
+                      <div>
+                        <td>Sex</td>
+                        <th>Male</th>
+                      </div>
                     </tr>
                     <tr>
-                      <td>Sex</td>
-                      <th>{{basic_info.sex}}</th>
-                    </tr>
-                    <tr>
-                      <td>Birthday</td>
-                      <th>{{basic_info.birthday}}</th>
+                      <td>Age</td>
+                      <th>7</th>
                     </tr>
                     <tr>
                       <td>Race</td>
-                      <th>{{basic_info.race}}</th>
+                      <th>Welsh</th>
                     </tr>
                     <tr>
                       <td>Eye Color</td>
-                      <th>{{basic_info.eyes}}</th>
+                      <th>Brown</th>
                     </tr>
                     <tr>
                       <td>Hair Color</td>
-                      <th>{{basic_info.hair}}</th>
+                      <th>Golden and white</th>
                     </tr>
                     <tr>
                       <td>Blood Type</td>
-                      <th>{{basic_info.blood_type}}</th>
+                      <th>DEA 4</th>
                     </tr>
                   </table>
                 </div>
               </div>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Identifying Information<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                  <h3 class="panel-title">Identifying Information</h3>
                 </div>
                 <div class="panel-body">
                   <table style="width:100%">
                     <tr>
                       <td>Program</td>
-                      <th>{{basic_info.training_program_or_school_address}}</th>
+                      <th>53 Winthrop St</th>
                     </tr>
                     <tr>
                       <td>SSN</td>
-                      <th>{{basic_info.social_security}}</th>
+                      <th>###-##-####</th>
                     </tr>
                     <tr>
                       <td>Religion</td>
-                      <th>{{basic_info.religion}}</th>
+                      <th></th>
                     </tr>
                     <tr>
                       <td>ID #</td>
-                      <th>UNRESOLVED</th>
+                      <th>1234556</th>
                     </tr>
                     <tr>
                       <td>Nickname</td>
-                      <th>{{basic_info.name_preferred}}</th>
+                      <th>Liam</th>
                     </tr>
                     <tr>
                       <td>Citizenship</td>
-                      <th>{{basic_info.citizenship}}</th>
+                      <th>USA</th>
                     </tr>
                     <tr>
                       <td>Marital Status</td>
-                      <th>{{basic_info.marital_status}}</th>
+                      <th>Married</th>
                     </tr>
                     <tr>
                       <td>Language</td>
-                      <th>{{basic_info.primary_language}}</th>
+                      <th>English</th>
                     </tr>
                   </table>
                   <p class="box-label">Behavior Characteristics</p>
-                  <p>{{identifying.behavior}}</p>
+                  <p><br><br><br><br></p>
                   <p class="box-label">Distinguishing Marks</p>
-                  <p>UNRESOLVED</p>
+                  <p><br><br><br><br></p>
                 </div>
               </div>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Historical<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                  <h3 class="panel-title">Historical</h3>
                 </div>
                 <div class="panel-body">
                   <p class="box-label">Accompanied by</p>
-                  <p>{{basic_info.accompanied_by}}<br></p>
+                  <p><br></p>
                   <p class="box-label">Areas of meaningful tie</p>
-                  <p>{{basic_info.area_meaningful_tie}}<br></p>
+                  <p><br></p>
                   <p class="box-label">Referral Source</p>
-                  <p>{{basic_info.referral_source}}<br></p>
+                  <p><br></p>
                   <p class="box-label">Birthplace</p>
-                  <p>{{basic_info.birthplace}}<br></p>
+                  <p><br></p>
                 </div>
               </div>  
             </div>
             <div class="col-xs-8">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Places<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                  <h3 class="panel-title">Places</h3>
                 </div>
                 <div class="panel-body">
                   <div class= "col-xs-6">
-                    <div class="panel panel-default">
+                    <div class="panel panel-info">
                       <div class="panel-heading">
                         <h3 class="panel-title">Address</h3>
                       </div>
                       <div class="panel-body">
                         <p class="box-label">Current</p>
-                        <p>{{basic_info.address_current}}<br></p>
+                        <p><br></p>
                         <p class="box-label">Day Program</p>
-                        <p>{{basic_info.training_program_or_school_address}}<br></p>
+                        <p><br></p>
                         <p class="box-label">Work</p>
-                        <p>{{basic_info.work_address}}<br></p>
+                        <p><br></p>
                         <p class="box-label">Prior Address</p>
-                        <p>{{basic_info.address_former}}<br></p>
+                        <p><br></p>
                       </div>
                     </div>
                   </div>
                   <div class= "col-xs-6">
-                    <div class="panel panel-default">
+                    <div class="panel panel-info">
                       <div class="panel-heading">
                         <h3 class="panel-title">Phone Number</h3>
                       </div>
                       <div class="panel-body">
                         <p class="box-label">Current</p>
-                        <p>{{basic_info.phone}}<br></p>
+                        <p><br></p>
                         <p class="box-label">Day Program</p>
-                        <p>{{basic_info.training_program_or_school_phone}}<br></p>
+                        <p><br></p>
                         <p class="box-label">Work</p>
-                        <p>{{basic_info.work_phone}}<br></p>
+                        <p><br></p>
                         <p class="box-label">Prior Address</p>
-                        <p>UNRESOLVED<br></p>
+                        <p><br></p>
                       </div>
                     </div>
                   </div>
@@ -213,38 +198,38 @@
               </div>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Self Sufficency<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                  <h3 class="panel-title">Self Sufficency</h3>
                 </div>
                 <div class="panel-body">
                   <div class= "col-xs-6">
-                    <div class="panel panel-default">
+                    <div class="panel panel-info">
                       <div class="panel-heading">
                         <h3 class="panel-title">Travel</h3>
                       </div>
                       <div class="panel-body">
                         <p class="box-label">Places Frequented</p>
-                        <p>{{identifying.places_frequented}}<br></p>
-                        <p class="box-label">Travel Method</p>
-                        <p>{{identifying.travel_method}}<br></p>
+                        <p><br><br><br><br></p>
+                        <p class="box-label">Community Travel</p>
+                        <p><br><br><br><br></p>
                         <p class="box-label">Surrounding Recognition</p>
-                        <p>{{identifying.surrounding_awareness}}<br></p>
+                        <p><br><br><br><br></p>
                         <p class="box-label">Carries ID</p>
-                        <p>{{identifying.carries_ID}}<br></p>
+                        <p><br></p>
                       </div>
                     </div>
                   </div>
                   <div class= "col-xs-6">  
-                    <div class="panel panel-default">
+                    <div class="panel panel-info">
                       <div class="panel-heading">
                         <h3 class="panel-title">Lost</h3>
                       </div>
                       <div class="panel-body">
                         <p class="box-label">Ability to protect self</p>
-                        <p>{{identifying.self_protection}}<br></p>
+                        <p><br><br><br><br></p>
                         <p class="box-label">Response to search efforts</p>
-                        <p>{{identifying.response_to_search}}<br></p>
+                        <p><br><br><br><br></p>
                         <p class="box-label">Pattern of movement if previously lost</p>
-                        <p>{{identifying.movement_pattern}}<br></p>
+                        <p><br><br><br><br></p>
                       </div>
                     </div>
                   </div>
@@ -252,44 +237,44 @@
               </div>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Parent History<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                  <h3 class="panel-title">Parent History</h3>
                 </div>
                 <div class="panel-body">
                   <div class= "col-xs-6">
-                    <div class="panel panel-default">
+                    <div class="panel panel-info">
                       <div class="panel-heading">
                         <h3 class="panel-title">Mother</h3>
                       </div>
                       <div class="panel-body">
                         <p class="box-label">Name</p>
-                        <p>{{legal_guardian.mother_maiden_name}}<br></p>
+                        <p><br></p>
                         <p class="box-label">Birthdate</p>
-                        <p>{{legal_guardian.mother_birthday}}<br></p>
+                        <p><br></p>
                         <p class="box-label">Birthplace</p>
-                        <p>{{legal_guardian.mother_birthplace}}<br></p>
+                        <p><br></p>
                         <p class="box-label">Alive</p>
-                        <p>{{legal_guardian.mother_alive}}<br></p>
+                        <p><br></p>
                       </div>
                     </div>
                   </div>
                   <div class= "col-xs-6">
-                    <div class="panel panel-default">
+                    <div class="panel panel-info">
                       <div class="panel-heading">
                         <h3 class="panel-title">Father</h3>
                       </div>
                       <div class="panel-body">
                         <p class="box-label">Name</p>
-                        <p>{{legal_guardian.father_name}}<br></p>
+                        <p><br></p>
                         <p class="box-label">Birthdate</p>
-                        <p>{{legal_guardian.father_birthday}}<br></p>
+                        <p><br></p>
                         <p class="box-label">Birthplace</p>
-                        <p>{{legal_guardian.father_birthplace}}<br></p>
+                        <p><br></p>
                         <p class="box-label">Alive</p>
-                        <p>{{legal_guardian.father_alive}}<br></p>
+                        <p><br></p>
                       </div>
                     </div>
                   </div>
-                  <p><strong>Parental Marital Status:</strong> {{legal_guardian.parents_marital_status}}</p>
+                  <p><strong>Parental Marital Status:</strong> Married</p>
                 </div>
               </div>
             </div>
@@ -299,7 +284,7 @@
           <div class="col-xs-12 col-md-10 col-md-offset-1">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Self Preservation<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                <h3 class="panel-title">Self Preservation</h3>
               </div>
               <div class="panel-body">
                 <table class="table table-striped table-bordered">
@@ -310,35 +295,20 @@
                       <th> Result </th>
                       <th> Assessment </th>
                       <th> Cause of Failure </th>
-                      <th> Determination Basis UNRESOLVED</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for item in self_preservation %}
                     <tr>
-                      <td>{{item.date_occured}}</td>
-                      <td>UNRESOLVED</td>
-                      <td>UNRESOLVED</td>
-                      <td>{{item.assessment}}</td>
-                      <td>{{item.cause_of_failure}}</td>
-                      <td>{{item.determination_basis}}</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
-                    {% endfor %}
                   </tbody>
               </div>
             </div>
           </div>
         </div>
       </div>
-          
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  </body>
-</html>
-
+{% endblock %}
