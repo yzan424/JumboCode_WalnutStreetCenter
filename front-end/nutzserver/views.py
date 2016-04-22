@@ -7,7 +7,7 @@ from django.template import *
 import json, requests
 
 
-backendGET = 'http://127.0.0.1:5000/api/patient/'
+backendGET = 'http://localhost:8000/backend/profile/'
 backendPOST = 'http://localhost:8000/backend/profile/'
 backendPUT = 'http://localhost:8000/backend/profile/'
 
@@ -15,7 +15,7 @@ backendPUT = 'http://localhost:8000/backend/profile/'
 def backend(request, profile_id, data):
     if request.method == 'GET':
         #create our response object
-        if data == "basic":
+        if data == "basic_info":
             # this is the basic info, we return this under demographics
             # Here's how to access this info: http://localhost:8000/backend/profile/1/basic
             result = {
@@ -81,7 +81,7 @@ def backend(request, profile_id, data):
             }
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif data == "medical":
+        elif data == "medical_info":
             # Access: http://localhost:8000/backend/profile/1/medical
             result = {
                 "patient_id": profile_id,
