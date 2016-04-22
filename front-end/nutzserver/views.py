@@ -60,7 +60,7 @@ def backend(request, profile_id, data):
             }
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif data == "legal_guardian":
+        elif data == "legal_family_info":
             # Access: http://localhost:8000/backend/profile/1/legal_guardian
             result = {
                 "patient_id": profile_id,
@@ -94,7 +94,7 @@ def backend(request, profile_id, data):
             }
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif data == "identifying":
+        elif data == "identifying_info":
             # Access: http://localhost:8000/backend/profile/1/identifying
             result = {
                 "patient_id": profile_id,
