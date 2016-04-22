@@ -1,105 +1,310 @@
-<!doctype html>
-
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-
-  <title>Profile</title>
-  <meta name="description" content="">
-</head>
-
-<body>
-    <div id="Diagnoses">
-        <h2>Diagnoses</h2>
-        <p>Diagnoses: {{medical_info.diagnoses}}</p>
-        <p><input type="checkbox" {% if medical_info.alzheimers_dementia == True %}checked {% endif %}>Alzheimers</p>
-        <p><input type="checkbox" {% if medical_info.vision_problem == True %}checked {% endif %}>Vision Problem</p>
-        <p><input type="checkbox" {% if medical_info.down_syndrome == True %}checked {% endif %}>Down Syndrome</p>
-    </div>
-    <div id="Allergies">
-        <h2>Allergies</h2>
-        <p>{{medical_info.allergies}}</p>
-    </div>
-    <div id="physical_characteristics">
-        <h2>Physical Characteristics</h2>
-        <p>Weight: {{basic_info.weight}}</p>
-        <p>Build: {{basic_info.build}}</p>
-        <p>Height: {{basic_info.height}}</p>
-        <p>Sex: {{basic_info.sex}}</p>
-        <p>Birthday: {{basic_info.birthday}}</p>
-        <p>Race: {{basic_info.race}}</p>
-        <p>Eye Color: {{basic_info.eyes}}</p>
-        <p>Hair color: {{basic_info.hair}}</p>
-        <p>Blood Type: {{basic_info.blood_type}}</p>
-    </div>
-    <div id="places">
-        <h2>Places</h2>
-        <h3>Address</h3>
-        <p>Current: {{basic_info.address_current}}</p>
-        <p>Former: {{basic_info.address_former}}</p>
-        <p>Day Program: {{basic_info.training_program_or_school_address}}</p>
-        <p>Work: {{basic_info.work_address}}</p>
-        <h3>Phone</h3>
-        <p>Current: {{basic_info.phone}}</p>
-        <p>Day Program: {{basic_info.training_program_or_school_phone}}</p>
-        <p>Work: {{basic_info.work_phone}}</p>
-    </div>
-    <div id="identifying">
-        <h2>Identifying Information</h2>
-        <p>Program: {{basic_info.training_program_or_school_address}}</p>
-        <p>SSN: {{basic_info.social_security}}</p>
-        <p>Religion: {{basic_info.religion}}</p>
-        <p>ID #: ???</p>
-        <p>Nickname: {{basic_info.name_preferred}}</p>
-        <p>Citizenship: {{basic_info.citizenship}}</p>
-        <p>Marital Status: {{basic_info.marital_status}}</p>
-        <p>Language: {{basic_info.primary_language}}</p>
-        <p>Behavior characteristics: {{identifying.behavior}}</p>
-    </div>
-    <div id="self_sufficency">
-        <h2>Self Sufficency</h2>
-        <h3>Travel</h3>
-        <p>Places frequented: {{identifying.places_frequented}}</p>
-        <p>Travel Method: {{identifying.travel_method}}</p>
-        <p>Surrounding Recognition: {{identifying.surrounding_awareness}}</p>
-        <p>Carries ID: {{identifying.carries_ID}}</p>
-        <h3>Lost</h3>
-        <p>Ability to Protect Self: {{identifying.self_protection}}</p>
-        <p>Response to Search Efforts: {{identifying.response_to_search}}</p>
-        <p>Pattern of Movement if previously lost: {{identifying.movement_pattern}}</p>
-    </div>
-    <div id="parent">
-        <h2>Parent History</h2>
-        <p>Parents Marital Status: {{legal_guardian.parents_marital_status}}</p>
-        <h3>Father</h3>
-        <p>Name: {{legal_guardian.father_name}}</p>
-        <p>Birthdate: {{legal_guardian.father_birthday}}</p>
-        <p>Birth place: {{legal_guardian.father_birthplace}}</p>
-        <p>Alive: {{legal_guardian.father_alive}}</p>
-        <h3>Mother</h3>
-        <p>Name: {{legal_guardian.mother_maiden_name}}</p>
-        <p>Birthdate: {{legal_guardian.mother_birthday}}</p>
-        <p>Birth place: {{legal_guardian.mother_birthplace}}</p>
-        <p>Alive: {{legal_guardian.mother_alive}}</p>
-    </div>
-    <div id="historical">
-        <h3>Historical</h3>
-        <p>Accompanied by: {{basic_info.accompanied_by}}</p>
-        <p>Area of meaningful tie: {{basic_info.area_meaningful_tie}}</p>
-        <p>Referral Source: {{basic_info.area_meaningful_tie}}</p>
-        <p>Birthplace: {{basic_info.birthplace}}</p>
-    </div>
-    <div id="self_preservation">
-        <h3>Self Preservation</h3>
-        {% for item in self_preservation %}
-            <div>
-                <p>Date: {{item.date_occured}}</p>
-                <p>Assessment: {{item.assessment}}</p>
-                <p>Cause of Failure: {{item.cause_of_failure}}</p>
-                <p>Determination Basis: {{item.determination_basis}}</p>
+{% extends "base.html" %}
+  {% block content %}
+      <div class="container theme-showcase" role="main">
+        <div class= "row">
+          <div class="col-xs-12 col-md-10 col-md-offset-1">
+            <img class= "col-xs-4" src="https://s-media-cache-ak0.pinimg.com/236x/43/6d/59/436d5995b69f9b2127824d5a31b558e0.jpg" alt="Cute corgi puppy" style="margin-bottom:5px">
+            <div class= "col-xs-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Diagnosis (Updated date)<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                  <!--- Figure out better way to do the updated date -->
+                </div>
+                <div class="panel-body">
+                  <p><input type="checkbox" checked>{{medical_info.diagnoses}} UNRESOLVED</p>
+                  <p><input type="checkbox" {% if medical_info.alzheimers_dementia == True %}checked {% endif %}>Alzheimers</p>
+                  <p><input type="checkbox" {% if medical_info.vision_problem == True %}checked {% endif %}>Vision Problem</p>
+                  <p><input type="checkbox" {% if medical_info.down_syndrome == True %}checked {% endif %}>Down Syndrome</p>
+                </div>
+              </div>
             </div>
-        {% endfor %}
-    </div>
+            <div class= "col-xs-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Allergies (Updated date)<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                  <!--- Figure out better way to do the updated date -->
+                </div>
+                <div class="panel-body">
+                  <p>{{medical_info.allergies}} UNRESOLVED</p>
+                  <!---Possibly add NKA and NKDA as checkboxes -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-10 col-md-offset-1">
+            <div class="col-xs-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Physical Characteristics<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                </div>
+                <div class="panel-body">
+                  <table style="width:100%">
+                    <tr>
+                      <td>Weight</td>
+                      <th>{{basic_info.weight}}</th>
+                    </tr>
+                    <tr>
+                      <td>last updated</td>
+                      <th>UNRESOLVED</th>
+                    </tr>
+                    <tr>
+                      <td>Build</td>
+                      <th>{{basic_info.build}}</th>
+                    </tr>
+                    <tr>
+                      <td>Height</td>
+                      <th>{{basic_info.height}}</th>
+                    </tr>
+                    <tr>
+                      <td>Sex</td>
+                      <th>{{basic_info.sex}}</th>
+                    </tr>
+                    <tr>
+                      <td>Birthday</td>
+                      <th>{{basic_info.birthday}}</th>
+                    </tr>
+                    <tr>
+                      <td>Race</td>
+                      <th>{{basic_info.race}}</th>
+                    </tr>
+                    <tr>
+                      <td>Eye Color</td>
+                      <th>{{basic_info.eyes}}</th>
+                    </tr>
+                    <tr>
+                      <td>Hair Color</td>
+                      <th>{{basic_info.hair}}</th>
+                    </tr>
+                    <tr>
+                      <td>Blood Type</td>
+                      <th>{{basic_info.blood_type}}</th>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Identifying Information<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                </div>
+                <div class="panel-body">
+                  <table style="width:100%">
+                    <tr>
+                      <td>Program</td>
+                      <th>{{basic_info.training_program_or_school_address}}</th>
+                    </tr>
+                    <tr>
+                      <td>SSN</td>
+                      <th>{{basic_info.social_security}}</th>
+                    </tr>
+                    <tr>
+                      <td>Religion</td>
+                      <th>{{basic_info.religion}}</th>
+                    </tr>
+                    <tr>
+                      <td>ID #</td>
+                      <th>UNRESOLVED</th>
+                    </tr>
+                    <tr>
+                      <td>Nickname</td>
+                      <th>{{basic_info.name_preferred}}</th>
+                    </tr>
+                    <tr>
+                      <td>Citizenship</td>
+                      <th>{{basic_info.citizenship}}</th>
+                    </tr>
+                    <tr>
+                      <td>Marital Status</td>
+                      <th>{{basic_info.marital_status}}</th>
+                    </tr>
+                    <tr>
+                      <td>Language</td>
+                      <th>{{basic_info.primary_language}}</th>
+                    </tr>
+                  </table>
+                  <p class="box-label">Behavior Characteristics</p>
+                  <p>{{identifying.behavior}}</p>
+                  <p class="box-label">Distinguishing Marks</p>
+                  <p>UNRESOLVED</p>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Historical<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                </div>
+                <div class="panel-body">
+                  <p class="box-label">Accompanied by</p>
+                  <p>{{basic_info.accompanied_by}}<br></p>
+                  <p class="box-label">Areas of meaningful tie</p>
+                  <p>{{basic_info.area_meaningful_tie}}<br></p>
+                  <p class="box-label">Referral Source</p>
+                  <p>{{basic_info.referral_source}}<br></p>
+                  <p class="box-label">Birthplace</p>
+                  <p>{{basic_info.birthplace}}<br></p>
+                </div>
+              </div>  
+            </div>
+            <div class="col-xs-8">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Places<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                </div>
+                <div class="panel-body">
+                  <div class= "col-xs-6">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Address</h3>
+                      </div>
+                      <div class="panel-body">
+                        <p class="box-label">Current</p>
+                        <p>{{basic_info.address_current}}<br></p>
+                        <p class="box-label">Day Program</p>
+                        <p>{{basic_info.training_program_or_school_address}}<br></p>
+                        <p class="box-label">Work</p>
+                        <p>{{basic_info.work_address}}<br></p>
+                        <p class="box-label">Prior Address</p>
+                        <p>{{basic_info.address_former}}<br></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class= "col-xs-6">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Phone Number</h3>
+                      </div>
+                      <div class="panel-body">
+                        <p class="box-label">Current</p>
+                        <p>{{basic_info.phone}}<br></p>
+                        <p class="box-label">Day Program</p>
+                        <p>{{basic_info.training_program_or_school_phone}}<br></p>
+                        <p class="box-label">Work</p>
+                        <p>{{basic_info.work_phone}}<br></p>
+                        <p class="box-label">Prior Address</p>
+                        <p>UNRESOLVED<br></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Self Sufficency<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                </div>
+                <div class="panel-body">
+                  <div class= "col-xs-6">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Travel</h3>
+                      </div>
+                      <div class="panel-body">
+                        <p class="box-label">Places Frequented</p>
+                        <p>{{identifying.places_frequented}}<br></p>
+                        <p class="box-label">Travel Method</p>
+                        <p>{{identifying.travel_method}}<br></p>
+                        <p class="box-label">Surrounding Recognition</p>
+                        <p>{{identifying.surrounding_awareness}}<br></p>
+                        <p class="box-label">Carries ID</p>
+                        <p>{{identifying.carries_ID}}<br></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class= "col-xs-6">  
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Lost</h3>
+                      </div>
+                      <div class="panel-body">
+                        <p class="box-label">Ability to protect self</p>
+                        <p>{{identifying.self_protection}}<br></p>
+                        <p class="box-label">Response to search efforts</p>
+                        <p>{{identifying.response_to_search}}<br></p>
+                        <p class="box-label">Pattern of movement if previously lost</p>
+                        <p>{{identifying.movement_pattern}}<br></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Parent History<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                </div>
+                <div class="panel-body">
+                  <div class= "col-xs-6">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Mother</h3>
+                      </div>
+                      <div class="panel-body">
+                        <p class="box-label">Name</p>
+                        <p>{{legal_guardian.mother_maiden_name}}<br></p>
+                        <p class="box-label">Birthdate</p>
+                        <p>{{legal_guardian.mother_birthday}}<br></p>
+                        <p class="box-label">Birthplace</p>
+                        <p>{{legal_guardian.mother_birthplace}}<br></p>
+                        <p class="box-label">Alive</p>
+                        <p>{{legal_guardian.mother_alive}}<br></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class= "col-xs-6">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Father</h3>
+                      </div>
+                      <div class="panel-body">
+                        <p class="box-label">Name</p>
+                        <p>{{legal_guardian.father_name}}<br></p>
+                        <p class="box-label">Birthdate</p>
+                        <p>{{legal_guardian.father_birthday}}<br></p>
+                        <p class="box-label">Birthplace</p>
+                        <p>{{legal_guardian.father_birthplace}}<br></p>
+                        <p class="box-label">Alive</p>
+                        <p>{{legal_guardian.father_alive}}<br></p>
+                      </div>
+                    </div>
+                  </div>
+                  <p><strong>Parental Marital Status:</strong> {{legal_guardian.parents_marital_status}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Self Preservation<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+              </div>
+              <div class="panel-body">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th> Date </th>
+                      <th> Drill Type </th>
+                      <th> Result </th>
+                      <th> Assessment </th>
+                      <th> Cause of Failure </th>
+                      <th> Determination Basis UNRESOLVED</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in self_preservation %}
+                    <tr>
+                      <td>{{item.date_occured}}</td>
+                      <td>UNRESOLVED</td>
+                      <td>UNRESOLVED</td>
+                      <td>{{item.assessment}}</td>
+                      <td>{{item.cause_of_failure}}</td>
+                      <td>{{item.determination_basis}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}
 
-</body>
-</html>
