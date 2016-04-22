@@ -339,11 +339,11 @@ def profile(request, profile_id, edit):
     identifying = requests.get(backendGET + profile_id + '/identifying_info') 
     legal_guardian = requests.get(backendGET + profile_id + '/legal_family_info') 
 
-    medical_info = json.loads(medical_info.json())
-    basic_info = json.loads(basic_info.json())
-    self_preservation = json.loads(self_preservation.json())
-    identifying = json.loads(identifying.json())
-    legal_guardian = json.loads(legal_guardian.json())
+    medical_info = medical_info.json()
+    basic_info = basic_info.json()
+    self_preservation = self_preservation.json()
+    identifying = identifying.json()
+    legal_guardian = legal_guardian.json()
         
     if edit == False:
         return render(request, "profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian})
@@ -356,10 +356,10 @@ def protocol(request, profile_id, edit):
     supportive = requests.get(backendGET + profile_id + '/supportive')
     tracking = requests.get(backendGET + profile_id + '/tracking')  
 
-    protocols = json.loads(protocols.json())
-    isp = json.loads(isp.json())
-    supportive = json.loads(supportive.json())
-    tracking = json.loads(tracking.json())
+    protocols = protocols.json()
+    isp = isp.json()
+    supportive = supportive.json()
+    tracking = tracking.json()
 
     if edit == False:
         return render(request, "protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking})
@@ -373,11 +373,11 @@ def behavior(request, profile_id, edit):
     restrictive = requests.get(backendGET + profile_id + '/restrictive')
     rogers_monitor = requests.get(backendGET + profile_id + '/rogers_monitor')
 
-    medical_treatment_plan = json.loads(medical_treatment_plan.json())
-    behavior = json.loads(behavior.json())
-    behavior_support_plans = json.loads(behavior_support_plans.json())
-    restrictive = json.loads(restrictive.json())
-    rogers_monitor = json.loads(rogers_monitor.json())
+    medical_treatment_plan = medical_treatment_plan.json()
+    behavior = behavior.json()
+    behavior_support_plans = behavior_support_plans.json()
+    restrictive = restrictive.json()
+    rogers_monitor = rogers_monitor.json()
         
     if edit == False:
         return render(request, "behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor})
@@ -389,9 +389,9 @@ def support(request, profile_id, edit):
     insurance = requests.get(backendGET + profile_id + '/insurance')
     legal_status = requests.get(backendGET + profile_id + '/legal_competency')
 
-    legal_guardian = json.loads(legal_guardian.json())
-    insurance = json.loads(insurance.json())
-    legal_status = json.loads(legal_status.json())
+    legal_guardian = legal_guardian.json()
+    insurance = insurance.json()
+    legal_status = legal_status.json()
         
     if edit == False:
         return render(request, "support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status})
