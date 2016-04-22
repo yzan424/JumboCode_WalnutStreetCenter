@@ -120,7 +120,6 @@ class LegalFamilyInfo(db.Model):
 
     __tablename__ = 'legal_family_info'
     id = db.Column(db.Integer, primary_key=True)
-    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), unique=True, nullable=False)
     guardian_name = db.Column(db.String)
     guardian_phone = db.Column(db.String)
     guardian_address = db.Column(db.String)

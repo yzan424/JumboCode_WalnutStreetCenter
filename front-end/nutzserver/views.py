@@ -7,7 +7,7 @@ from django.template import *
 import json, requests
 
 
-backendGET = 'http://localhost:8000/backend/profile/'
+backendGET = 'http://127.0.0.1:5000/api/patient/'
 backendPOST = 'http://localhost:8000/backend/profile/'
 backendPUT = 'http://localhost:8000/backend/profile/'
 
@@ -341,6 +341,7 @@ def profile(request, profile_id, edit):
 
     medical_info = medical_info.json()
     basic_info = basic_info.json()
+    print(basic_info)
     self_preservation = self_preservation.json()
     identifying = identifying.json()
     legal_guardian = legal_guardian.json()
