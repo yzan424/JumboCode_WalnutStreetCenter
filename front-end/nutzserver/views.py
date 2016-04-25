@@ -305,7 +305,7 @@ def backend(request, profile_id, data):
             }]
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif data == "behavior_support_plans":
+        elif data == "behavior_support_plan":
             # Access: http://localhost:8000/backend/profile/1/behavior_support_plans
             result = {
                 "patient_id": profile_id,
