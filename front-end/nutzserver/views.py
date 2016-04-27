@@ -7,7 +7,7 @@ from django.template import *
 import json, requests
 
 
-backendGET = 'http://localhost:8000/backend/profile/'
+backendGET = 'http://127.0.0.1:5000/api/patient/'
 backendPOST = 'http://localhost:8000/backend/profile/'
 backendPUT = 'http://localhost:8000/backend/profile/'
 
@@ -305,7 +305,7 @@ def backend(request, profile_id, data):
             }]
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif data == "behavior_support_plans":
+        elif data == "behavior_support_plan":
             # Access: http://localhost:8000/backend/profile/1/behavior_support_plans
             result = {
                 "patient_id": profile_id,
@@ -341,6 +341,7 @@ def profile(request, profile_id, edit):
 
     medical_info = medical_info.json()
     basic_info = basic_info.json()
+    print(basic_info)
     self_preservation = self_preservation.json()
     identifying = identifying.json()
     legal_guardian = legal_guardian.json()
@@ -385,7 +386,7 @@ def behavior(request, profile_id, edit):
         return render(request, "update_behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor})        
 
 def support(request, profile_id, edit):
-    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian')
+    legal_guardian = requests.get(backendGET + profile_id + '/legal_family_info')
     insurance = requests.get(backendGET + profile_id + '/insurance')
     legal_status = requests.get(backendGET + profile_id + '/legal_competency')
 

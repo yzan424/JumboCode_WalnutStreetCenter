@@ -1,8 +1,535 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+         <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Edit Protocols</title>
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    
+    <style>
+      .box-label{
+        font-weight: bold;
+      }    
+    </style>
     </head>
+    <body role="document">
+      <div class="container theme-showcase" role="main">
+        <div class= "row">
+          <div class="col-xs-12 col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Protocols</h3>
+              </div>
+              <div class="panel-body">
+                <!-- Able to add more of these: -->
+                <div class="col-xs-4">
+                  <div class="panel panel-info">
+                    <div class="panel-heading">
+                      <input type="text" class="form-control" value="Transport">
+                      <h3>Name: <input type="text" name="{{item.name}}" value="protocols.existing.{{item.protocol_id}}.name"></h3>
+                    </div>
+                    <div class="panel-body">
+                      <p class="box-label"> Description</p>
+                      <textarea class="form-control" rows="2"></textarea>
+                      <p class="box-label">Training Date</p>
+                      <select name="month">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+                      <input type="text" size="1" maxlength="2" placeholder=" day">
+                      <input type="text" size="1" maxlength="4" placeholder=" year">
+                      <p class="box-label">Guardian Signature</p>
+                      <select name="month">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+                      <input type="text" size="1" maxlength="2" placeholder=" day">
+                      <input type="text" size="1" maxlength="4" placeholder=" year">
+                      <p class="box-label">Physician Signature</p>
+                      <select name="month">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+                      <input type="text" size="1" maxlength="2" placeholder=" day">
+                      <input type="text" size="1" maxlength="4" placeholder=" year">  
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <div class="panel panel-info">
+                    <div class="panel-heading">
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="panel-body">
+                      <p class="box-label"> Description</p>
+                      <textarea class="form-control" rows="2"></textarea>
+                      <p class="box-label">Training Date</p>
+                      <select name="month">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+                      <input type="text" size="1" maxlength="2" placeholder=" day">
+                      <input type="text" size="1" maxlength="4" placeholder=" year">
+                      <p class="box-label">Guardian Signature</p>
+                      <select name="month">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+                      <input type="text" size="1" maxlength="2" placeholder=" day">
+                      <input type="text" size="1" maxlength="4" placeholder=" year">
+                      <p class="box-label">Physician Signature</p>
+                      <select name="month">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+                      <input type="text" size="1" maxlength="2" placeholder=" day">
+                      <input type="text" size="1" maxlength="4" placeholder=" year">  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class= "row">
+          <div class="col-xs-12 col-md-10 col-md-offset-1" style="padding:0px">
+            <div class= "col-xs-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">ISP</h3>
+                </div>
+                <div class="panel-body">
+                  <p class="box-label">Most Recent ISP</p>
+                  <select name="month">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+                      <input type="text" size="1" maxlength="2" placeholder=" day">
+                      <input type="text" size="1" maxlength="4" placeholder=" year">
+                  <p class="box-label">Semi-Annual Due</p>
+                  <select name="month">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+                      <input type="text" size="1" maxlength="2" placeholder=" day">
+                      <input type="text" size="1" maxlength="4" placeholder=" year">
+                  <p class="box-label">ISP Paperwork Due</p>
+                  <select name="month">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+                      <input type="text" size="1" maxlength="2" placeholder=" day">
+                      <input type="text" size="1" maxlength="4" placeholder=" year">
+                  <p class="box-label">ISP Due</p>
+                  <select name="month">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+                      <input type="text" size="1" maxlength="2" placeholder=" day">
+                      <input type="text" size="1" maxlength="4" placeholder=" year">
+                  <p class="box-label">Comments</p>
+                  <textarea class="form-control" rows="2"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class= "col-xs-8">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Supportive and Protective Devices</h3>
+                </div>
+                <div class="panel-body">
+                  <!-- Able to add more of these: -->
+                  <div class= "col-xs-6">
+                    <div class="panel panel-info">
+                      <div class="panel-heading">
+                        <input type="text" class="form-control" value="Wheel Chair">
+                      </div>
+                      <div class="panel-body">
+                        <p class="box-label">HRC Approval Date</p>
+                        <select name="month">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+                      <input type="text" size="1" maxlength="2" placeholder=" day">
+                      <input type="text" size="1" maxlength="4" placeholder=" year">
+                        <p class="box-label">Approval Expiration Date</p>
+                        <select name="month">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+                      <input type="text" size="1" maxlength="2" placeholder=" day">
+                      <input type="text" size="1" maxlength="4" placeholder=" year">
+                        <p class="box-label">HRC Submission Date</p>
+                        <select name="month">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+                      <input type="text" size="1" maxlength="2" placeholder=" day">
+                      <input type="text" size="1" maxlength="4" placeholder=" year">
+                        <p class="box-label">RN Signature</p>
+                        <label class="radio-inline"><input type="radio" name="RNSig">Yes</label>
+                        <label class="radio-inline"><input type="radio" name="RNSig">No</label>
+                        <p class="box-label">MD Signature</p>
+                        <label class="radio-inline"><input type="radio" name="MDSig">Yes</label>
+                        <label class="radio-inline"><input type="radio" name="MDSig">No</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class= "col-xs-6">
+                    <div class="panel panel-info">
+                      <div class="panel-heading">
+                        <input type="text" class="form-control" value="">
+                      </div>
+                      <div class="panel-body">
+                        <p class="box-label">HRC Approval Date</p>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                        <p class="box-label">Approval Expiration Date</p>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                        <p class="box-label">HRC Submission Date</p>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                        <p class="box-label">RN Signature</p>
+                        <label class="radio-inline"><input type="radio" name="RNSig">Yes</label>
+                        <label class="radio-inline"><input type="radio" name="RNSig">No</label>
+                        <p class="box-label">MD Signature</p>
+                        <label class="radio-inline"><input type="radio" name="MDSig">Yes</label>
+                        <label class="radio-inline"><input type="radio" name="MDSig">No</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class= "row">
+          <div class="col-xs-12 col-md-10 col-md-offset-1" style="padding:0px">
+            <div class= "col-xs-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Self Medication Protocol</h3>
+                </div>
+                <div class="panel-body">
+                  <p class="box-label">HRC Approval</p>
+                  <select name="month">
+                    <option value="01">Jan</option>
+                    <option value="02">Feb</option>
+                    <option value="03">Mar</option>
+                    <option value="04">Apr</option>
+                    <option value="05">May</option>
+                    <option value="06">Jun</option>
+                    <option value="07">Jul</option>
+                    <option value="08">Aug</option>
+                    <option value="09">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                  </select>
+                  <input type="text" size="1" maxlength="2" placeholder=" day">
+                  <input type="text" size="1" maxlength="4" placeholder=" year">
+                  <p class="box-label">Training Date</p>
+                  <select name="month">
+                    <option value="01">Jan</option>
+                    <option value="02">Feb</option>
+                    <option value="03">Mar</option>
+                    <option value="04">Apr</option>
+                    <option value="05">May</option>
+                    <option value="06">Jun</option>
+                    <option value="07">Jul</option>
+                    <option value="08">Aug</option>
+                    <option value="09">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                  </select>
+                  <input type="text" size="1" maxlength="2" placeholder=" day">
+                  <input type="text" size="1" maxlength="4" placeholder=" year">
+                  <p class="box-label">Assessment Score</p>
+                  <input type="text" class="form-control" value="int">
+                  <p class="box-label">Plan Type</p>
+                  <input type="text" class="form-control" value="string">
+                  <p class="box-label">MD Signature</p>
+                  <select name="month">
+                    <option value="01">Jan</option>
+                    <option value="02">Feb</option>
+                    <option value="03">Mar</option>
+                    <option value="04">Apr</option>
+                    <option value="05">May</option>
+                    <option value="06">Jun</option>
+                    <option value="07">Jul</option>
+                    <option value="08">Aug</option>
+                    <option value="09">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                  </select>
+                  <input type="text" size="1" maxlength="2" placeholder=" day">
+                  <input type="text" size="1" maxlength="4" placeholder=" year">
+                </div>
+              </div>
+            </div>
+            <div class= "col-xs-8">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Tracking</h3>
+                </div>
+                <div class="panel-body">
+                  <!-- Able to add more of these: -->
+                  <div class= "col-xs-6">
+                    <div class="panel panel-info">
+                      <div class="panel-heading">
+                        <input type="text" class="form-control" value="DHSP">
+                      </div>
+                      <div class="panel-body">
+                        <p class="box-label">Description</p>
+                        <textarea class="form-control" rows="6"></textarea>
+                        <p class="box-label">Most Recent</p>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                        <p class="box-label">Timeframe Due</p>
+                        <input type="text" class="form-control" value="1 year">
+                      </div>
+                    </div>
+                  </div>
+                  <div class= "col-xs-6">
+                    <div class="panel panel-info">
+                      <div class="panel-heading">
+                        <input type="text" class="form-control" value="">
+                      </div>
+                      <div class="panel-body">
+                        <p class="box-label">Description</p>
+                        <textarea class="form-control" rows="6"></textarea>
+                        <p class="box-label">Most Recent</p>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                        <p class="box-label">Timeframe Due</p>
+                        <input type="text" class="form-control" value="1 year">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+
+
+
+
     <body>
         <form action="/edit/protocol/1/" method="post">
             {% csrf_token %}
