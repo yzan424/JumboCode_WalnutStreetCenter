@@ -1,90 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-    </head>
-    <body>
-        <form action="/edit/protocol/1/" method="post">
-            {% csrf_token %}
-        <div id="protocols">
-        {% for item in protocols %}
-            <h3>Name: <input type="text" value="{{item.name}}" name="protocols.existing.{{item.protocol_id}}.name"></h3>
-            <p>Description: <input type="text" value="{{item.description}}" name="protocols.existing.{{item.protocol_id}}.description"></p>
-            <p>Guardian Signature: <input type="text" value="{{item.guardian_signature_date}}" name="protocols.existing.{{item.protocol_id}}.guardian_signature_date"></p>
-            <p>Physician Signature: <input type="text" value="{{item.physician_signature_date}}" name="protocols.existing.{{item.protocol_id}}.physician_signature_date"></p>
-        {% endfor %}
-
-            <div>
-                <h3>Name: <input type="text" name="protocols.new.0.name"></h3>
-                <p>Description: <input type="text" name="protocols.new.0.description"></p>
-                <p>Guardian Signature: <input type="text" name="protocols.new.0.guardian_signature_date"></p>
-                <p>Physician Signature: <input type="text" name="protocols.new.0.physician_signature_date"></p>
+{% extends "base.html" %}
+    {% block content %}
+    <form action="/edit/protocol/1/" method="post">
+    {% csrf_token %}
+    <div class="container theme-showcase" role="main">
+        <div class= "row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Protocols</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% for item in protocols %}
+                        <div class="col-xs-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Name:</h3><h3><input type="text" value="{{item.name}}" name="protocols.existing.{{item.protocol_id}}.name"></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="box-label">Description: </p><p><input type="text" value="{{item.description}}" name="protocols.existing.{{item.protocol_id}}.description"><br></p>
+                                    <p class="box-label">Guardian Signature: </p><p><input type="text" value="{{item.guardian_signature_date}}" name="protocols.existing.{{item.protocol_id}}.guardian_signature_date"><br></p>
+                                    <p class="box-label">Physician Signature: </p><p><input type="text" value="{{item.physician_signature_date}}" name="protocols.existing.{{item.protocol_id}}.physician_signature_date"><br></p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="col-xs-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Name:</h3><h3><input type="text" name="protocols.new.0.name"></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="box-label">Description: </p><p><input type="text" name="protocols.new.0.description"><br></p>
+                                    <p class="box-label">Guardian Signature: </p><p><input type="text" name="protocols.new.0.guardian_signature_date"><br></p>
+                                    <p class="box-label">Physician Signature: </p><p><input type="text" name="protocols.new.0.physician_signature_date"><br></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Name:</h3><h3><input type="text" name="protocols.new.0.name"></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="box-label">Description: </p><p><input type="text" name="protocols.new.0.description"><br></p>
+                                    <p class="box-label">Guardian Signature: </p><p><input type="text" name="protocols.new.0.guardian_signature_date"><br></p>
+                                    <p class="box-label">Physician Signature: </p><p><input type="text" name="protocols.new.0.physician_signature_date"><br></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div>
-                <h3>Name: <input type="text" name="protocols.new.1.name"></h3>
-                <p>Description: <input type="text" name="protocols.new.1.description"></p>
-                <p>Guardian Signature: <input type="text" name="protocols.new.1.guardian_signature_date"></p>
-                <p>Physician Signature: <input type="text" name="protocols.new.1.physician_signature_date"></p>
-            </div>
-
         </div>
-
-        <div id="isp">
-            <h2>ISP</h2>
-            <p>Last ISP: <input type="text" name="isp.last_isp_date" value="{{isp.last_isp_date}}"></p>
-            <p>Comments: <input type="text" name="isp.comments" value="{{isp.comments}}"></p>
+        <div class= "row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1" style="padding:0px">
+                <!--ISP-->
+                <div class= "col-xs-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">ISP</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p class="box-label">Most Recent ISP: </p><p><input type="text" name="isp.last_isp_date" value="{{isp.last_isp_date}}"><br></p>
+                            <p class="box-label">Comments: </p><p><input type="text" name="isp.comments" value="{{isp.comments}}"><br></p>
+                        </div>
+                    </div>
+                </div>     
+                <div class= "col-xs-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Supportive and Protective Devices</h3>
+                        </div>
+                        <div class="panel-body">
+                            {% for item in supportive %}
+                            <div class= "col-xs-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Type:</h3><h3><input type="text" value="{{item.device_type}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.device_type"></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="box-label">HRC Approval Date: </p><p><input type="text" value="{{item.hrc_approval_date}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.hrc_approval_date"><br></p>
+                                        <p class="box-label">HRC Submission Date: </p><p><input type="text" value="{{item.hrc_submission_date}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.hrc_submission_date"><br></p>
+                                        <p class="box-label">Physician Signature: </p><p><input type="text" value="{{item.physician_signature}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.physician_signature"><br></p>
+                                        <p class="box-label">Nurse Signature: </p><p><input type="text" value="{{item.nurse_signature}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.nurse_signature"><br></p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <div class= "col-xs-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Type: </h3><h3><input type="text" name="supportive.new.0.device_type"></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="box-label">HRC Approval Date: </p><p><input type="text" name="supportive.new.0.hrc_approval_date"><br></p>
+                                        <p class="box-label">HRC Submission Date: </p><p><input type="text" name="supportive.new.0.hrc_submission_date"><br></p>
+                                        <p class="box-label">Physician Signature: </p><p><input type="text" name="supportive.new.0.physician_signature"><br></p>
+                                        <p class="box-label">Nurse Signature: </p><p><input type="text" name="supportive.new.0.nurse_signature"><br></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class= "col-xs-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Type: </h3><h3><input type="text" name="supportive.new.0.device_type"></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="box-label">HRC Approval Date: </p><p><input type="text" name="supportive.new.0.hrc_approval_date"><br></p>
+                                        <p class="box-label">HRC Submission Date: </p><p><input type="text" name="supportive.new.0.hrc_submission_date"><br></p>
+                                        <p class="box-label">Physician Signature: </p><p><input type="text" name="supportive.new.0.physician_signature"><br></p>
+                                        <p class="box-label">Nurse Signature: </p><p><input type="text" name="supportive.new.0.nurse_signature"><br></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class= "col-xs-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Tracking</h3>
+                        </div>
+                        <div class="panel-body">
+                            {% for item in tracking %}
+                            <div class= "col-xs-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Name:</h3><h3><input type="text" value="{{item.tracking_name}}" name="tracking.existing.{{item.tracking_id}}.tracking_name"></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="box-label">Description: </p><p><input type="text" value="{{item.description}}" name="tracking.existing.{{item.tracking_id}}.description"><br></p>
+                                        <p class="box-label">Most Recent: </p><p><input type="text" value="{{item.most_recent}}" name="tracking.existing.{{item.tracking_id}}.most_recent"><br></p>
+                                        <p class="box-label">Timeframe: Every <input type="text" value="{{item.next_due}}" name="tracking.existing.{{item.tracking_id}}.next_due"> month(s)<br></p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <div class= "col-xs-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Name: </h3><h3><input type="text" name="tracking.new.0.tracking_name"></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="box-label">Description: </p><p><input type="text" name="tracking.new.0.description"><br></p>
+                                        <p class="box-label">Most Recent: </p><p><input type="text" name="tracking.new.0.most_recent"><br></p>
+                                        <p class="box-label">Timeframe: Every <input type="text" name="tracking.new.0.next_due"> month(s)<br></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class= "col-xs-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Name: </h3><h3><input type="text" name="tracking.new.0.tracking_name"></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="box-label">Description: </p><p><input type="text" name="tracking.new.0.description"><br></p>
+                                        <p class="box-label">Most Recent: </p><p><input type="text" name="tracking.new.0.most_recent"><br></p>
+                                        <p class="box-label">Timeframe: Every <input type="text" name="tracking.new.0.next_due"> month(s)<br></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div id="supportive">
-        <h2>Supportive and Protective Devices</h2>
-        {% for item in supportive %}
-            <h3>Type: <input type="text" value="{{item.device_type}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.device_type"></h3>
-            <p>HRC Approval Date: <input type="text" value="{{item.hrc_approval_date}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.hrc_approval_date"></p>
-            <p>HRC Submission Date: <input type="text" value="{{item.hrc_submission_date}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.hrc_submission_date"></p>
-            <p>Physician Signature: <input type="text" value="{{item.physician_signature}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.physician_signature"></p>
-            <p>Nurse Signature: <input type="text" value="{{item.nurse_signature}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.nurse_signature"></p>
-        {% endfor %}
-        </div>
-            <div>
-                <h3>Type: <input type="text" name="supportive.new.0.device_type"></h3>
-                <p>HRC Approval Date: <input type="text" name="supportive.new.0.hrc_approval_date"></p>
-                <p>HRC Submission Date: <input type="text" name="supportive.new.0.hrc_submission_date"></p>
-                <p>Physician Signature: <input type="text" name="supportive.new.0.physician_signature"></p>
-                <p>Nurse Signature: <input type="text" name="supportive.new.0.nurse_signature"></p>
-            </div>
-            <div>
-                <h3>Type: <input type="text" name="supportive.new.1.device_type"></h3>
-                <p>HRC Approval Date: <input type="text" name="supportive.new.1.hrc_approval_date"></p>
-                <p>HRC Submission Date: <input type="text" name="supportive.new.1.hrc_submission_date"></p>
-                <p>Physician Signature: <input type="text" name="supportive.new.1.physician_signature"></p>
-                <p>Nurse Signature: <input type="text" name="supportive.new.1.nurse_signature"></p>
-            </div>
-
-        <div id="tracking">
-            <h2>Tracking</h2>
-            {% for item in tracking %}
-                <h3>Name: <input type="text" value="{{item.tracking_name}}" name="tracking.existing.{{item.tracking_id}}.tracking_name"></h3>
-                <p>Description: <input type="text" value="{{item.description}}" name="tracking.existing.{{item.tracking_id}}.description"></p>
-                <p>Most Recent: <input type="text" value="{{item.most_recent}}" name="tracking.existing.{{item.tracking_id}}.most_recent"></p>
-                <p>Timeframe: Every <input type="text" value="{{item.next_due}}" name="tracking.existing.{{item.tracking_id}}.next_due"> month(s)</p>
-            {% endfor %}
-
-            <div>
-                <h3>Name: <input type="text" name="tracking.new.0.tracking_name"></h3>
-                <p>Description: <input type="text" name="tracking.new.0.description"></p>
-                <p>Most Recent: <input type="text" name="tracking.new.0.most_recent"></p>
-                <p>Timeframe: Every <input type="text" name="tracking.new.0.next_due"> month(s)</p>
-            </div>
-            <div>
-                <h3>Name: <input type="text" name="tracking.new.1.tracking_name"></h3>
-                <p>Description: <input type="text" name="tracking.new.1.description"></p>
-                <p>Most Recent: <input type="text" name="tracking.new.1.most_recent"></p>
-                <p>Timeframe: Every <input type="text" name="tracking.new.1.next_due"> month(s)</p>
-            </div>
-
-        </div>
-        <input type="submit"></input>
-
-    </body>
-</html>
+    </div>
+    </form>
+    <input type="submit"></input>
+{% endblock %}
