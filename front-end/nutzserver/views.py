@@ -7,7 +7,7 @@ from django.template import *
 import json, requests
 
 
-backendGET = 'http://127.0.0.1:5000/api/patient/'
+backendGET = 'http://localhost:8000/backend/profile/'
 backendPOST = 'http://localhost:8000/backend/profile/'
 backendPUT = 'http://localhost:8000/backend/profile/'
 
@@ -347,9 +347,9 @@ def profile(request, profile_id, edit):
     legal_guardian = legal_guardian.json()
         
     if edit == False:
-        return render(request, "profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian})
+        return render(request, "profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian, 'profile_id': profile_id})
     else:
-        return render(request, "update_profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian})        
+        return render(request, "update_profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian, 'profile_id': profile_id})        
 
 def protocol(request, profile_id, edit):
     protocols = requests.get(backendGET + profile_id + '/protocols')
@@ -363,9 +363,9 @@ def protocol(request, profile_id, edit):
     tracking = tracking.json()
 
     if edit == False:
-        return render(request, "protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking})
+        return render(request, "protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking, 'profile_id': profile_id})
     else:
-        return render(request, "update_protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking})        
+        return render(request, "update_protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking, 'profile_id': profile_id})        
 
 def behavior(request, profile_id, edit):
     medical_treatment_plan = requests.get(backendGET + profile_id + '/medical_treatment_plan')
@@ -381,9 +381,9 @@ def behavior(request, profile_id, edit):
     rogers_monitor = rogers_monitor.json()
         
     if edit == False:
-        return render(request, "behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor})
+        return render(request, "behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})
     else:
-        return render(request, "update_behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor})        
+        return render(request, "update_behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})        
 
 def support(request, profile_id, edit):
     legal_guardian = requests.get(backendGET + profile_id + '/legal_family_info')
@@ -395,9 +395,9 @@ def support(request, profile_id, edit):
     legal_status = legal_status.json()
         
     if edit == False:
-        return render(request, "support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status})
+        return render(request, "support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status, 'profile_id': profile_id})
     else:
-        return render(request, "update_support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status})        
+        return render(request, "update_support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status, 'profile_id': profile_id})        
 
 def edit(request, page, profile_id):
     if page == 'profile':
