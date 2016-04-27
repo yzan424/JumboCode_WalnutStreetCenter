@@ -1,4 +1,23 @@
 {% extends "base.html" %}
+{% block title %}
+    "Profile"
+{% endblock %}
+{% block patient_name %}
+    {{basic_info.name_first}} 
+    {{basic_info.name_last}}
+{% endblock %}
+{% block program %}
+  {{basic_info.training_program_or_school_address}}
+{% endblock %}
+{% block birthday %}
+  {{basic_info.birthday}}
+{% endblock %}
+{% block age %}  
+  {{basic_info.}}
+{% endblock %}
+{% block SSN %} 
+  {{basic_info.social_security}}
+{% endblock %}
   {% block content %}
       <div class="container theme-showcase" role="main">
         <div class= "row">

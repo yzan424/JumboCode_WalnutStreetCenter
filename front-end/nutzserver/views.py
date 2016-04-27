@@ -385,7 +385,7 @@ def behavior(request, profile_id, edit):
         return render(request, "update_behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor})        
 
 def support(request, profile_id, edit):
-    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian')
+    legal_guardian = requests.get(backendGET + profile_id + '/legal_family_info')
     insurance = requests.get(backendGET + profile_id + '/insurance')
     legal_status = requests.get(backendGET + profile_id + '/legal_competency')
 
