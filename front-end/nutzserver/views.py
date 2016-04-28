@@ -358,6 +358,7 @@ def protocol(request, profile_id, edit):
     tracking = requests.get(backendGET + profile_id + '/tracking')  
 
     protocols = protocols.json()
+    protocols = protocols['objects']
     isp = isp.json()
     supportive = supportive.json()
     tracking = tracking.json()
