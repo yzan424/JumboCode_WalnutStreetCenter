@@ -68,12 +68,36 @@ class Patient(db.Model):
         primaryjoin='Patient.medical_info_id==MedicalInfo.id',
         backref='patient'
     )
+    insurance_id = db.Column(db.Integer, db.ForeignKey('insurance.id'))
+    insurance = db.relationship(
+        'Insurance',
+        primaryjoin='Patient.insurance_id==Insurance.id',
+        backref='patient'
+    )
+    legal_competency_id = db.Column(db.Integer, db.ForeignKey('legal_competency.id'))
+    identifying_info = db.relationship(
+        'LegalCompetency',
+        primaryjoin='Patient.legal_competency_id==LegalCompetency.id',
+        backref='patient'
+    )
     self_preservation_id = db.Column(db.Integer, db.ForeignKey('self_preservation.id'))
     self_preservation = db.relationship(
         'SelfPreservation',
         primaryjoin='Patient.self_preservation_id==SelfPreservation.id',
         backref='patient'
     )
+    behavior_id = db.Column(db.Integer, db.ForeignKey('behavior.id'))
+    behavior = db.relationship(
+        'Behavior',
+        primaryjoin='Patient.behavior_id==Behavior.id',
+        backref='patient'
+    )
+    isp_id = db.Column(db.Integer, db.ForeignKey('individual_support_plan.id'))
+    isp = db.relationship(
+        'IndividualSupportPlan',
+        primaryjoin='Patient.isp_id==IndividualSupportPlan.id',
+        backref='patient'
+    )    
     identifying_info_id = db.Column(db.Integer, db.ForeignKey('identifying_info.id'))
     identifying_info = db.relationship(
         'IdentifyingInfo',
@@ -225,9 +249,9 @@ class Doctor(db.Model):
     fax = db.Column(db.String(10))
 
 
-class HealthInsuranceAndOther(db.Model):
+class Insurance(db.Model):
 
-    __tablename__ = 'health_insurance_and_other'
+    __tablename__ = 'insurance'
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
     source = db.Column(db.String)
@@ -276,6 +300,7 @@ class RogersMonitor(db.Model):
 
     __tablename__ = 'rogers_monitor'
     id = db.Column(db.Integer, primary_key=True)
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
     next_court_date = db.Column(db.Date)
     last_court_date = db.Column(db.Date)
     guardian_signature_date = db.Column(db.Date)
@@ -295,8 +320,8 @@ class Director(db.Model):
     staff = db.relationship("Staff", backref="director")
 
 
-class BehaviorAssessment(db.Model):
-    __tablename__ = 'behavior_assessment'
+class Behavior(db.Model):
+    __tablename__ = 'behavior'
     id = db.Column(db.Integer, primary_key=True)
     assessment_date = db.Column(db.Date)
     behaviors = db.Column(db.String)
@@ -342,6 +367,49 @@ class SelfMedication(db.Model):
     plan_type = db.Column(db.String)
     physician_signature_date = db.Column(db.Date)
 
+class Protocol(db.Model):
+    __tablename__ = 'protocol'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    description = db.Column(db.String)
+    appointment_id = db.Column(db.Integer, db.ForeignKey('appointment.id'))
+    guardian_signature_date = db.Column(db.Date)
+    physician_signature_date = db.Column(db.Date)
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    patient = db.relationship(
+        'Patient',
+        primaryjoin='Protocol.patient_id==Patient.id',
+        backref='protocols'
+    )
+
+class SupportiveDevices(db.Model):
+    __tablename__ = 'supportive_devices'
+    id = db.Column(db.Integer, primary_key=True)
+    device_type = db.Column(db.String)
+    hrc_approval_date = db.Column(db.Date)
+    hrc_submission_date = db.Column(db.Date)
+    physician_signature = db.Column(db.Boolean)
+    nurse_signature = db.Column(db.Boolean)
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    patient = db.relationship(
+        'Patient',
+        primaryjoin='SupportiveDevices.patient_id==Patient.id',
+        backref='supportive'
+    )
+
+class Tracking(db.Model):
+    __tablename__ = 'tracking'
+    id = db.Column(db.Integer, primary_key=True)
+    tracking_name = db.Column(db.String)
+    description = db.Column(db.String)
+    most_recent = db.Column(db.Date)
+    next_due = db.Column(db.Integer) 
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    patient = db.relationship(
+        'Patient',
+        primaryjoin='Tracking.patient_id==Patient.id',
+        backref='tracking'
+    )
 
 class Appointment(db.Model):
 

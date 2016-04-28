@@ -7,7 +7,7 @@ from django.template import *
 import json, requests
 
 
-backendGET = 'http://localhost:8000/backend/profile/'
+backendGET = 'http://127.0.0.1:5000/api/patient/'
 backendPOST = 'http://localhost:8000/backend/profile/'
 backendPUT = 'http://localhost:8000/backend/profile/'
 
@@ -370,7 +370,7 @@ def protocol(request, profile_id, edit):
 def behavior(request, profile_id, edit):
     medical_treatment_plan = requests.get(backendGET + profile_id + '/medical_treatment_plan')
     behavior = requests.get(backendGET + profile_id + '/behavior')
-    behavior_support_plans = requests.get(backendGET + profile_id + '/behavior_support_plans')
+    behavior_support_plans = requests.get(backendGET + profile_id + '/behavior_support_plan')
     restrictive = requests.get(backendGET + profile_id + '/restrictive')
     rogers_monitor = requests.get(backendGET + profile_id + '/rogers_monitor')
 
@@ -381,9 +381,9 @@ def behavior(request, profile_id, edit):
     rogers_monitor = rogers_monitor.json()
         
     if edit == False:
-        return render(request, "behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})
+        return render(request, "behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})
     else:
-        return render(request, "update_behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})        
+        return render(request, "update_behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})        
 
 def support(request, profile_id, edit):
     legal_guardian = requests.get(backendGET + profile_id + '/legal_family_info')
@@ -590,7 +590,7 @@ def edit(request, page, profile_id):
                     updated_medical_treatment_plan[keys.split('.')[1]] = values
                 elif (keys.split('.'))[0] == "behavior":
                     updated_behavior[keys.split('.')[1]] = values
-                elif (keys.split('.'))[0] == "behavior_support_plans":
+                elif (keys.split('.'))[0] == "behavior_support_plan":
                     updated_behavior_support_plans[keys.split('.')[1]] = values
                 elif (keys.split('.'))[0] == "restrictive":
                     restrictive_id = keys.split('.')[2]
@@ -620,7 +620,7 @@ def edit(request, page, profile_id):
 
             requests.post(backendPOST + profile_id + '/medical_treatment_plan', data=updated_medical_treatment_plan)
             requests.post(backendPOST + profile_id + '/behavior', data=updated_behavior)
-            requests.post(backendPOST + profile_id + '/behavior_support_plans', data=updated_behavior_support_plans)
+            requests.post(backendPOST + profile_id + '/behavior_support_plan', data=updated_behavior_support_plans)
             requests.post(backendPOST + profile_id + '/rogers_monitor', data=updated_rogers_monitor)
 
             for i in updated_restrictive:
