@@ -1,6 +1,6 @@
 {% extends "base.html" %}
     {% block content %}
-    <form action="/edit/support/1/" method="post">
+    <form action="/edit/support/{{profile_id}}/" method="post">
     {% csrf_token %}
     <div class="container theme-showcase" role="main">
       <div class="col-xs-12">
