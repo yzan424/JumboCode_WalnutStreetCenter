@@ -7,8 +7,8 @@ from django.template import *
 import json, requests
 
 
-backendGET = 'http://localhost:8000/backend/profile/'
-backendPOST = 'http://localhost:8000/backend/profile/'
+backendGET = 'http://127.0.0.1:5000/api/patient/'
+backendPOST = 'http://127.0.0.1:5000/api/patient/'
 backendPUT = 'http://localhost:8000/backend/profile/'
 
 # Create your views here.
@@ -342,7 +342,6 @@ def profile(request, profile_id, edit):
     medical_info = medical_info.json()
     basic_info = basic_info.json()
     self_preservation = self_preservation.json()
-    self_preservation = self_preservation['objects']
     identifying = identifying.json()
     legal_guardian = legal_guardian.json()
         
@@ -452,24 +451,30 @@ def edit(request, page, profile_id):
                                 if i['self_preservation_id'] == self_preservation_id:
                                     i[dictKey] = values
 
-            print("updated_identifying:", updated_identifying)
-            print("updated_medical_info:", updated_medical_info)
-            print("updated_basic_info:", updated_basic_info)
-            print("updated_self_prservation:", updated_self_preservation)
-            print("new_self_preservation:", new_self_preservation)
-            print("updated_legal_guardian:", updated_legal_guardian)
+            header = {'Content-Type': 'application/json'}
+            updated_basic_info = json.dumps({"basic_info" : updated_basic_info})
+            updated_identifying = json.dumps({"identifying_info" : updated_identifying})
+            updated_medical_info = json.dumps({"medical_info" : updated_medical_info})
+            updated_legal_guardian = json.dumps({"legal_family_info" : updated_legal_guardian})
+            updated_self_preservation = json.dumps({"self_preservation" : updated_self_preservation + new_self_preservation})
 
+            print(updated_self_preservation)
+                        
             # send all the new stuff
-            requests.post(backendPOST + profile_id + '/identifying', data=updated_identifying)
-            requests.post(backendPOST + profile_id + '/medical_info', data=updated_medical_info)
-            requests.post(backendPOST + profile_id + '/basic', data=updated_basic_info)
-            requests.post(backendPOST + profile_id + '/legal_guardian', data=updated_legal_guardian)
-            for i in updated_self_preservation:
-                requests.post(backendPOST + profile_id + '/self_preservation', data=i)           
-            for i in new_self_preservation:
-                i.pop('self_preservation_id', None)
-                print(i)
-                requests.put(backendPOST + "/self_preservation", data=i) 
+            requests.put(backendPOST + profile_id, data=updated_identifying, headers=header)
+            requests.put(backendPOST + profile_id, data=updated_medical_info, headers=header)
+            requests.put(backendPOST + profile_id, data=updated_basic_info, headers=header)
+            requests.put(backendPOST + profile_id, data=updated_legal_guardian, headers=header)
+            #requests.put(backendPOST + profile_id, data=updated_self_preservation, headers=header)
+
+            #print(new_self_preservation)
+            
+            #for i in updated_self_preservation:
+                #requests.put(backendPOST + profile_id + '/self_preservation', data=i)           
+            #for i in new_self_preservation:
+                #i.pop('self_preservation_id', None)
+                #print(i)
+                #requests.put(backendPOST + "/self_preservation", data=i) 
 
             return HttpResponseRedirect("/profile/" + profile_id)
     elif page == "protocol":

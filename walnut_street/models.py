@@ -161,7 +161,7 @@ class LegalFamilyInfo(db.Model):
     mother_birthday = db.Column(db.Date)
     mother_birthplace = db.Column(db.String)
     mother_alive = db.Column(db.Boolean)
-    parents_martial_status = db.Column(db.String)
+    parents_marital_status = db.Column(db.String)
     family_phone = db.Column(db.String(10))
     family_address = db.Column(db.String)
 
