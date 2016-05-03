@@ -1,4 +1,5 @@
-from flask.ext.sqlalchemy import SQLAlchemy
+#from flask.ext.sqlalchemy import SQLAlchemy
+import flask.ext.whooshalchemy
 
 from . import app
 
@@ -25,6 +26,7 @@ DoctorPatient = db.Table(
 class Patient(db.Model):
 
     __tablename__ = 'patient'
+    __searchable__ = ['name_first', 'name_last']
     id = db.Column(db.Integer, primary_key=True)
 
     name_first = db.Column(db.String)

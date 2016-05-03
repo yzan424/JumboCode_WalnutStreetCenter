@@ -3,9 +3,8 @@ import os
 from flask.ext import restless
 from jinja2 import Template
 
-from . import models
-from . import app
-
+from . import models 
+from . import app 
 
 #appointments table NOT ready for production
 manager = restless.APIManager(app, flask_sqlalchemy_db=models.db)
@@ -44,3 +43,7 @@ def profile(patient_id):
             models.Patient.id == patient_id
         ).one()
     )
+
+@app.route('/search/<text>')
+def search(text):
+    return models.Patient.query.whoosh_search(text)
