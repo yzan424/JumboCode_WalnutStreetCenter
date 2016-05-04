@@ -38,7 +38,7 @@
   {{basic_info.social_security}}
 {% endblock %}
     {% block content %}
-    <form action="/edit/behavior/{{profile_id}}/" method="post">
+    <form action="/edit/profile/{{profile_id}}/" method="post">
         {% csrf_token %}
       <div class="container theme-showcase" role="main">
         <div class= "row">
