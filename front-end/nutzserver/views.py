@@ -342,7 +342,7 @@ def profile(request, profile_id, edit):
     medical_info = medical_info.json()
     basic_info = basic_info.json()
     self_preservation = self_preservation.json()
-    self_preservation = self_preservation['objects']
+    # self_preservation = self_preservation['objects']
     identifying = identifying.json()
     legal_guardian = legal_guardian.json()
         
