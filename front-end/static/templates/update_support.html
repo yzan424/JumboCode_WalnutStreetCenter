@@ -1,4 +1,42 @@
 {% extends "base.html" %}
+{% block profile_links %}
+  <div id = "thirdrow">
+      <div class="col-md-3 text-center darkgrayed">
+        <p> <a href="/profile/{{profile_id}}">Demographic</a> </p>
+      </div>
+      <div class="col-md-2 text-center darkgrayed">
+        <p> <a href="/support/{{profile_id}}">Support</a> </p>
+      </div>
+      <div class="col-md-3 text-center darkgrayed">
+        <p> Appointments </p>
+      </div>
+      <div class="col-md-2 text-center darkgrayed">
+        <p> <a href="/protocol/{{profile_id}}">Protocols</a> </p>
+      </div>
+      <div class="col-md-2 text-center darkgrayed">
+        <p> <a href="/behavior/{{profile_id}}">Behavior</a> </p>
+      </div>
+    </div>
+{% endblock %}
+{% block title %}
+    Edit Support
+{% endblock %}
+{% block patient_name %}
+    {{basic_info.name_first}} 
+    {{basic_info.name_last}}
+{% endblock %}
+{% block program %}
+  {{basic_info.training_program_or_school_address}}
+{% endblock %}
+{% block birthday %}
+  {{basic_info.birthday}}
+{% endblock %}
+{% block age %}  
+  {{basic_info.}}
+{% endblock %}
+{% block SSN %} 
+  {{basic_info.social_security}}
+{% endblock %}
     {% block content %}
     <form action="/edit/support/{{profile_id}}/" method="post">
     {% csrf_token %}
