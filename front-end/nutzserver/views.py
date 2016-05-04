@@ -358,12 +358,12 @@ def protocol(request, profile_id, edit):
     tracking = requests.get(backendGET + profile_id + '/tracking')  
 
     protocols = protocols.json()
-    protocols = protocols['objects']
+    # protocols = protocols['objects']
     isp = isp.json()
     supportive = supportive.json()
-    supportive = ['objects']
+    # supportive = ['objects']
     tracking = tracking.json()
-    tracking = tracking['objects']
+    # tracking = tracking['objects']
 
     if edit == False:
         return render(request, "protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking, 'profile_id': profile_id})
@@ -381,7 +381,7 @@ def behavior(request, profile_id, edit):
     behavior = behavior.json()
     behavior_support_plans = behavior_support_plans.json()
     restrictive = restrictive.json()
-    restrictive = restrictive['objects']
+    # restrictive = restrictive['objects']
     rogers_monitor = rogers_monitor.json()
         
     if edit == False:
@@ -396,9 +396,9 @@ def support(request, profile_id, edit):
 
     legal_guardian = legal_guardian.json()
     insurance = insurance.json()
-    insurance = insurance['objects']
+    # insurance = insurance['objects']
     legal_status = legal_status.json()
-    legal_status = legal_status['objects']
+    # legal_status = legal_status['objects']
         
     if edit == False:
         return render(request, "support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status, 'profile_id': profile_id})
