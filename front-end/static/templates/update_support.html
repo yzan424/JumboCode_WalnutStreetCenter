@@ -1,96 +1,357 @@
-<!doctype html>
+{% extends "base.html" %}
+    {% block content %}
+    <form action="/edit/support/{{profile_id}}/" method="post">
+    {% csrf_token %}
+    <div class="container theme-showcase" role="main">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Family/Guardian/Conservator</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Primary</th>
+                      <th>Name</th>
+                      <th>Relation</th>
+                      <th>Address</th>
+                      <th>Phone</th>
+                      <th>Date Added</th>
+                      <th>Date Removed</th>
+                      <th>Removal Reason</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><input type="radio" name="primSup" value="" style="margin-left: 15px;"></td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value= "{{legal_guardian.legal_guardian}}">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value= "UNRESOLVED">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value= "{{legal_guardiant.family_address}}">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value="{{legal_guardiant.family_phone}}">
+                        </div>
+                      </td>
+                      <td>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                      </td>
+                      <td>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
 
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-
-  <title>Support</title>
-  <meta name="description" content="">
-</head>
-
-<body>
-    <form action="/edit/support/1/" method="post">
-            {% csrf_token %}
-        <div id="legal_guardian">
-            <h2>Legal Guardian</h2>
-            <p>Guardian Name: <input type="text" name="legal_guardian.guardian_name=" value="{{legal_guardian.legal_guardian}}"></p>
-            <p>Guardian Phone: <input type="text" name="legal_guardian.guardian_phone" value="{{legal_guardian.guardian_phone}}"></p>
-            <p>Guardian Address: <input type="text" name="legal_guardian.guardian_address" value="{{legal_guardian.guardian_address}}"></p>
-            <p>Father Name: <input type="text" name="legal_guardian.father_name=" value="{{legal_guardian.father_name}}"></p>
-            <p> Father Birthday: <input type="text" name="legal_guardian.father_birthday" value="{{legal_guardian.father_birthday}}"></p>
-            <p> Father Birthplace: <input type="text" name="legal_guardian.father_alive" value="{{legal_guardiant.father_alive}}"></p>
-            <p> Mother Maiden Name: <input type="text" name="legal_guardian.mother_maiden_name=" value="{{legal_guardiant.mother_maiden_name}}"></p>
-            <p> Mother Birthday: <input type="text" name="legal_guardian.mother_birthday" value="{{legal_guardiant.mother_birthday}}"></p>
-            <p> Mother Birthplace: <input type="text" name="legal_guardian.mother_birthplace" value="{{legal_guardiant.mother_birthplace}}"></p>
-            <p> Mother Alive: <input type="text" name="legal_guardian.mother_alive" value="{{legal_guardiant.mother_alive}}"></p>
-            <p> Parents Maritcal Status: <input type="text" name="legal_guardian.parent_maritcal_status" value="{{legal_guardiant.parent_maritcal_status}}"></p>
-            <p> Family Phone: <input type="text" name="legal_guardian.family_phone" value="{{legal_guardiant.family_phone}}"></p>
-            <p> Family Address: <input type="text" name="legal_guardian.family_address" value="{{legal_guardiant.family_address}}"></p>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <textarea class="form-control" rows="2"></textarea>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><input type="radio" name="primSup" value="" style="margin-left: 15px;"></td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                      </td>
+                      <td>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <textarea class="form-control" rows="2"></textarea>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
-        <div id="insurance">
-            <h2>Insurance</h2>
-            {% for item in insurance %}
-                <div>
-                    <p>Health Insurance and Other ID: <input type="text" name="insurance.existing.{{item.insurance_id}}.health_insurance_and_other_id" value="{{item.health_insurance_and_other_id}}"></p>
-                    <p>Source: <input type="text" name="insurance.existing.{{item.insurance_id}}.source" value="{{item.source}}"></p>
-                    <p>Type of: <input type="text" name="insurance.existing.{{item.insurance_id}}.type_of" value="{{item.type_of}}"></p>
-                    <p>ID Number: <input type="text" name="insurance.existing.{{item.insurance_id}}.id_number" value="{{item.id_number}}"></p>
-                    <p>Benefits: <input type="text" name="insurance.existing.{{item.insurance_id}}.benefits" value="{{item.benifts}}"></p>
-                    <p>Expiration Date: <input type="text" name="insurance.existing.{{item.insurance_id}}.expiration_date" value="{{item.expiration_date}}"></p>
-                    <p>Expired: <input type="text" name="insurance.existing.{{item.insurance_id}}.Expired" value="{{item.expired}}"></p>  
-                </div>
-            {% endfor %}    
-                <!-- These are new self_preservation entries -->
-                <div>
-                    <p>Health Insurance and Other ID: <input type="text" name="insurance.new.0.health_insurance_and_other_id" value="{{item.health_insurance_and_other_id}}"></p>
-                    <p>Source: <input type="text" name="insurance.new.0.source" value="{{item.source}}"></p>
-                    <p>Type of: <input type="text" name="insurance.new.0.type_of" value="{{item.type_of}}"></p>
-                    <p>ID Number: <input type="text" name="insurance.new.0.id_number" value="{{item.id_number}}"></p>
-                    <p>Benefits: <input type="text" name="insurance.new.0.benefits" value="{{item.benifts}}"></p>
-                    <p>Expiration Date: <input type="text" name="insurance.new.0.expiration_date" value="{{item.expiration_date}}"></p>
-                    <p>Expired: <input type="text" name="insurance.new.0.Expired" value="{{item.expired}}"></p> 
-                </div>
-                <div>
-                    <p>Health Insurance and Other ID: <input type="text" name="insurance.new.1.health_insurance_and_other_id" value="{{item.health_insurance_and_other_id}}"></p>
-                    <p>Source: <input type="text" name="insurance.new.1.source" value="{{item.source}}"></p>
-                    <p>Type of: <input type="text" name="insurance.new.1.type_of" value="{{item.type_of}}"></p>
-                    <p>ID Number: <input type="text" name="insurance.new.1.id_number" value="{{item.id_number}}"></p>
-                    <p>Benefits: <input type="text" name="insurance.new.1.benefits" value="{{item.benifts}}"></p>
-                    <p>Expiration Date: <input type="text" name="insurance.new.1.expiration_date" value="{{item.expiration_date}}"></p>
-                    <p>Expired: <input type="text" name="insurance.new.1.Expired" value="{{item.expired}}"></p> 
-                </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Insurance, Financial Support, Entitlements</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Source</th>
+                      <th>Type</th>
+                      <th>Identification Number</th>
+                      <th>Benefits</th>
+                      <th>Expiration Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value= "{{item.source}}">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value="{{item.type_of}}">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value="{{item.id_number}}">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value="{{item.benifts}}">
+                        </div>
+                      </td>
+                      <!-- Needs to change color if expiration date has passed -->
+                      <td>
+                          <select name="month">
+                            <option value="01">Jan</option>
+                            <option value="02">Feb</option>
+                            <option value="03">Mar</option>
+                            <option value="04">Apr</option>
+                            <option value="05">May</option>
+                            <option value="06">Jun</option>
+                            <option value="07">Jul</option>
+                            <option value="08">Aug</option>
+                            <option value="09">Sep</option>
+                            <option value="10">Oct</option>
+                            <option value="11">Nov</option>
+                            <option value="12">Dec</option>
+                          </select>
+                          <input type="text" size="1" maxlength="2" placeholder=" day">
+                          <input type="text" size="1" maxlength="4" placeholder=" year">
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control">
+                        </div>
+                      </td>
+                      <!-- Needs to change color if expiration date has passed -->
+                      <td>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
-        <div id="legal_status">
-            <h2>Legal Status</h2>
-            {% for item in legal_status %}
-                <div>
-                    <p>Status: <input type="text" name="legal_status.existing.{{item.legal_status_id}}.status" value="{{item.status}}"></p>
-                    <p>Type: <input type="text" name="legal_status.existing.{{item.legal_status_id}}.type" value="{{item.type}}"></p>
-                    <p>Requested By: <input type="text" name="legal_status.existing.{{item.legal_status_id}}.date_of_adjudication" value="{{item.date_of_adjudication}}"></p>
-                    <p>Date of Adjudication: <input type="text" name="legal_status.existing.{{item.legal_status_id}}.requested_by" value="{{item.requested_by}}"></p>
-                    <p>Requested By: <input type="text" name="legal_status.existing.{{item.legal_status_id}}.date_of_request" value="{{item.benifts}}"></p>
-                    <p>Date of Request: <input type="text" name="legal_status.existing.{{item.legal_status_id}}.expiration_date" value="{{item.expiration_date}}"></p>
-                </div>
-            {% endfor %}    
-                <!-- These are new self_preservation entries -->
-                <div>
-                    <p>Status: <input type="text" name="legal_status.new.0.status" value="{{item.status}}"></p>
-                    <p>Type: <input type="text" name="legal_status.new.0.type" value="{{item.type}}"></p>
-                    <p>Requested By: <input type="text" name="legal_status.new.0.date_of_adjudication" value="{{item.date_of_adjudication}}"></p>
-                    <p>Date of Adjudication: <input type="text" name="legal_status.new.0.requested_by" value="{{item.requested_by}}"></p>
-                    <p>Requested By: <input type="text" name="legal_status.existing.new.0.date_of_request" value="{{item.benifts}}"></p>
-                    <p>Date of Request: <input type="text" name="legal_status.existing.new.0.expiration_date" value="{{item.expiration_date}}"></p>
-                </div>
-                <div>
-                    <p>Status: <input type="text" name="legal_status.existing.new.1.status" value="{{item.status}}"></p>
-                    <p>Type: <input type="text" name="legal_status.existing.new.1.type" value="{{item.type}}"></p>
-                    <p>Requested By: <input type="text" name="legal_status.new.1.date_of_adjudication" value="{{item.date_of_adjudication}}"></p>
-                    <p>Date of Adjudication: <input type="text" name="legal_status.new.1.requested_by" value="{{item.requested_by}}"></p>
-                    <p>Requested By: <input type="text" name="legal_status.existing.new.1.date_of_request" value="{{item.benifts}}"></p>
-                    <p>Date of Request: <input type="text" name="legal_status.existing.new.1.expiration_date" value="{{item.expiration_date}}"></p>
-                </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Legal Status</h3>
+          </div>
+          <div class="panel-body">
+            <p class = "box-label"> Legal Competency </p>
+            <div class="form-group">
+              <textarea class="form-control" rows="2"></textarea>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Status</th>
+                      <th>Type</th>
+                      <th>Date of Adjudication</th>
+                      <th>Requested By</th>
+                      <th>Date of Request</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value= "{{item.status}}">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value= "{{item.type}}">
+                        </div>
+                      </td>
+                      <td>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" class="form-control" value= "{{item.requested_by}}">
+                        </div>
+                      </td>
+                      <td>
+                        <select name="month">
+                          <option value="01">Jan</option>
+                          <option value="02">Feb</option>
+                          <option value="03">Mar</option>
+                          <option value="04">Apr</option>
+                          <option value="05">May</option>
+                          <option value="06">Jun</option>
+                          <option value="07">Jul</option>
+                          <option value="08">Aug</option>
+                          <option value="09">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                        <input type="text" size="1" maxlength="2" placeholder=" day">
+                        <input type="text" size="1" maxlength="4" placeholder=" year">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
+        
+    
+        </div>
+    </div>
+</div>
         <input type="submit"></input>
     </form>
-</body>
-</html>
+{% endblock %}

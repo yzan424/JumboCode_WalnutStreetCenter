@@ -1,6 +1,6 @@
 {% extends "base.html" %}
     {% block content %}
-    <form action="/edit/behavior/1/" method="post">
+    <form action="/edit/behavior/{{profile_id}}/" method="post">
         {% csrf_token %}
         <div class="container theme-showcase" role="main">
             <div class= "row">

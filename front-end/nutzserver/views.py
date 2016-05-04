@@ -341,15 +341,15 @@ def profile(request, profile_id, edit):
 
     medical_info = medical_info.json()
     basic_info = basic_info.json()
-    print(basic_info)
     self_preservation = self_preservation.json()
+    self_preservation = self_preservation['objects']
     identifying = identifying.json()
     legal_guardian = legal_guardian.json()
         
     if edit == False:
-        return render(request, "profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian})
+        return render(request, "profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian, 'profile_id': profile_id})
     else:
-        return render(request, "update_profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian})        
+        return render(request, "update_profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian, 'profile_id': profile_id})        
 
 def protocol(request, profile_id, edit):
     protocols = requests.get(backendGET + profile_id + '/protocols')
@@ -358,19 +358,22 @@ def protocol(request, profile_id, edit):
     tracking = requests.get(backendGET + profile_id + '/tracking')  
 
     protocols = protocols.json()
+    protocols = protocols['objects']
     isp = isp.json()
     supportive = supportive.json()
+    supportive = ['objects']
     tracking = tracking.json()
+    tracking = tracking['objects']
 
     if edit == False:
-        return render(request, "protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking})
+        return render(request, "protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking, 'profile_id': profile_id})
     else:
-        return render(request, "update_protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking})        
+        return render(request, "update_protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking, 'profile_id': profile_id})        
 
 def behavior(request, profile_id, edit):
     medical_treatment_plan = requests.get(backendGET + profile_id + '/medical_treatment_plan')
     behavior = requests.get(backendGET + profile_id + '/behavior')
-    behavior_support_plans = requests.get(backendGET + profile_id + '/behavior_support_plans')
+    behavior_support_plans = requests.get(backendGET + profile_id + '/behavior_support_plan')
     restrictive = requests.get(backendGET + profile_id + '/restrictive')
     rogers_monitor = requests.get(backendGET + profile_id + '/rogers_monitor')
 
@@ -378,26 +381,29 @@ def behavior(request, profile_id, edit):
     behavior = behavior.json()
     behavior_support_plans = behavior_support_plans.json()
     restrictive = restrictive.json()
+    restrictive = restrictive['objects']
     rogers_monitor = rogers_monitor.json()
         
     if edit == False:
-        return render(request, "behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor})
+        return render(request, "behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})
     else:
-        return render(request, "update_behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plans': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor})        
+        return render(request, "update_behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})        
 
 def support(request, profile_id, edit):
-    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian')
+    legal_guardian = requests.get(backendGET + profile_id + '/legal_family_info')
     insurance = requests.get(backendGET + profile_id + '/insurance')
     legal_status = requests.get(backendGET + profile_id + '/legal_competency')
 
     legal_guardian = legal_guardian.json()
     insurance = insurance.json()
+    insurance = insurance['objects']
     legal_status = legal_status.json()
+    legal_status = legal_status['objects']
         
     if edit == False:
-        return render(request, "support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status})
+        return render(request, "support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status, 'profile_id': profile_id})
     else:
-        return render(request, "update_support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status})        
+        return render(request, "update_support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status, 'profile_id': profile_id})        
 
 def edit(request, page, profile_id):
     if page == 'profile':
@@ -590,7 +596,7 @@ def edit(request, page, profile_id):
                     updated_medical_treatment_plan[keys.split('.')[1]] = values
                 elif (keys.split('.'))[0] == "behavior":
                     updated_behavior[keys.split('.')[1]] = values
-                elif (keys.split('.'))[0] == "behavior_support_plans":
+                elif (keys.split('.'))[0] == "behavior_support_plan":
                     updated_behavior_support_plans[keys.split('.')[1]] = values
                 elif (keys.split('.'))[0] == "restrictive":
                     restrictive_id = keys.split('.')[2]
@@ -620,7 +626,7 @@ def edit(request, page, profile_id):
 
             requests.post(backendPOST + profile_id + '/medical_treatment_plan', data=updated_medical_treatment_plan)
             requests.post(backendPOST + profile_id + '/behavior', data=updated_behavior)
-            requests.post(backendPOST + profile_id + '/behavior_support_plans', data=updated_behavior_support_plans)
+            requests.post(backendPOST + profile_id + '/behavior_support_plan', data=updated_behavior_support_plans)
             requests.post(backendPOST + profile_id + '/rogers_monitor', data=updated_rogers_monitor)
 
             for i in updated_restrictive:

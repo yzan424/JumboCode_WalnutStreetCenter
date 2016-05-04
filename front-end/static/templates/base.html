@@ -15,7 +15,9 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		{% load staticfiles %}
 		<link rel ="stylesheet" type = "text/css" href="{% static "css/header.css" %}">  
-
+		<title> {% block title %}
+			{% endblock %}
+		</title>
 	</head> 
 	<body>
 		<!-- Header that is present on every page -->
@@ -34,10 +36,12 @@
 						<i class="fa fa-print"></i>  ID</button>
 				</div>
 	  			<div class="col-md-4 patient_name"> 
-	  				<p> Jordan Kilian </p>
+	  				<p> {% block patient_name %}
+	  					{% endblock %}
+	  				 </p>
 	  			</div>
 	  			<div class="col-md-4"> 
-	  				<button type="button" class="btn btn-default ">
+	  				<button type="button" class="btn btn-default " onclick="location.href='/new'">
 	  					<i class="fa fa-plus-circle"></i>  new</button>
 					<button type="button" class="btn btn-default ">
 						<i class="fa fa-archive"></i>  archive</button>
@@ -51,19 +55,28 @@
 			</div>
 		</form>
 
-	</div>
+		</div>
 		<div id = "secondrow">
 			<div class="col-md-3 text-center">
-				<p> <strong> Program </strong> 53 Winthrop Street </p>
+				<p> <strong> Program </strong> 
+					{% block program %}
+					{% endblock %}
+				</p>
 			</div>
 			<div class="col-md-3 text-center"> 
-				<p> <strong> Birthdate </strong> August 24 1973 </p>
+				<p> <strong> Birthdate </strong> 
+					{% block birthday %}
+						{{basic_info.birthday}}
+					{% endblock %} </p>
 			</div>
 			<div class="col-md-3 text-center"> 
-				<p> <strong> Age </strong> 47 Years </p>
+				<p> <strong> Age </strong> {% block age %}  
+					{{basic_info.}}
+				{% endblock %} </p>
 			</div>
 			<div class="col-md-3 text-center"> 
-				<p> <strong> SSN </strong> 523-54-4323 </p>
+				<p> <strong> SSN </strong> {% block SSN %} 	{{basic_info.social_security}}
+					{% endblock %} </p>
 			</div>
 		</div>
 		

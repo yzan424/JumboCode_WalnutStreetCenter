@@ -11,7 +11,7 @@ from . import app
 manager = restless.APIManager(app, flask_sqlalchemy_db=models.db)
 default_methods = ('GET', 'PUT', 'POST', 'DELETE')
 json_endpoint_models = [
-    models.Patient, models.BasicInfo, models.LegalFamilyInfo, models.MedicalInfo, models.IdentifyingInfo, models.SelfPreservation,
+    models.Patient, models.BasicInfo, models.LegalFamilyInfo, models.MedicalInfo, models.IdentifyingInfo, models.SelfPreservation, models.Protocol
 ]
 
 
