@@ -10,6 +10,7 @@ import json, requests
 backendGET = 'http://127.0.0.1:5000/api/patient/'
 backendPOST = 'http://127.0.0.1:5000/api/patient/'
 backendPUT = 'http://localhost:8000/backend/profile/'
+spPOST = 'http://127.0.0.1:5000/api/self_preservation'
 
 # Create your views here.
 def backend(request, profile_id, data):
@@ -364,7 +365,7 @@ def protocol(request, profile_id, edit):
     tracking = tracking.json()
     tracking = tracking['objects']
 
-    if edit == False:
+    if edit== False:
         return render(request, "protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking, 'profile_id': profile_id})
     else:
         return render(request, "update_protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking, 'profile_id': profile_id})        
@@ -428,11 +429,13 @@ def edit(request, page, profile_id):
                 elif (keys.split('.'))[0] == "legal_guardian":
                     updated_legal_guardian[keys.split('.')[1]] = values
                 elif (keys.split('.'))[0] == "self_preservation":
+                    print(keys)
+                    print(values)
                     self_preservation_id = keys.split('.')[2]
                     dictKey = keys.split('.')[3]
                     if (keys.split('.')[1] == "existing"):
-                        # these are just edits to existing things
-                        # create a new dictionary if it does not exist
+                         #these are just edits to existing things
+                         #create a new dictionary if it does not exist
                         if not any(x['self_preservation_id'] == self_preservation_id for x in updated_self_preservation):
                             updated_self_preservation.append({'self_preservation_id': self_preservation_id})
 
@@ -442,6 +445,7 @@ def edit(request, page, profile_id):
                     else:
                         # new entries to self_preservation
                         # check if theres even anything in them
+                        print("hi new shit")
                         if values != '':
                             # these are just edits to existing things
                             if not any(x['self_preservation_id'] == self_preservation_id for x in new_self_preservation):
@@ -451,15 +455,14 @@ def edit(request, page, profile_id):
                                 if i['self_preservation_id'] == self_preservation_id:
                                     i[dictKey] = values
 
+                                    
             header = {'Content-Type': 'application/json'}
             updated_basic_info = json.dumps({"basic_info" : updated_basic_info})
             updated_identifying = json.dumps({"identifying_info" : updated_identifying})
             updated_medical_info = json.dumps({"medical_info" : updated_medical_info})
-            updated_legal_guardian = json.dumps({"legal_family_info" : updated_legal_guardian})
-            updated_self_preservation = json.dumps({"self_preservation" : updated_self_preservation + new_self_preservation})
-
-            print(updated_self_preservation)
-                        
+            #updated_legal_guardian = json.dumps({"legal_family_info" : updated_legal_guardian})
+            #updated_self_preservation = json.dumps({"self_preservation" : updated_self_preservation})
+            
             # send all the new stuff
             requests.put(backendPOST + profile_id, data=updated_identifying, headers=header)
             requests.put(backendPOST + profile_id, data=updated_medical_info, headers=header)
@@ -467,14 +470,15 @@ def edit(request, page, profile_id):
             requests.put(backendPOST + profile_id, data=updated_legal_guardian, headers=header)
             #requests.put(backendPOST + profile_id, data=updated_self_preservation, headers=header)
 
-            #print(new_self_preservation)
+            print(new_self_preservation)
             
             #for i in updated_self_preservation:
                 #requests.put(backendPOST + profile_id + '/self_preservation', data=i)           
-            #for i in new_self_preservation:
-                #i.pop('self_preservation_id', None)
-                #print(i)
-                #requests.put(backendPOST + "/self_preservation", data=i) 
+            for i in new_self_preservation:
+                del i['self_preservation_id']
+                i['patient_id'] = profile_id
+                i = json.dumps(i)
+                requests.post(spPOST, data=i, headers=header)
 
             return HttpResponseRedirect("/profile/" + profile_id)
     elif page == "protocol":
@@ -808,5 +812,4 @@ def login(request):
             return render(request, 'signin.html', context={})
             # Return an 'invalid login' error message.
             ...
-
 
