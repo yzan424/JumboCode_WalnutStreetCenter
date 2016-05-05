@@ -22,7 +22,7 @@
 	<body>
 		<!-- Header that is present on every page -->
 		<div id = "firstrow">
-		<form class="form-inline">
+		<div class="form-inline">
 			<div class="row">
 	  			<div class="col-md-4">
 	  				<button type="button" class="btn btn-default icon-save">
@@ -47,13 +47,17 @@
 						<i class="fa fa-archive"></i>  archive</button>
 						<div class="form-group">
 					    <!--<label for="exampleInputSearch">Search</label>-->
-					    <input type="search" class="form-control" id="exampleInputSearch" placeholder="Name or program">
+					    <form action="/search/" method="post">
+					    {% csrf_token %}
+					    <input type="search" class="form-control" name="query" id="exampleInputSearch" placeholder="Name or program">
+					    </form>
 						</div>
 			  		<button type="submit" class="btn btn-default">
-			  		<i class="fa fa-search"></i></button>
+			  			<i class="fa fa-search"></i>
+			  		</button>
 	  			</div>
 			</div>
-		</form>
+		</div>
 
 		</div>
 		<div id = "secondrow">
