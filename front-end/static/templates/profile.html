@@ -1,4 +1,23 @@
 {% extends "base.html" %}
+{% block profile_links %}
+  <div id = "thirdrow">
+      <div class="col-md-3 text-center darkgrayed">
+        <p> <a href="/profile/{{profile_id}}">Demographic</a> </p>
+      </div>
+      <div class="col-md-2 text-center darkgrayed">
+        <p> <a href="/support/{{profile_id}}">Support</a> </p>
+      </div>
+      <div class="col-md-3 text-center darkgrayed">
+        <p> Appointments </p>
+      </div>
+      <div class="col-md-2 text-center darkgrayed">
+        <p> <a href="/protocol/{{profile_id}}">Protocols</a> </p>
+      </div>
+      <div class="col-md-2 text-center darkgrayed">
+        <p> <a href="/behavior/{{profile_id}}">Behavior</a> </p>
+      </div>
+    </div>
+{% endblock %}
 {% block title %}
     "Profile"
 {% endblock %}
@@ -30,10 +49,7 @@
                   <!--- Figure out better way to do the updated date -->
                 </div>
                 <div class="panel-body">
-                  <p><input type="checkbox" checked>{{medical_info.diagnoses}} UNRESOLVED</p>
-                  <p><input type="checkbox" {% if medical_info.alzheimers_dementia == True %}checked {% endif %}>Alzheimers</p>
-                  <p><input type="checkbox" {% if medical_info.vision_problem == True %}checked {% endif %}>Vision Problem</p>
-                  <p><input type="checkbox" {% if medical_info.down_syndrome == True %}checked {% endif %}>Down Syndrome</p>
+                  <p>{{medical_info.diagnoses}}</p>
                 </div>
               </div>
             </div>
@@ -44,7 +60,7 @@
                   <!--- Figure out better way to do the updated date -->
                 </div>
                 <div class="panel-body">
-                  <p>{{medical_info.allergies}} UNRESOLVED</p>
+                  <p>{{medical_info.allergies}}</p>
                   <!---Possibly add NKA and NKDA as checkboxes -->
                 </div>
               </div>
@@ -66,7 +82,7 @@
                     </tr>
                     <tr>
                       <td>last updated</td>
-                      <th>UNRESOLVED</th>
+                      <th>(Updated Date)</th>
                     </tr>
                     <tr>
                       <td>Build</td>
@@ -123,7 +139,7 @@
                     </tr>
                     <tr>
                       <td>ID #</td>
-                      <th>UNRESOLVED</th>
+                      <th>{{basic_info.state_id}}</th>
                     </tr>
                     <tr>
                       <td>Nickname</td>
@@ -145,7 +161,7 @@
                   <p class="box-label">Behavior Characteristics</p>
                   <p>{{identifying.behavior}}</p>
                   <p class="box-label">Distinguishing Marks</p>
-                  <p>UNRESOLVED</p>
+                  <p>{{basic_info.distinguishing_marks}}</p>
                 </div>
               </div>
               <div class="panel panel-default">
@@ -199,8 +215,8 @@
                         <p>{{basic_info.training_program_or_school_phone}}<br></p>
                         <p class="box-label">Work</p>
                         <p>{{basic_info.work_phone}}<br></p>
-                        <p class="box-label">Prior Address</p>
-                        <p>UNRESOLVED<br></p>
+                        <p class="box-label">Prior Phone Number</p>
+                        <p>{{basic_info.phone_on_entry}}<br></p>
                       </div>
                     </div>
                   </div>
@@ -208,7 +224,7 @@
               </div>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Self Sufficency<button onclick="location.href='/edit/profile/{{profile_id}}'" type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                  <h3 class="panel-title">Self Sufficiency<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
                 </div>
                 <div class="panel-body">
                   <div class= "col-xs-6">
@@ -305,7 +321,6 @@
                       <th> Result </th>
                       <th> Assessment </th>
                       <th> Cause of Failure </th>
-                      <th> Determination Basis UNRESOLVED</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -316,7 +331,6 @@
                       <td>UNRESOLVED</td>
                       <td>{{item.assessment}}</td>
                       <td>{{item.cause_of_failure}}</td>
-                      <td>{{item.determination_basis}}</td>
                     </tr>
                     {% endfor %}
                   </tbody>

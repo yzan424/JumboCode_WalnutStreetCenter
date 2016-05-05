@@ -1,51 +1,166 @@
-
-<!doctype html>
-
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-
-  <title>Support</title>
-  <meta name="description" content="">
-</head>
-
-<body>
-    <div id="legal_guardian">
-        <h1>Legal Guardian</h1>
-        {% for key, value in legal_guardian.items %}
-        <div id="{{key}}">
-            <p><b>{{key}}</b>: {{value}} </p>
+{% extends "base.html" %}
+{% block profile_links %}
+  <div id = "thirdrow">
+      <div class="col-md-3 text-center darkgrayed">
+        <p> <a href="/profile/{{profile_id}}">Demographic</a> </p>
+      </div>
+      <div class="col-md-2 text-center darkgrayed">
+        <p> <a href="/support/{{profile_id}}">Support</a> </p>
+      </div>
+      <div class="col-md-3 text-center darkgrayed">
+        <p> Appointments </p>
+      </div>
+      <div class="col-md-2 text-center darkgrayed">
+        <p> <a href="/protocol/{{profile_id}}">Protocols</a> </p>
+      </div>
+      <div class="col-md-2 text-center darkgrayed">
+        <p> <a href="/behavior/{{profile_id}}">Behavior</a> </p>
+      </div>
+    </div>
+{% endblock %}
+{% block title %}
+    Support
+{% endblock %}
+{% block patient_name %}
+    {{basic_info.name_first}} 
+    {{basic_info.name_last}}
+{% endblock %}
+{% block program %}
+  {{basic_info.training_program_or_school_address}}
+{% endblock %}
+{% block birthday %}
+  {{basic_info.birthday}}
+{% endblock %}
+{% block age %}  
+  {{basic_info.}}
+{% endblock %}
+{% block SSN %} 
+  {{basic_info.social_security}}
+{% endblock %}
+  {% block content %}
+     <div class="container theme-showcase" role="main">
+      
+        <div class="col-xs-10 col-xs-offset-1">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Family/Guardian/Conservator <button type="button" onclick="location.href='/edit/support/{{profile_id}}'" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+            </div>
+            <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Primary</th>
+                      <th>Name</th>
+                      <th>Relation</th>
+                      <th>Address</th>
+                      <th>Phone</th>
+                      <th>Date Added</th>
+                      <th>Date Removed</th>
+                      <th>Removal Reason</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>UNRESOLVED<!-- input type="checkbox" value="" disabled style="margin-left: 30px;"> --></td>
+                      <td>{{legal_family_info.mother_maiden_name}}</td>
+                      <td>Mother</td>
+                      <td>UNRESOLVED</td>
+                      <td>UNRESOLVED</td>
+                      <td>UNRESOLVED</td>
+                      <td>UNRESOLVED</td>
+                      <td>UNRESOLVED</td>
+                    </tr>
+                    <tr>
+                      <td>UNRESOLVED<!-- input type="checkbox" value="" disabled style="margin-left: 30px;"> --></td>
+                      <td>{{legal_family_info.father_name}}</td>
+                      <td>Father</td>
+                      <td>UNRESOLVED</td>
+                      <td>UNRESOLVED</td>
+                      <td>UNRESOLVED</td>
+                      <td>UNRESOLVED</td>
+                      <td>UNRESOLVED</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
-        {% endfor %}
-    </div>
+      </div>
 
-    <div id="insurance">
-        <h1>Insurance Information</h1>
-
- 		<p><b>{% for key, value in insurance.0.items %}
-	       	{{key}}
-	 	{% endfor %}</b></p>
-	 	
-        {% for item in insurance %}
-	        <p>|| {% for key, value in item.items %}
-	            {{value}} || 
-	        {% endfor %}
-	    {% endfor %}</p>
-    </div>
-
-    <div id="legal_status">
-        <h1>Legal Status</h1>
-	 		<p><b>
-	 			{% for key, value in legal_status.0.items %}
-		       		{{key}}
-		 		{% endfor %}
-	 		</b></p>
-	        {% for item in legal_status %}
-		        <p>|| {% for key, value in item.items %}
-		            {{value}} || 
-		        {% endfor %}
-		    {% endfor %}</p>
-    </div>
-
-</body>
-</html>
+      <div class="col-xs-10 col-xs-offset-1">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Insurance, Financial Support, Entitlements<button type="button" onclick="location.href='/edit/support/{{profile_id}}'" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Source</th>
+                      <th>Type</th>
+                      <th>Identification Number</th>
+                      <th>Benefits</th>
+                      <th>Expiration Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in self_preservation.items %}
+                    <tr>
+                      <td>{{item.source}}</td>
+                      <td>{{item.type_of}}</td>
+                      <td>{{item.id_number}}</td>
+                      <td>{{item.benefits}}</td>
+                      <td>{{item.expiration_date}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        
+      <div class="col-xs-10 col-xs-offset-1">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Legal Status <button type="button" onclick="location.href='/edit/support/{{profile_id}}'" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+          </div>
+          <div class="panel-body">
+            <p class = "box-label"> Legal Competency </p>
+            <p> One-line description </p>
+            <div class="row">
+              <div class="col-xs-12">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Status</th>
+                      <th>Type</th>
+                      <th>Date of Adjudication</th>
+                      <th>Requested By</th>
+                      <th>Date of Request</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in legal_competency.items %}
+                    <tr>
+                      <td>{{item.status}}</td>
+                      <td>{{item.type_of}}</td>
+                      <td>{{item.adjudication_date}}</td>
+                      <td>{{item.requested_by}}</td>
+                      <td>{{item.date_requested}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}
