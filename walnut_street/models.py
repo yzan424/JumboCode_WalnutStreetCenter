@@ -80,12 +80,12 @@ class Patient(db.Model):
         primaryjoin='Patient.legal_competency_id==LegalCompetency.id',
         backref='patient'
     )
-    self_preservation_id = db.Column(db.Integer, db.ForeignKey('self_preservation.id'))
-    self_preservation = db.relationship(
-        'SelfPreservation',
-        primaryjoin='Patient.self_preservation_id==SelfPreservation.id',
-        backref='patient'
-    )
+    #self_preservation_id = db.Column(db.Integer, db.ForeignKey('self_preservation.id'))
+    #self_preservation = db.relationship(
+        #'SelfPreservation',
+        #primaryjoin='Patient.self_preservation_id==SelfPreservation.id',
+        #backref='patient'
+    #)
     behavior_id = db.Column(db.Integer, db.ForeignKey('behavior.id'))
     behavior = db.relationship(
         'Behavior',
@@ -161,7 +161,7 @@ class LegalFamilyInfo(db.Model):
     mother_birthday = db.Column(db.Date)
     mother_birthplace = db.Column(db.String)
     mother_alive = db.Column(db.Boolean)
-    parents_martial_status = db.Column(db.String)
+    parents_marital_status = db.Column(db.String)
     family_phone = db.Column(db.String(10))
     family_address = db.Column(db.String)
 
@@ -266,11 +266,16 @@ class SelfPreservation(db.Model):
 
     __tablename__ = 'self_preservation'
     id = db.Column(db.Integer, primary_key=True)
-    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
     assessment = db.Column(db.String)
     cause_of_failure = db.Column(db.String)
     determination_basis = db.Column(db.String)
     date_occurred = db.Column(db.Date)
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    patient = db.relationship(
+        'Patient',
+        primaryjoin='SelfPreservation.patient_id==Patient.id',
+        backref='self_preservation'
+    )
 
 
 class LegalCompetency(db.Model):
