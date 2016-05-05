@@ -418,6 +418,10 @@ def edit(request, page, profile_id):
             updated_identifying = {}
             updated_legal_guardian = {}
 
+            for keys, values in request.POST.items():
+                print (keys)
+                print (values)
+
 
             for keys, values in request.POST.items():
                 if (keys.split('.'))[0] == "basic_info":
@@ -460,8 +464,10 @@ def edit(request, page, profile_id):
             updated_basic_info = json.dumps({"basic_info" : updated_basic_info})
             updated_identifying = json.dumps({"identifying_info" : updated_identifying})
             updated_medical_info = json.dumps({"medical_info" : updated_medical_info})
-            #updated_legal_guardian = json.dumps({"legal_family_info" : updated_legal_guardian})
+            updated_legal_guardian = json.dumps({"legal_family_info" : updated_legal_guardian})
             #updated_self_preservation = json.dumps({"self_preservation" : updated_self_preservation})
+
+            print(updated_basic_info)
             
             # send all the new stuff
             requests.put(backendPOST + profile_id, data=updated_identifying, headers=header)
