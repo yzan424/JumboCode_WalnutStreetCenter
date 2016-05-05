@@ -27,5 +27,7 @@ urlpatterns = [
     url(r'^edit/(?P<page>\w+)/(?P<profile_id>\d+)/$', edit),
     url(r'^new/$', new),
     url(r'^signin/$', login),
-
+    url(r'^logout/$', logout_page),
+    url(r'^search/$', search),
+    url(r'^$', index),
 ]
