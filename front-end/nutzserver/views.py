@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from nutzserver.models import *
 from django.template import *
 import json, requests
 
 
-backendGET = 'http://127.0.0.1:5000/api/patient/'
+backendGET = 'http://localhost:8000/backend/profile/'
 backendPOST = 'http://127.0.0.1:5000/api/patient/'
 backendPUT = 'http://localhost:8000/backend/profile/'
 spPOST = 'http://127.0.0.1:5000/api/self_preservation'
@@ -799,8 +799,6 @@ def login(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
-                login(request, user)
-            # Redirect to a success page.
                 return HttpResponseRedirect('/')
             else:
                 print("Disabled Account")
@@ -1020,3 +1018,10 @@ def search(request):
                 return HttpResponseRedirect('/profile/' + str(people['id']))
 
     return HttpResponseNotFound('<h1>Page not found</h1>')
+
+def index(request):
+    return render(request, "home.html")
+
+def logout_page(request):
+    logout(request)
+    return HttpResponseRedirect("/")
