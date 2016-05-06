@@ -867,7 +867,7 @@ def search(request):
             if request.POST['query'] == name_temp:
                 return HttpResponseRedirect('/profile/' + str(people['id']))
 
-    return render("home-notFound.html", request)
+    return render(request, "home-notFound.html")
 
 def index(request):
     return render(request, "home.html")
