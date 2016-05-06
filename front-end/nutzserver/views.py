@@ -648,10 +648,10 @@ def edit(request, page, profile_id):
             updated_rogers_monitor = json.dumps({"updated_rogers_monitor" : updated_rogers_monitor})
 
 
-            requests.post(backendPOST + profile_id + '/medical_treatment_plan', data=updated_medical_treatment_plan, headers=header)
-            requests.post(backendPOST + profile_id + '/behavior', data=updated_behavior, headers=header)
-            requests.post(backendPOST + profile_id + '/behavior_support_plan', data=updated_behavior_support_plans, headers=header)
-            requests.post(backendPOST + profile_id + '/rogers_monitor', data=updated_rogers_monitor, headers=header)
+            requests.put(backendPOST + profile_id, data=updated_medical_treatment_plan, headers=header)
+            requests.put(backendPOST + profile_id, data=updated_behavior, headers=header)
+            requests.put(backendPOST + profile_id, data=updated_behavior_support_plans, headers=header)
+            requests.put(backendPOST + profile_id, data=updated_rogers_monitor, headers=header)
 
             for i in updated_restrictive:
                 requests.post(backendPOST + profile_id + '/restrictive', data=i)
@@ -719,9 +719,14 @@ def edit(request, page, profile_id):
             print("updated_legal_guardian:", updated_legal_guardian)
             print("updated_legal_status:", updated_legal_status)
 
-            requests.post(backendPOST + profile_id + '/insurance', data=updated_insurance)
-            requests.post(backendPOST + profile_id + '/legal_guardian', data=updated_legal_guardian)
-            requests.post(backendPOST + profile_id + '/legal_status', data=updated_legal_status)
+            header = {'Content-Type': 'application/json'}
+            updated_insurance = json.dumps({"updated_insurance" : updated_insurance})
+            updated_legal_guardian = json.dumps({"updated_legal_guardian" : updated_legal_guardian})
+            updated_legal_status = json.dumps({"updated_legal_status" : updated_legal_status})
+            
+            requests.post(backendPOST + profile_id, data=updated_insurance, headers=header)
+            requests.post(backendPOST + profile_id, data=updated_legal_guardian, headers=header)
+            requests.post(backendPOST + profile_id, data=updated_legal_status, headers=header)
 
             for i in updated_insurance:
                 requests.post(backendPOST + profile_id + '/insurance', data=i)
@@ -828,9 +833,8 @@ def login(request):
 
 def search(request):
     if request.method == 'POST':
-        all_results = requests.get('http://localhost:5000/api/patient')
-
-        all_results = json.loads(all_results)
+        all_results = requests.get('http://127.0.0.1:5000/api/patient')
+        all_results = all_results.json()
 
         for people in all_results['objects']:
             name_temp = people['name_first'] + ' ' + people['name_last']

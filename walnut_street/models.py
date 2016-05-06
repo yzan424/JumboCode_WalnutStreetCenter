@@ -75,7 +75,7 @@ class Patient(db.Model):
         backref='patient'
     )
     legal_competency_id = db.Column(db.Integer, db.ForeignKey('legal_competency.id'))
-    identifying_info = db.relationship(
+    legal_competency = db.relationship(
         'LegalCompetency',
         primaryjoin='Patient.legal_competency_id==LegalCompetency.id',
         backref='patient'
