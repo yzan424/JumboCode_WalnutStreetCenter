@@ -7,9 +7,9 @@ from django.template import *
 import json, requests
 
 
-backendGET = 'http://127.0.0.1:5000/api/patient/'
+backendGET = 'http://localhost:8000/backend/profile/'
 backendPOST = 'http://127.0.0.1:5000/api/patient/'
-backendPUT = 'http://127.0.0.1:5000/api/patient/'
+backendPUT = 'http://localhost:8000/backend/profile/'
 spPOST = 'http://127.0.0.1:5000/api/self_preservation'
 
 # Create your views here.
@@ -410,8 +410,6 @@ def edit(request, page, profile_id):
         if request.method == 'GET':
             return profile(request, profile_id, True)
         else:
-            print("hi!!! we are here!!")
-            print(profile_id)
             # send the new stuffs to the backend
             updated_medical_info = {}
             updated_basic_info = {}
@@ -423,6 +421,7 @@ def edit(request, page, profile_id):
             for keys, values in request.POST.items():
                 print (keys)
                 print (values)
+
 
             for keys, values in request.POST.items():
                 if (keys.split('.'))[0] == "basic_info":
@@ -450,6 +449,7 @@ def edit(request, page, profile_id):
                     else:
                         # new entries to self_preservation
                         # check if theres even anything in them
+                        print("hi new shit")
                         if values != '':
                             # these are just edits to existing things
                             if not any(x['self_preservation_id'] == self_preservation_id for x in new_self_preservation):
@@ -791,7 +791,6 @@ def new(request):
             print(i)
             requests.put(backendPUT + "/self_preservation/", data=i) 
 
-        print("culprit")    
         profile_id = "1"
 
         return HttpResponseRedirect("/profile/" + profile_id)
