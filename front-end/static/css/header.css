@@ -1,7 +1,7 @@
 #firstrow {
 	padding-top: 15px;
+	padding-bottom: 10px;
 	padding-left: 3%;
-	padding-right: 3%;
 	background-color: #f2f2f2;
 }
 
@@ -16,12 +16,23 @@
 	color: white;
 	font-size: 16px;
 }
+
+#fourthrow {
+  padding-top: 70px;
+  padding-left: 30px;
+}
+
 .patient_name {
 	text-align: center;
 	font-size: 25px;
 	font-weight: bold;
 	color: #33cccc;
 }
+
+.logout {
+	text-align: center;
+}
+
 .grayed {
 	background-color: #f2f2f2;
 }
@@ -29,17 +40,15 @@
 .darkgrayed {
 	background-color: #A9A9A9;
 	padding-top: 10px;
+	margin-bottom: 15px;
 }
 
-body {
+.signin {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #eee;
 }
 
-.signin {
-	font-size: 18px;
-}
 .form-signin {
   max-width: 330px;
   padding: 15px;
