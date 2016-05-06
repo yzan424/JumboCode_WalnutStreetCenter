@@ -1,2 +1,4 @@
 Django
 requests
+PyPDF2
+reportlab
