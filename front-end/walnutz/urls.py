@@ -29,5 +29,6 @@ urlpatterns = [
     url(r'^signin/$', login),
     url(r'^logout/$', logout_page),
     url(r'^search/$', search),
+    url(r'^efs/(?P<profile_id>\d+)/$', efs_gen),
     url(r'^$', index),
 ]
