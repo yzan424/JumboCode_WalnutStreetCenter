@@ -465,7 +465,7 @@ def edit(request, page, profile_id):
             updated_identifying = json.dumps({"identifying_info" : updated_identifying})
             updated_medical_info = json.dumps({"medical_info" : updated_medical_info})
             updated_legal_guardian = json.dumps({"legal_family_info" : updated_legal_guardian})
-            #updated_self_preservation = json.dumps({"self_preservation" : updated_self_preservation})
+            updated_self_preservation = json.dumps({"self_preservation" : updated_self_preservation})
 
             print(updated_basic_info)
             
