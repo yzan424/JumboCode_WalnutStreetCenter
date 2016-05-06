@@ -75,7 +75,7 @@ class Patient(db.Model):
         backref='patient'
     )
     legal_competency_id = db.Column(db.Integer, db.ForeignKey('legal_competency.id'))
-    identifying_info = db.relationship(
+    legal_competency = db.relationship(
         'LegalCompetency',
         primaryjoin='Patient.legal_competency_id==LegalCompetency.id',
         backref='patient'
@@ -104,6 +104,18 @@ class Patient(db.Model):
         primaryjoin='Patient.identifying_info_id==IdentifyingInfo.id',
         backref='patient'
     )
+    behavior_support_plan_id = db.Column(db.Integer, db.ForeignKey('behavior_support_plan.id'))
+    behavior_support_plan = db.relationship(
+        'BehaviorSupportPlan',
+        primaryjoin='Patient.behavior_support_plan_id==BehaviorSupportPlan.id',
+        backref='patient'
+    )
+    rogers_monitor_id = db.Column(db.Integer, db.ForeignKey('rogers_monitor.id'))
+    rogers_monitor = db.relationship(
+        'RogersMonitor',
+        primaryjoin='Patient.rogers_monitor_id==RogersMonitor.id',
+        backref='patient'
+    )    
 
 
 class BasicInfo(db.Model):

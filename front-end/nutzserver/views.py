@@ -12,9 +12,9 @@ from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 
-backendGET = 'http://localhost:8000/backend/profile/'
+backendGET = 'http://127.0.0.1:5000/api/patient/'
 backendPOST = 'http://127.0.0.1:5000/api/patient/'
-backendPUT = 'http://localhost:8000/backend/profile/'
+backendPUT = 'http://127.0.0.1:5000/api/patient/'
 spPOST = 'http://127.0.0.1:5000/api/self_preservation'
 
 # Create your views here.
@@ -401,8 +401,9 @@ def behavior(request, profile_id, edit):
     behavior = behavior.json()
     behavior_support_plans = behavior_support_plans.json()
     restrictive = restrictive.json()
+
     # restrictive = restrictive['objects']
-    rogers_monitor = rogers_monitor.json()
+    #rogers_monitor = rogers_monitor.json()
         
     if edit == False:
         return render(request, "behavior.html", context={'first_name': firstname, 'last_name': lastname, 'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})
@@ -658,16 +659,25 @@ def edit(request, page, profile_id):
                                     i[dictKey] = values
                 elif (keys.split('.'))[0] == "rogers_monitor":
                     updated_rogers_monitor[keys.split('.')[1]] = values
+
             print("updated_medical_treatment_plan:", updated_medical_treatment_plan)
             print("updated_behavior:", updated_behavior)
             print("updated_behavior_support_plans:", updated_behavior_support_plans)
             print("updated_restrictive:", updated_restrictive)
             print("updated_rogers_monitor", updated_rogers_monitor)
 
-            requests.post(backendPOST + profile_id + '/medical_treatment_plan', data=updated_medical_treatment_plan)
-            requests.post(backendPOST + profile_id + '/behavior', data=updated_behavior)
-            requests.post(backendPOST + profile_id + '/behavior_support_plan', data=updated_behavior_support_plans)
-            requests.post(backendPOST + profile_id + '/rogers_monitor', data=updated_rogers_monitor)
+            header = {'Content-Type': 'application/json'}
+            updated_medical_treatment_plan = json.dumps({"updated_medical_treatment_plan" : updated_medical_treatment_plan})
+            updated_behavior = json.dumps({"updated_behavior" : updated_behavior})
+            updated_behavior_support_plans = json.dumps({"updated_behavior_support_plans" : updated_behavior_support_plans})
+            updated_restrictive = json.dumps({"updated_restrictive" : updated_restrictive})
+            updated_rogers_monitor = json.dumps({"updated_rogers_monitor" : updated_rogers_monitor})
+
+
+            requests.put(backendPOST + profile_id, data=updated_medical_treatment_plan, headers=header)
+            requests.put(backendPOST + profile_id, data=updated_behavior, headers=header)
+            requests.put(backendPOST + profile_id, data=updated_behavior_support_plans, headers=header)
+            requests.put(backendPOST + profile_id, data=updated_rogers_monitor, headers=header)
 
             for i in updated_restrictive:
                 requests.post(backendPOST + profile_id + '/restrictive', data=i)
@@ -735,9 +745,14 @@ def edit(request, page, profile_id):
             print("updated_legal_guardian:", updated_legal_guardian)
             print("updated_legal_status:", updated_legal_status)
 
-            requests.post(backendPOST + profile_id + '/insurance', data=updated_insurance)
-            requests.post(backendPOST + profile_id + '/legal_guardian', data=updated_legal_guardian)
-            requests.post(backendPOST + profile_id + '/legal_status', data=updated_legal_status)
+            header = {'Content-Type': 'application/json'}
+            updated_insurance = json.dumps({"updated_insurance" : updated_insurance})
+            updated_legal_guardian = json.dumps({"updated_legal_guardian" : updated_legal_guardian})
+            updated_legal_status = json.dumps({"updated_legal_status" : updated_legal_status})
+            
+            requests.post(backendPOST + profile_id, data=updated_insurance, headers=header)
+            requests.post(backendPOST + profile_id, data=updated_legal_guardian, headers=header)
+            requests.post(backendPOST + profile_id, data=updated_legal_status, headers=header)
 
             for i in updated_insurance:
                 requests.post(backendPOST + profile_id + '/insurance', data=i)
@@ -844,9 +859,8 @@ def login(request):
 
 def search(request):
     if request.method == 'POST':
-        all_results = requests.get('http://localhost:5000/api/patient')
-
-        all_results = json.loads(all_results)
+        all_results = requests.get('http://127.0.0.1:5000/api/patient')
+        all_results = all_results.json()
 
         for people in all_results['objects']:
             name_temp = people['name_first'] + ' ' + people['name_last']
