@@ -6,6 +6,11 @@ from nutzserver.models import *
 from django.template import *
 import json, requests
 
+from PyPDF2 import PdfFileWriter, PdfFileReader
+from io import StringIO
+from io import BytesIO 
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
 
 backendGET = 'http://127.0.0.1:5000/api/patient/'
 backendPOST = 'http://127.0.0.1:5000/api/patient/'
@@ -340,6 +345,11 @@ def profile(request, profile_id, edit):
     identifying = requests.get(backendGET + profile_id + '/identifying_info') 
     legal_guardian = requests.get(backendGET + profile_id + '/legal_family_info') 
 
+    full_result = requests.get(backendGET + profile_id)
+    full_result = full_result.json()
+    firstname = full_result['name_first']
+    lastname = full_result['name_last']
+
     medical_info = medical_info.json()
     basic_info = basic_info.json()
     self_preservation = self_preservation.json()
@@ -347,7 +357,7 @@ def profile(request, profile_id, edit):
     legal_guardian = legal_guardian.json()
         
     if edit == False:
-        return render(request, "profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian, 'profile_id': profile_id})
+        return render(request, "profile.html", context={'first_name': firstname, 'last_name': lastname, 'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian, 'profile_id': profile_id})
     else:
         return render(request, "update_profile.html", context={'medical_info': medical_info, 'basic_info': basic_info, 'self_preservation': self_preservation, 'identifying': identifying, "legal_guardian": legal_guardian, 'profile_id': profile_id})        
 
@@ -356,6 +366,11 @@ def protocol(request, profile_id, edit):
     isp = requests.get(backendGET + profile_id + '/isp')
     supportive = requests.get(backendGET + profile_id + '/supportive')
     tracking = requests.get(backendGET + profile_id + '/tracking')  
+
+    full_result = requests.get(backendGET + profile_id)
+    full_result = full_result.json()
+    firstname = full_result['name_first']
+    lastname = full_result['name_last']
 
     protocols = protocols.json()
     # protocols = protocols['objects']
@@ -366,7 +381,7 @@ def protocol(request, profile_id, edit):
     # tracking = tracking['objects']
 
     if edit== False:
-        return render(request, "protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking, 'profile_id': profile_id})
+        return render(request, "protocol.html", context={'first_name': firstname, 'last_name': lastname, 'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking, 'profile_id': profile_id})
     else:
         return render(request, "update_protocol.html", context={'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking, 'profile_id': profile_id})        
 
@@ -377,15 +392,21 @@ def behavior(request, profile_id, edit):
     restrictive = requests.get(backendGET + profile_id + '/restrictive')
     rogers_monitor = requests.get(backendGET + profile_id + '/rogers_monitor')
 
-    #medical_treatment_plan = medical_treatment_plan.json()
-    #behavior = behavior.json()
-    #behavior_support_plans = behavior_support_plans.json()
-    #restrictive = restrictive.json()
+    full_result = requests.get(backendGET + profile_id)
+    full_result = full_result.json()
+    firstname = full_result['name_first']
+    lastname = full_result['name_last']
+
+    medical_treatment_plan = medical_treatment_plan.json()
+    behavior = behavior.json()
+    behavior_support_plans = behavior_support_plans.json()
+    restrictive = restrictive.json()
+
     # restrictive = restrictive['objects']
     #rogers_monitor = rogers_monitor.json()
         
     if edit == False:
-        return render(request, "behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})
+        return render(request, "behavior.html", context={'first_name': firstname, 'last_name': lastname, 'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})
     else:
         return render(request, "update_behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})        
 
@@ -394,6 +415,11 @@ def support(request, profile_id, edit):
     insurance = requests.get(backendGET + profile_id + '/insurance')
     legal_status = requests.get(backendGET + profile_id + '/legal_competency')
 
+    full_result = requests.get(backendGET + profile_id)
+    full_result = full_result.json()
+    firstname = full_result['name_first']
+    lastname = full_result['name_last']
+
     legal_guardian = legal_guardian.json()
     insurance = insurance.json()
     # insurance = insurance['objects']
@@ -401,7 +427,7 @@ def support(request, profile_id, edit):
     # legal_status = legal_status['objects']
         
     if edit == False:
-        return render(request, "support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status, 'profile_id': profile_id})
+        return render(request, "support.html", context={'first_name': firstname, 'last_name': lastname, 'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status, 'profile_id': profile_id})
     else:
         return render(request, "update_support.html", context={'legal_guardian': legal_guardian, 'insurance': insurance, 'legal_status': legal_status, 'profile_id': profile_id})        
 
@@ -841,7 +867,7 @@ def search(request):
             if request.POST['query'] == name_temp:
                 return HttpResponseRedirect('/profile/' + str(people['id']))
 
-    return HttpResponseNotFound('<h1>Page not found</h1>')
+    return render("home-notFound.html", request)
 
 def index(request):
     return render(request, "home.html")
@@ -849,3 +875,231 @@ def index(request):
 def logout_page(request):
     logout(request)
     return HttpResponseRedirect("/")
+
+def efs_gen(request, profile_id):
+   output = PdfFileWriter()
+   input = PdfFileReader(open("static/original.pdf", "rb"))
+
+   #create response object
+   response = HttpResponse(content_type='application/pdf')
+   response['Content-Disposition'] = 'attachment; filename=EFS.pdf'
+
+   result = """ {
+      "basic_info": {
+        "accompanied_by": "gwen stefani", 
+        "address_current": "Frisco", 
+        "address_former": "None", 
+        "area_meaningful_tie": "kosh deli", 
+        "area_office": null, 
+        "birthday": "1995-05-12", 
+        "birthplace": "DTD basement", 
+        "blood_type": "a+", 
+        "build": "swole", 
+        "citizenship": "None", 
+        "competency_status": null, 
+        "day_service": null, 
+        "distinguishing_marks": null, 
+        "eligibility_date": null, 
+        "eyes": "brown like poo", 
+        "hair": "lush", 
+        "height": 5.7, 
+        "id": 29, 
+        "marital_status": "None", 
+        "name_preferred": "None", 
+        "phone": "None", 
+        "phone_on_entry": null, 
+        "primary_language": "English", 
+        "race": "pale", 
+        "record_location": null, 
+        "referral_source": null, 
+        "religion": "None", 
+        "sex": "yep", 
+        "social_security": "None", 
+        "state_id": null, 
+        "training_program_or_school_address": "None", 
+        "training_program_or_school_phone": "None", 
+        "weight": 5000.0, 
+        "work_address": "toofts", 
+        "work_phone": "None"
+      }, 
+      "basic_info_id": 29, 
+      "behavior": {
+        "assessment_date": null, 
+        "behaviors": "baddd", 
+        "id": 1, 
+        "summary": "killed a rabbit"
+      }, 
+      "behavior_id": 1, 
+      "contacts": [
+        {
+          "address": null, 
+          "date_added": null, 
+          "date_removed": null, 
+          "id": 1, 
+          "name": "A Malis", 
+          "patient_id": 1, 
+          "primary_contact": null, 
+          "relation": "paps", 
+          "removal_reason": null
+        }
+      ], 
+      "doctors": [], 
+      "id": 17, 
+      "identifying_info": {
+        "behavior": "None", 
+        "carries_ID": true, 
+        "id": 29, 
+        "last_update": null, 
+        "movement_pattern": "None", 
+        "places_frequented": "tenoch", 
+        "response_to_search": "run!!!", 
+        "self_protection": "not much", 
+        "surrounding_awareness": "yeah", 
+        "travel_method": "None"
+      }, 
+      "identifying_info_id": 29, 
+      "insurance": {
+        "benefits": "free drugs", 
+        "expiration_date": null, 
+        "expired": null, 
+        "id": 1, 
+        "id_number": "12345678", 
+        "patient_id": null, 
+        "source": "blue shield", 
+        "type_of": "good kind"
+      }, 
+      "insurance_id": 1, 
+      "isp": {
+        "comments": "great!", 
+        "id": 1, 
+        "last_isp_date": "2012-12-12"
+      }, 
+      "isp_id": 1, 
+      "legal_competency_id": null, 
+      "legal_family_info": {
+        "family_address": null, 
+        "family_phone": null, 
+        "father_alive": true, 
+        "father_birthday": "1956-01-04", 
+        "father_birthplace": "Spain", 
+        "father_name": "Alex", 
+        "guardian_address": "hillsidez", 
+        "guardian_name": "yukes", 
+        "guardian_phone": "3018061451", 
+        "id": 1, 
+        "mother_alive": null, 
+        "mother_birthday": null, 
+        "mother_birthplace": null, 
+        "mother_maiden_name": "Wilson", 
+        "parents_marital_status": "great"
+      }, 
+      "legal_family_info_id": 1, 
+      "medical_info": {
+        "allergies": "", 
+        "alzheimers_dementia": null, 
+        "diagnoses": "", 
+        "down_syndrome": null, 
+        "id": 28, 
+        "vision_problem": null
+      }, 
+      "medical_info_id": 28, 
+      "name_first": "Bat", 
+      "name_last": "Woman", 
+      "primary_physician": null, 
+      "primary_physician_id": null, 
+      "program": [], 
+      "protocols": [], 
+      "self_preservation": [
+        {
+          "assessment": "help", 
+          "cause_of_failure": null, 
+          "date_occurred": null, 
+          "determination_basis": null, 
+          "id": 1, 
+          "patient_id": 1
+        }, 
+        {
+          "assessment": "helppp", 
+          "cause_of_failure": null, 
+          "date_occurred": null, 
+          "determination_basis": null, 
+          "id": 2, 
+          "patient_id": 1
+        }, 
+        {
+          "assessment": "sllslkdkd", 
+          "cause_of_failure": null, 
+          "date_occurred": null, 
+          "determination_basis": null, 
+          "id": 3, 
+          "patient_id": 1
+        }, 
+        {
+          "assessment": "sdfjkjfjfj", 
+          "cause_of_failure": null, 
+          "date_occurred": null, 
+          "determination_basis": null, 
+          "id": 4, 
+          "patient_id": 1
+        }, 
+        {
+          "assessment": "helo?", 
+          "cause_of_failure": null, 
+          "date_occurred": null, 
+          "determination_basis": null, 
+          "id": 5, 
+          "patient_id": 1
+        }, 
+        {
+          "assessment": "plsplspls", 
+          "cause_of_failure": null, 
+          "date_occurred": null, 
+          "determination_basis": null, 
+          "id": 6, 
+          "patient_id": 1
+        }, 
+        {
+          "assessment": "yayaya", 
+          "cause_of_failure": null, 
+          "date_occurred": null, 
+          "determination_basis": null, 
+          "id": 7, 
+          "patient_id": 1
+        }
+      ], 
+      "supportive": [], 
+      "tracking": []
+    } """
+
+   result = json.loads(result)
+   # result = requests.get(backendGET + profile_id)
+
+   #get necessary JSON
+   # result = json.loads(result.json())
+
+   # generate watermark on the fly
+   buffer = BytesIO() # create string buffer for PDF
+   pdf = canvas.Canvas(buffer, pagesize=letter)
+   fields = []
+   fields.append((140, 755, result['name_last']))
+   fields.append((70, 755, result['name_first']))
+   fields.append((120, 735, result['basic_info']['address_current']))
+   for element in fields:
+        pdf.drawString(element[0],element[1],element[2])
+   pdf.save()
+
+   # put on watermark from buffer
+   watermark = PdfFileReader(buffer)
+   page1 = input.getPage(0)
+
+   page1.mergePage(watermark.getPage(0))
+
+   # add processed pdf page
+   output.addPage(page1)
+
+   #stream to browserxs
+   outputStream = response
+   output.write(response)
+   outputStream.close()
+
+   return response
