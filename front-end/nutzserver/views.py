@@ -853,7 +853,7 @@ def search(request):
             if request.POST['query'] == name_temp:
                 return HttpResponseRedirect('/profile/' + str(people['id']))
 
-    return HttpResponseNotFound('<h1>Page not found</h1>')
+    return render("home-notFound.html", request)
 
 def index(request):
     return render(request, "home.html")
