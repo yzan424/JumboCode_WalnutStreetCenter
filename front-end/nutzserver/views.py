@@ -400,10 +400,10 @@ def behavior(request, profile_id, edit):
     firstname = full_result['name_first']
     lastname = full_result['name_last']
 
-    #medical_treatment_plan = medical_treatment_plan.json()
-    #behavior = behavior.json()
-    #behavior_support_plans = behavior_support_plans.json()
-    #restrictive = restrictive.json()
+    medical_treatment_plan = medical_treatment_plan.json()
+    behavior = behavior.json()
+    behavior_support_plans = behavior_support_plans.json()
+    restrictive = restrictive.json()
 
     # restrictive = restrictive['objects']
     #rogers_monitor = rogers_monitor.json()
