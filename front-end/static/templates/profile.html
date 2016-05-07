@@ -2,29 +2,34 @@
 {% block profile_links %}
   <div id = "thirdrow">
       <div class="col-md-3 text-center darkgrayed">
-        <p> <a href="/profile/{{profile_id}}">Demographic</a> </p>
-      </div>
-      <div class="col-md-2 text-center darkgrayed">
-        <p> <a href="/support/{{profile_id}}">Support</a> </p>
+        <p> <a href="/profile/{{profile_id}}" class="active">Demographic</a> </p>
       </div>
       <div class="col-md-3 text-center darkgrayed">
-        <p> Appointments </p>
+        <p> <a href="/support/{{profile_id}}">Support</a> </p>
       </div>
-      <div class="col-md-2 text-center darkgrayed">
+      <!-- <div class="col-md-3 text-center darkgrayed">
+        <p> Appointments </p>
+      </div> -->
+      <div class="col-md-3 text-center darkgrayed">
         <p> <a href="/protocol/{{profile_id}}">Protocols</a> </p>
       </div>
-      <div class="col-md-2 text-center darkgrayed">
+      <div class="col-md-3 text-center darkgrayed">
         <p> <a href="/behavior/{{profile_id}}">Behavior</a> </p>
       </div>
     </div>
-    {% endblock %}
-     {% block edit_buttons %}
+{% endblock %}
+{% block efs %}
+<button type="button" class="btn btn-default " onclick = "location.href='/efs/{{profile_id}}/'">
+           <i class="fa fa-print"></i>  EFS</button>
+{% endblock %}
+{% block edit_buttons %}
 
     <div id = "fourthrow">
       <div data-spy="affix">
         <div class="row">
           <div class="col-md-4">
-            <button type="button" onclick="location.href='/edit/profile/{{profile_id}}'" class="btn btn-info icon-save">
+
+            <button type="button" onclick="location.href='/edit/protocol/{{profile_id}}'" class="btn btn-primary icon-save">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
               Edit</button>
           </div>
@@ -32,10 +37,7 @@
       </div>
     </div>
       {% endblock %}
-{% block efs %}
-<button type="button" class="btn btn-default " onclick = "location.href='/efs/{{profile_id}}/'">
-           <i class="fa fa-print"></i>  EFS</button>
-{% endblock %}
+
 {% block title %}
     Profile
 {% endblock %}
@@ -63,7 +65,7 @@
             <div class= "col-xs-4">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Diagnosis (Updated date)</h3>
+                  <h3 class="panel-title">Diagnosis (Updated date)<!-- <button type="button" onclick="location.href='/edit/profile/{{profile_id}}'" class="btn btn-xs btn-default pull-right">Edit</button> --></h3>
                   <!--- Figure out better way to do the updated date -->
                 </div>
                 <div class="panel-body">
@@ -74,7 +76,7 @@
             <div class= "col-xs-4">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Allergies (Updated date)</h3>
+                  <h3 class="panel-title">Allergies (Updated date)<!-- <button type="button" onclick="location.href='/edit/profile/{{profile_id}}'" class="btn btn-xs btn-default pull-right">Edit</button> --></h3>
                   <!--- Figure out better way to do the updated date -->
                 </div>
                 <div class="panel-body">
@@ -90,7 +92,7 @@
             <div class="col-xs-4">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Physical Characteristics</h3>
+                  <h3 class="panel-title">Physical Characteristics<!-- <button onclick="location.href='/edit/profile/{{profile_id}}'" type="button" class="btn btn-xs btn-default pull-right">Edit</button>--></h3>
                 </div>
                 <div class="panel-body">
                   <table style="width:100%">
@@ -139,7 +141,7 @@
               </div>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Identifying Information</h3>
+                  <h3 class="panel-title">Identifying Information<!-- <button onclick="location.href='/edit/profile/{{profile_id}}'" type="button" class="btn btn-xs btn-default pull-right">Edit</button> --></h3>
                 </div>
                 <div class="panel-body">
                   <table style="width:100%">
@@ -184,7 +186,7 @@
               </div>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Historical</h3>
+                  <h3 class="panel-title">Historical<!-- <button onclick="location.href='/edit/profile/{{profile_id}}'" type="button" class="btn btn-xs btn-default pull-right">Edit</button> --></h3>
                 </div>
                 <div class="panel-body">
                   <p class="box-label">Accompanied by</p>
@@ -201,7 +203,7 @@
             <div class="col-xs-8">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Places</h3>
+                  <h3 class="panel-title">Places<!-- <button onclick="location.href='/edit/profile/{{profile_id}}'" type="button" class="btn btn-xs btn-default pull-right">Edit</button> --></h3>
                 </div>
                 <div class="panel-body">
                   <div class= "col-xs-6">
@@ -242,7 +244,7 @@
               </div>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Self Sufficiency</h3>
+                  <h3 class="panel-title">Self Sufficiency<!-- <button type="button" class="btn btn-xs btn-default pull-right">Edit</button> --></h3>
                 </div>
                 <div class="panel-body">
                   <div class= "col-xs-6">
@@ -281,7 +283,7 @@
               </div>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Parent History</h3>
+                  <h3 class="panel-title">Parent History<!-- <button type="button" onclick="location.href='/edit/profile/{{profile_id}}'" class="btn btn-xs btn-default pull-right">Edit</button> --></h3>
                 </div>
                 <div class="panel-body">
                   <div class= "col-xs-6">
@@ -328,7 +330,7 @@
           <div class="col-xs-12 col-md-10 col-md-offset-1">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Self Preservation</h3>
+                <h3 class="panel-title">Self Preservation<!-- <button type="button" onclick="location.href='/edit/profile/{{profile_id}}'" class="btn btn-xs btn-default pull-right">Edit</button> --></h3>
               </div>
               <div class="panel-body">
                 <table class="table table-striped table-bordered">
@@ -345,7 +347,7 @@
                     {% for item in self_preservation %}
                     <tr>
                       <td>{{item.date_occurred}}</td>
-                      <td>Self-care and hygene</td>
+                      <td>Self-care and hygiene</td>
                       <td>{{item.determination_basis}}</td>
                       <td>{{item.assessment}}</td>
                       <td>{{item.cause_of_failure}}</td>

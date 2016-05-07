@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from nutzserver.models import *
 from django.template import *
 import json, requests
+import datetime
 
 from PyPDF2 import PdfFileWriter, PdfFileReader
 from io import StringIO
@@ -862,6 +863,7 @@ def login(request):
 
 def search(request):
     if request.method == 'POST':
+
         all_results = requests.get('http://127.0.0.1:5000/api/patient')
         all_results = all_results.json()
 
@@ -896,11 +898,47 @@ def efs_gen(request, profile_id):
    buffer = BytesIO() # create string buffer for PDF
    pdf = canvas.Canvas(buffer, pagesize=letter)
    fields = []
-   fields.append((140, 755, result['name_last']))
    fields.append((70, 755, result['name_first']))
+   fields.append((140, 755, result['name_last']))
+   fields.append((250, 755, result['basic_info']['name_preferred']))
    fields.append((120, 735, result['basic_info']['address_current']))
+   fields.append((120, 715, result['basic_info']['address_former']))
+   fields.append((40, 685, result['basic_info']['sex']))
+   fields.append((70, 685, result['basic_info']['race']))
+   fields.append((105, 685, result['basic_info']['birthday']))
+   fields.append((155, 685, "30"))
+   fields.append((185, 685, str(result['basic_info']['height'])))
+   fields.append((225, 685, str(result['basic_info']['weight'])))
+   fields.append((265, 685, result['basic_info']['build']))
+   fields.append((305, 685, result['basic_info']['hair']))
+   fields.append((345, 685, result['basic_info']['eyes']))
+   fields.append((150, 670, result['basic_info']['distinguishing_marks']))
+   fields.append((175, 650, result['basic_info']['competency_status']))
+   fields.append((40, 620, result['legal_family_info']['guardian_name']))
+   fields.append((225, 620, result['legal_family_info']['guardian_phone']))
+   fields.append((40, 590, result['legal_family_info']['guardian_address']))
+   fields.append((40, 560, result['legal_family_info']['family_address']))
+   fields.append((225, 560, result['legal_family_info']['family_phone']))
+   fields.append((40, 520, result['basic_info']['training_program_or_school_address']))
+   fields.append((225, 520, result['basic_info']['training_program_or_school_phone']))
+   fields.append((305, 520, result['basic_info']['work_address']))
+   fields.append((510, 520, result['basic_info']['work_phone']))
+   fields.append((40, 480, result['medical_info']['diagnoses']))
+   fields.append((90, 465, result['medical_info']['allergies']))
+   fields.append((40, 430, result['primary_physician']))
+   fields.append((40, 405, result['basic_info']['primary_language']))
+   fields.append((345, 405, result['identifying_info']['self_protection']))
+   fields.append((40, 370, result['identifying_info']['behavior']))
+   fields.append((345, 370, result['identifying_info']['response_to_search']))
+   fields.append((40, 335, result['identifying_info']['movement_pattern']))
+   fields.append((265, 335, result['identifying_info']['places_frequented']))
+   fields.append((155, 205, result['contacts'][0]['name']))
+   fields.append((427, 197, result['contacts'][0]['address']))
+
+
    for element in fields:
-        pdf.drawString(element[0],element[1],element[2])
+        if type(element[2]) == str:
+            pdf.drawString(element[0],element[1],element[2])
    pdf.save()
 
    # put on watermark from buffer
