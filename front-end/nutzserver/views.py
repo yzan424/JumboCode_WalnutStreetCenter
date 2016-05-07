@@ -912,7 +912,7 @@ def efs_gen(request, profile_id):
    fields.append((225, 685, str(result['basic_info']['weight'])))
    fields.append((265, 685, result['basic_info']['build']))
    fields.append((305, 685, result['basic_info']['hair']))
-   fields.append((345, 685, result['basic_info']['eyes']))
+   fields.append((342, 685, result['basic_info']['eyes']))
    fields.append((150, 670, result['basic_info']['distinguishing_marks']))
    fields.append((175, 650, result['basic_info']['competency_status']))
    fields.append((40, 620, result['legal_guardian']['guardian_name']))
