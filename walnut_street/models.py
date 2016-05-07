@@ -56,10 +56,10 @@ class Patient(db.Model):
         backref='patient'
     )
 
-    legal_family_info_id = db.Column(db.Integer, db.ForeignKey('legal_family_info.id'))
-    legal_family_info = db.relationship(
-        'LegalFamilyInfo',
-        primaryjoin='Patient.legal_family_info_id==LegalFamilyInfo.id',
+    legal_guardian_id = db.Column(db.Integer, db.ForeignKey('legal_guardian.id'))
+    legal_guardian = db.relationship(
+        'LegalGuardian',
+        primaryjoin='Patient.legal_guardian_id==LegalGuardian.id',
         backref='patient'
     )
     medical_info_id = db.Column(db.Integer, db.ForeignKey('medical_info.id'))
@@ -158,9 +158,9 @@ class BasicInfo(db.Model):
     work_address = db.Column(db.String)
 
 
-class LegalFamilyInfo(db.Model):
+class LegalGuardian(db.Model):
 
-    __tablename__ = 'legal_family_info'
+    __tablename__ = 'legal_guardian'
     id = db.Column(db.Integer, primary_key=True)
     guardian_name = db.Column(db.String)
     guardian_phone = db.Column(db.String)

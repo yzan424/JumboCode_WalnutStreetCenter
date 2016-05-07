@@ -66,7 +66,7 @@ def backend(request, profile_id, data):
             }
             result = json.dumps(result)
             return JsonResponse(result, safe=False)
-        elif data == "legal_family_info":
+        elif data == "legal_guardian":
             # Access: http://localhost:8000/backend/profile/1/legal_guardian
             result = {
                 "patient_id": profile_id,
@@ -343,7 +343,7 @@ def profile(request, profile_id, edit):
     basic_info = requests.get(backendGET + profile_id + '/basic_info')
     self_preservation = requests.get(backendGET + profile_id + '/self_preservation')
     identifying = requests.get(backendGET + profile_id + '/identifying_info') 
-    legal_guardian = requests.get(backendGET + profile_id + '/legal_family_info') 
+    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian') 
 
     full_result = requests.get(backendGET + profile_id)
     full_result = full_result.json()
@@ -397,10 +397,10 @@ def behavior(request, profile_id, edit):
     firstname = full_result['name_first']
     lastname = full_result['name_last']
 
-    medical_treatment_plan = medical_treatment_plan.json()
-    behavior = behavior.json()
-    behavior_support_plans = behavior_support_plans.json()
-    restrictive = restrictive.json()
+    #medical_treatment_plan = medical_treatment_plan.json()
+    #behavior = behavior.json()
+    #behavior_support_plans = behavior_support_plans.json()
+    #restrictive = restrictive.json()
 
     # restrictive = restrictive['objects']
     #rogers_monitor = rogers_monitor.json()
@@ -411,7 +411,7 @@ def behavior(request, profile_id, edit):
         return render(request, "update_behavior.html", context={'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})        
 
 def support(request, profile_id, edit):
-    legal_guardian = requests.get(backendGET + profile_id + '/legal_family_info')
+    legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian')
     insurance = requests.get(backendGET + profile_id + '/insurance')
     legal_status = requests.get(backendGET + profile_id + '/legal_competency')
 
@@ -445,11 +445,6 @@ def edit(request, page, profile_id):
             updated_legal_guardian = {}
 
             for keys, values in request.POST.items():
-                print (keys)
-                print (values)
-
-
-            for keys, values in request.POST.items():
                 if (keys.split('.'))[0] == "basic_info":
                     updated_basic_info[keys.split('.')[1]] = values
                 elif (keys.split('.'))[0] == "medical_info":
@@ -459,8 +454,6 @@ def edit(request, page, profile_id):
                 elif (keys.split('.'))[0] == "legal_guardian":
                     updated_legal_guardian[keys.split('.')[1]] = values
                 elif (keys.split('.'))[0] == "self_preservation":
-                    print(keys)
-                    print(values)
                     self_preservation_id = keys.split('.')[2]
                     dictKey = keys.split('.')[3]
                     if (keys.split('.')[1] == "existing"):
@@ -475,7 +468,6 @@ def edit(request, page, profile_id):
                     else:
                         # new entries to self_preservation
                         # check if theres even anything in them
-                        print("hi new shit")
                         if values != '':
                             # these are just edits to existing things
                             if not any(x['self_preservation_id'] == self_preservation_id for x in new_self_preservation):
@@ -490,16 +482,14 @@ def edit(request, page, profile_id):
             updated_basic_info = json.dumps({"basic_info" : updated_basic_info})
             updated_identifying = json.dumps({"identifying_info" : updated_identifying})
             updated_medical_info = json.dumps({"medical_info" : updated_medical_info})
-            updated_legal_guardian = json.dumps({"legal_family_info" : updated_legal_guardian})
+            updated_legal_guardian = json.dumps({"legal_guardian" : updated_legal_guardian})
             updated_self_preservation = json.dumps({"self_preservation" : updated_self_preservation})
 
-            print(updated_basic_info)
-            
             # send all the new stuff
             requests.put(backendPOST + profile_id, data=updated_identifying, headers=header)
             requests.put(backendPOST + profile_id, data=updated_medical_info, headers=header)
             requests.put(backendPOST + profile_id, data=updated_basic_info, headers=header)
-            requests.put(backendPOST + profile_id, data=updated_legal_guardian, headers=header)
+            #requests.put(backendPOST + profile_id, data=updated_legal_guardian, headers=header)
             #requests.put(backendPOST + profile_id, data=updated_self_preservation, headers=header)
 
             print(new_self_preservation)
@@ -887,7 +877,7 @@ def efs_gen(request, profile_id):
    result = requests.get(backendGET + profile_id)
 
    #get necessary JSON
-   result = json.loads(result.json())
+   result = result.json()
 
    # generate watermark on the fly
    buffer = BytesIO() # create string buffer for PDF
