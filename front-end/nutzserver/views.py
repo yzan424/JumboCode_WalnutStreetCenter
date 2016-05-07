@@ -535,7 +535,7 @@ def edit(request, page, profile_id):
             for keys, values in request.POST.items():
                 if (keys.split('.'))[0] == "protocols":
                     protocols_id = keys.split('.')[2]
-                    dictKey = keys.split('.')[2]
+                    dictKey = keys.split('.')[3]
                     if (keys.split('.')[1] == "existing"):
                         if not any(x['protocols_id'] ==  protocols_id for x in updated_protocols):
                             updated_protocols.append({'protocols_id': protocols_id})
@@ -555,7 +555,7 @@ def edit(request, page, profile_id):
                     updated_isp[keys.split('.')[1]] = values
                 elif (keys.split('.'))[0] == "supportive":
                     supportive_id = keys.split('.')[2]
-                    dictKey = keys.split('.')[2]
+                    dictKey = keys.split('.')[3]
                     if (keys.split('.')[1] == "existing"):
                         if not any(x['supportive_id'] ==  supportive_id for x in updated_supportive):
                             updated_supportive.append({'supportive_id': supportive_id})
@@ -574,7 +574,7 @@ def edit(request, page, profile_id):
                                     i[dictKey] = values
                 elif (keys.split('.'))[0] == "tracking":
                     tracking_id = keys.split('.')[2]
-                    dictKey = keys.split('.')[2]
+                    dictKey = keys.split('.')[3]
                     if (keys.split('.')[1] == "existing"):
                         if not any(x['tracking_id'] ==  tracking_id for x in updated_tracking):
                             updated_tracking.append({'tracking_id': tracking_id})
