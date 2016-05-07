@@ -384,7 +384,7 @@
                   <tbody>
                     {% for item in self_preservation %}
                     <tr>
-                    <td><input type="date" name="self_preservation.existing.{{item.id}}.date_occurred" value="{{item.date_occurred}}"></td>
+                    <td><input type="date" placeholder="mm/dd/yyyy" name="self_preservation.existing.{{item.id}}.date_occurred" value="{{item.date_occurred}}"></td>
                     <td><input type="text" name="UNRESOLVED" value="UNRESOLVED"></td>
                     <td><input type="text" name="UNRESOLVED" value="UNRESOLVED"></td>
                     <td> <input type="text" name="self_preservation.existing.{{item.id}}.assessment" value="{{item.assessment}}"</td>
@@ -392,14 +392,14 @@
                     </tr>
                     {% endfor %}
                     <tr>
-                    <td><input type="text" name="self_preservation.new.0.date_occurred"></td>
+                    <td><input type="date" placeholder="mm/dd/yyyy" name="self_preservation.new.0.date_occurred"></td>
                     <td><input type="text" name="UNRESOLVED" ></td>
                     <td><input type="text" name="UNRESOLVED"></td>
                     <td> <input type="text" name="self_preservation.new.0.assessment"></td>
                     <td><input type="text" name="self_preservation.new.0.cause_of_failure"></td>
                     </tr>
                     <tr>
-                    <td><input type="text" name="self_preservation.new.1.date_occurred"></td>
+                    <td><input type="date" placeholder="mm/dd/yyyy" name="self_preservation.new.1.date_occurred"></td>
                     <td><input type="text" name="UNRESOLVED" ></td>
                     <td><input type="text" name="UNRESOLVED"></td>
                     <td> <input type="text" name="self_preservation.new.1.assessment"></td>
