@@ -18,8 +18,8 @@
 }
 
 #fourthrow {
-  padding-top: 70px;
-  padding-left: 30px;
+  padding-bottom: 70px;
+  padding-right: 30px;
 }
 
 .patient_name {
@@ -82,4 +82,8 @@
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.active {
+    background-color: white;
 }
