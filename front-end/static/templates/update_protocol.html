@@ -70,7 +70,7 @@
                                 <div class="panel-body">
                                     <p class="box-label">Description: </p><p><input type="text" value="{{item.description}}" name="protocols.existing.{{item.protocol_id}}.description"><br></p>
                                     <p class="box-label">Guardian Signature: </p><p><input type="text" value="{{item.guardian_signature_date}}" name="protocols.existing.{{item.protocol_id}}.guardian_signature_date"><br></p>
-                                    <p class="box-label">Physician Signature: </p><p><input type="text" value="{{item.physician_signature_date}}" name="protocols.existing.{{item.protocol_id}}.physician_signature_date"><br></p>
+                                    <p class="box-label">Physician Signature: </p><p><input type="date" placeholder="mm/dd/yyyy" value="{{item.physician_signature_date}}" name="protocols.existing.{{item.protocol_id}}.physician_signature_date"><br></p>
                                 </div>
                             </div>
                         </div>
@@ -82,8 +82,8 @@
                                 </div>
                                 <div class="panel-body">
                                     <p class="box-label">Description: </p><p><input type="text" name="protocols.new.0.description"><br></p>
-                                    <p class="box-label">Guardian Signature: </p><p><input type="text" name="protocols.new.0.guardian_signature_date"><br></p>
-                                    <p class="box-label">Physician Signature: </p><p><input type="text" name="protocols.new.0.physician_signature_date"><br></p>
+                                    <p class="box-label">Guardian Signature: </p><p><input type="date" placeholder="mm/dd/yyyy" name="protocols.new.0.guardian_signature_date"><br></p>
+                                    <p class="box-label">Physician Signature: </p><p><input type="date" placeholder="mm/dd/yyyy" name="protocols.new.0.physician_signature_date"><br></p>
                                 </div>
                             </div>
                         </div>
@@ -94,8 +94,8 @@
                                 </div>
                                 <div class="panel-body">
                                     <p class="box-label">Description: </p><p><input type="text" name="protocols.new.0.description"><br></p>
-                                    <p class="box-label">Guardian Signature: </p><p><input type="text" name="protocols.new.0.guardian_signature_date"><br></p>
-                                    <p class="box-label">Physician Signature: </p><p><input type="text" name="protocols.new.0.physician_signature_date"><br></p>
+                                    <p class="box-label">Guardian Signature: </p><p><input type="date" placeholder="mm/dd/yyyy" name="protocols.new.0.guardian_signature_date"><br></p>
+                                    <p class="box-label">Physician Signature: </p><p><input type="date" placeholder="mm/dd/yyyy" name="protocols.new.0.physician_signature_date"><br></p>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +112,7 @@
                             <h3 class="panel-title">ISP</h3>
                         </div>
                         <div class="panel-body">
-                            <p class="box-label">Most Recent ISP: </p><p><input type="text" name="isp.last_isp_date" value="{{isp.last_isp_date}}"><br></p>
+                            <p class="box-label">Most Recent ISP: </p><p><input type="date" placeholder="mm/dd/yyyy" name="isp.last_isp_date" value="{{isp.last_isp_date}}"><br></p>
                             <p class="box-label">Comments: </p><p><input type="text" name="isp.comments" value="{{isp.comments}}"><br></p>
                         </div>
                     </div>
@@ -130,10 +130,10 @@
                                         <h3 class="panel-title">Type:</h3><h3><input type="text" value="{{item.device_type}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.device_type"></h3>
                                     </div>
                                     <div class="panel-body">
-                                        <p class="box-label">HRC Approval Date: </p><p><input type="text" value="{{item.hrc_approval_date}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.hrc_approval_date"><br></p>
-                                        <p class="box-label">HRC Submission Date: </p><p><input type="text" value="{{item.hrc_submission_date}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.hrc_submission_date"><br></p>
-                                        <p class="box-label">Physician Signature: </p><p><input type="text" value="{{item.physician_signature}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.physician_signature"><br></p>
-                                        <p class="box-label">Nurse Signature: </p><p><input type="text" value="{{item.nurse_signature}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.nurse_signature"><br></p>
+                                        <p class="box-label">HRC Approval Date: </p><p><input type="date" placeholder="mm/dd/yyyy" value="{{item.hrc_approval_date}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.hrc_approval_date"><br></p>
+                                        <p class="box-label">HRC Submission Date: </p><p><input type="date" placeholder="mm/dd/yyyy" value="{{item.hrc_submission_date}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.hrc_submission_date"><br></p>
+                                        <p class="box-label">Physician Signature: </p><p><input type="date" placeholder="mm/dd/yyyy" value="{{item.physician_signature}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.physician_signature"><br></p>
+                                        <p class="box-label">Nurse Signature: </p><p><input type="date" placeholder="mm/dd/yyyy" value="{{item.nurse_signature}}" name="supportive.existing.{{item.supportive_protective_devices_id}}.nurse_signature"><br></p>
                                     </div>
                                 </div>
                             </div>
@@ -144,10 +144,10 @@
                                         <h3 class="panel-title">Type: </h3><h3><input type="text" name="supportive.new.0.device_type"></h3>
                                     </div>
                                     <div class="panel-body">
-                                        <p class="box-label">HRC Approval Date: </p><p><input type="text" name="supportive.new.0.hrc_approval_date"><br></p>
-                                        <p class="box-label">HRC Submission Date: </p><p><input type="text" name="supportive.new.0.hrc_submission_date"><br></p>
-                                        <p class="box-label">Physician Signature: </p><p><input type="text" name="supportive.new.0.physician_signature"><br></p>
-                                        <p class="box-label">Nurse Signature: </p><p><input type="text" name="supportive.new.0.nurse_signature"><br></p>
+                                        <p class="box-label">HRC Approval Date: </p><p><input type="date" placeholder="mm/dd/yyyy" name="supportive.new.0.hrc_approval_date"><br></p>
+                                        <p class="box-label">HRC Submission Date: </p><p><input type="date" placeholder="mm/dd/yyyy" name="supportive.new.0.hrc_submission_date"><br></p>
+                                        <p class="box-label">Physician Signature: </p><p><input type="date" placeholder="mm/dd/yyyy" name="supportive.new.0.physician_signature"><br></p>
+                                        <p class="box-label">Nurse Signature: </p><p><input type="date" placeholder="mm/dd/yyyy" name="supportive.new.0.nurse_signature"><br></p>
                                     </div>
                                 </div>
                             </div>
@@ -157,10 +157,10 @@
                                         <h3 class="panel-title">Type: </h3><h3><input type="text" name="supportive.new.0.device_type"></h3>
                                     </div>
                                     <div class="panel-body">
-                                        <p class="box-label">HRC Approval Date: </p><p><input type="text" name="supportive.new.0.hrc_approval_date"><br></p>
-                                        <p class="box-label">HRC Submission Date: </p><p><input type="text" name="supportive.new.0.hrc_submission_date"><br></p>
-                                        <p class="box-label">Physician Signature: </p><p><input type="text" name="supportive.new.0.physician_signature"><br></p>
-                                        <p class="box-label">Nurse Signature: </p><p><input type="text" name="supportive.new.0.nurse_signature"><br></p>
+                                        <p class="box-label">HRC Approval Date: </p><p><input type="date" placeholder="mm/dd/yyyy" name="supportive.new.0.hrc_approval_date"><br></p>
+                                        <p class="box-label">HRC Submission Date: </p><p><input type="date" placeholder="mm/dd/yyyy" name="supportive.new.0.hrc_submission_date"><br></p>
+                                        <p class="box-label">Physician Signature: </p><p><input type="date" placeholder="mm/dd/yyyy" name="supportive.new.0.physician_signature"><br></p>
+                                        <p class="box-label">Nurse Signature: </p><p><input type="date" placeholder="mm/dd/yyyy" name="supportive.new.0.nurse_signature"><br></p>
                                     </div>
                                 </div>
                             </div>
@@ -181,7 +181,7 @@
                                     </div>
                                     <div class="panel-body">
                                         <p class="box-label">Description: </p><p><input type="text" value="{{item.description}}" name="tracking.existing.{{item.tracking_id}}.description"><br></p>
-                                        <p class="box-label">Most Recent: </p><p><input type="text" value="{{item.most_recent}}" name="tracking.existing.{{item.tracking_id}}.most_recent"><br></p>
+                                        <p class="box-label">Most Recent: </p><p><input type="date" placeholder="mm/dd/yyyy" value="{{item.most_recent}}" name="tracking.existing.{{item.tracking_id}}.most_recent"><br></p>
                                         <p class="box-label">Timeframe: Every <input type="text" value="{{item.next_due}}" name="tracking.existing.{{item.tracking_id}}.next_due"> month(s)<br></p>
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@
                                     </div>
                                     <div class="panel-body">
                                         <p class="box-label">Description: </p><p><input type="text" name="tracking.new.0.description"><br></p>
-                                        <p class="box-label">Most Recent: </p><p><input type="text" name="tracking.new.0.most_recent"><br></p>
+                                        <p class="box-label">Most Recent: </p><p><input type="date" placeholder="mm/dd/yyyy" name="tracking.new.0.most_recent"><br></p>
                                         <p class="box-label">Timeframe: Every <input type="text" name="tracking.new.0.next_due"> month(s)<br></p>
                                     </div>
                                 </div>
@@ -206,7 +206,7 @@
                                     </div>
                                     <div class="panel-body">
                                         <p class="box-label">Description: </p><p><input type="text" name="tracking.new.0.description"><br></p>
-                                        <p class="box-label">Most Recent: </p><p><input type="text" name="tracking.new.0.most_recent"><br></p>
+                                        <p class="box-label">Most Recent: </p><p><input type="date" placeholder="mm/dd/yyyy" name="tracking.new.0.most_recent"><br></p>
                                         <p class="box-label">Timeframe: Every <input type="text" name="tracking.new.0.next_due"> month(s)<br></p>
                                     </div>
                                 </div>

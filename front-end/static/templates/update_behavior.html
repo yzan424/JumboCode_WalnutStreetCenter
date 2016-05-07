@@ -63,7 +63,7 @@
                         </div>
                         <div class="panel-body">
                              <p class="box-label"> Medical Treatment Plan ID: </p><p><input type="text" name="medical_treatment_plan.medical_treatment_plan_id" value="{{medical_treatment_plan.medical_treatment_plan_id}}"><br></p>
-                             <p class="box-label"> Guardian Signature Date: </p><p><input type="text" name="medical_treatment_plan.guardian_signature_date" value="{{medical_treatment_plan.guardian_signature_date}}"><br></p>
+                             <p class="box-label"> Guardian Signature Date: </p><p><input type="date" placeholder="mm/dd/yyyy" name="medical_treatment_plan.guardian_signature_date" value="{{medical_treatment_plan.guardian_signature_date}}"><br></p>
                              <p class="box-label"> Appointment ID: </p><p><input type="text" name="medical_treatment_plan.appointment_id" value="{{medical_treatment_plan.appointment_id}}"><br></p>
                              <p class="box-label">  Medications: </p><p><input type="text" name="medical_treatment_plan.medications" value="{{medical_treatment_plan.medications}}"><br></p>
                              <p class="box-label">  Diagnoses: </p><p><input type="text" name="medical_treatment_plan.diagnoses" value="{{medical_treatment_plan.diagnoses}}"><br></p>
@@ -77,9 +77,9 @@
                             <h3 class="panel-title">Supportive and Protective Devices</h3>
                         </div>
                         <div class="panel-body">
-                             <p class="box-label"> Assesment Date: </p><p><input type="text" name="behavior.assessment" value="{{behavior.assessment}}"><br></p>
+                             <p class="box-label"> Assesment Date: </p><p><input type="date" placeholder="mm/dd/yyyy" name="behavior.assessment" value="{{behavior.assessment}}"><br></p>
                              <p class="box-label"> Behavior: </p><p><input type="text" name="behavior.behavior" value="{{behavior.behavior}}"><br></p>
-                             <p class="box-label"> Date: </p><p><input type="text" name="behavior.date" value="{{behavior.date}}"><br></p>
+                             <p class="box-label"> Date: </p><p><input type="date" placeholder="mm/dd/yyyy" name="behavior.date" value="{{behavior.date}}"><br></p>
                              <p class="box-label"> Summary: </p><p>: </p><p><input type="text" name="behavior.summary" value="{{behavior.summary}}"><br></p>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                                 <h3 class="panel-title">Behavior Support Plan</h3>
                             </div>
                             <div class="panel-body">
-                                 <p class="box-label"> Guardian Signature Date: </p><p> <input type="text" name="behavior_support_plans.guardian_signature_date" value="{{behavior_support_plans.guardian_signature_date}}"><br></p>
+                                 <p class="box-label"> Guardian Signature Date: </p><p> <input type="date" placeholder="mm/dd/yyyy" name="behavior_support_plans.guardian_signature_date" value="{{behavior_support_plans.guardian_signature_date}}"><br></p>
                                  <p class="box-label"> Residential Appointment ID: </p><p><input type="text" name="behavior_support_plans.residential_appointment_id" value="{{behavior_support_plans.residential_appointment_id}}"><br></p>
                                  <p class="box-label"> Day Appointment ID: </p><p><input type="text" name="behavior_support_plans.day_appointment_id" value="{{behavior_support_plans.day_appointment_id}}"><br></p>
                                  <p class="box-label"> Tier: </p><p> <input type="text" name="behavior_support_plans.tier" value="{{behavior_support_plans.tier}}"><br></p>
@@ -109,9 +109,9 @@
                                 <h3 class="panel-title">Rogers Monitor</h3>
                             </div>
                             <div class="panel-body">
-                                <p class="box-label"> Next Court Date: </p><p> <input type="text" name="rogers_monitor.next_court_date" value="{{rogers_monitor.next_court_date}}"><br></p>
-                                <p class="box-label"> Last Court Date: </p><p> <input type="text" name="rogers_monitor.last_court_date" value="{{rogers_monitor.last_court_date}}"><br></p>
-                                <p class="box-label"> Guardian Signature Date: </p><p> <input type="text" name="rogers_monitor.guardian_signature_date" value="{{rogers_monitor.guardian_signature_date}}"><br></p>
+                                <p class="box-label"> Next Court Date: </p><p> <input type="date" placeholder="mm/dd/yyyy" name="rogers_monitor.next_court_date" value="{{rogers_monitor.next_court_date}}"><br></p>
+                                <p class="box-label"> Last Court Date: </p><p> <input type="date" placeholder="mm/dd/yyyy" name="rogers_monitor.last_court_date" value="{{rogers_monitor.last_court_date}}"><br></p>
+                                <p class="box-label"> Guardian Signature Date: </p><p> <input type="date" placeholder="mm/dd/yyyy" name="rogers_monitor.guardian_signature_date" value="{{rogers_monitor.guardian_signature_date}}"><br></p>
                                 <p class="box-label"> Appointment ID: </p><p> <input type="text" name="rogers_monitor.appointment_id" value="{{rogers_monitor.appointment_id}}"><br></p>
                                 <p class="box-label"> Medications: </p><p> <input type="text" name="rogers_monitor.medications" value="{{rogers_monitor.medications}}"><br></p>
                             </div>
@@ -130,22 +130,22 @@
                     {% for item in restrictive %}
                     <div class="panel-body">
                          <p class="box-label"> Practice Type: </p><p><input type="text" name="restrictive.existing.{{item.restrictive_practices_id}}.practice_type" value="{{item.practice_type}}"><br></p>
-                         <p class="box-label"> HRC Approval Date: </p><p><input type="text" name="restrictive.existing.{{item.restrictive_practices_id}}.hrc_approval_date" value="{{item.hrc_approval_date}}"><br></p>
-                         <p class="box-label"> HRC Submission Date: </p><p><input type="text" name="restrictive.existing.{{item.restrictive_practices_id}}.hrc_submission_date" value="{{item.hrc_submission_date}}"><br></p>
+                         <p class="box-label"> HRC Approval Date: </p><p><input type="date" placeholder="mm/dd/yyyy" name="restrictive.existing.{{item.restrictive_practices_id}}.hrc_approval_date" value="{{item.hrc_approval_date}}"><br></p>
+                         <p class="box-label"> HRC Submission Date: </p><p><input type="date" placeholder="mm/dd/yyyy" name="restrictive.existing.{{item.restrictive_practices_id}}.hrc_submission_date" value="{{item.hrc_submission_date}}"><br></p>
                          <p class="box-label"> Description: </p><p><input type="text" name="restrictive.existing.{{item.restrictive_practices_id}}.description" value="{{item.restrictive}}"><br></p>  
                     </div>
                     {% endfor %} 
                 <!-- These are new entries -->
                     <div class="panel-body">
                          <p class="box-label"> Practice Type: </p><p><input type="text" name="restrictive.new.0.practice_type" ><br></p>
-                         <p class="box-label"> HRC Approval Date: </p><p><input type="text" name="restrictive.new.0.hrc_approval_date" ><br></p>
-                         <p class="box-label"> HRC Submission Date: </p><p><input type="text" name="restrictive.new.0.hrc_submission_date" ><br></p>
+                         <p class="box-label"> HRC Approval Date: </p><p><input type="date" placeholder="mm/dd/yyyy" name="restrictive.new.0.hrc_approval_date" ><br></p>
+                         <p class="box-label"> HRC Submission Date: </p><p><input type="date" placeholder="mm/dd/yyyy" name="restrictive.new.0.hrc_submission_date" ><br></p>
                          <p class="box-label"> Description: </p><p><input type="text" name="restrictive.new.0.description" ><br></p>  
                     </div>
                     <div class="panel-body">
                          <p class="box-label"> Practice Type: </p><p><input type="text" name="restrictive.new.1.practice_type" ><br></p>
-                         <p class="box-label"> HRC Approval Date: </p><p><input type="text" name="restrictive.new.1.hrc_approval_date" ><br></p>
-                         <p class="box-label"> HRC Submission Date: </p><p><input type="text" name="restrictive.new.1.hrc_submission_date" ><br></p>
+                         <p class="box-label"> HRC Approval Date: </p><p><input type="date" placeholder="mm/dd/yyyy" name="restrictive.new.1.hrc_approval_date" ><br></p>
+                         <p class="box-label"> HRC Submission Date: </p><p><input type="date" placeholder="mm/dd/yyyy" name="restrictive.new.1.hrc_submission_date" ><br></p>
                          <p class="box-label"> Description: </p><p><input type="text" name="restrictive.new.1.description" ><br></p>  
                     </div>
                 </div>
