@@ -115,8 +115,13 @@ class Patient(db.Model):
         'RogersMonitor',
         primaryjoin='Patient.rogers_monitor_id==RogersMonitor.id',
         backref='patient'
+    )
+    medical_treatment_plan_id = db.Column(db.Integer, db.ForeignKey('medical_treatment_plan.id'))
+    medical_treatment_plan = db.relationship(
+        'MedicalTreatmentPlan',
+        primaryjoin='Patient.medical_treatment_plan_id==MedicalTreatmentPlan.id',
+        backref='patient'
     )    
-
 
 class BasicInfo(db.Model):
 

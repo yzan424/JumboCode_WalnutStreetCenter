@@ -390,10 +390,11 @@ def protocol(request, profile_id, edit):
         return render(request, "update_protocol.html", context={'first_name': firstname, 'last_name': lastname, 'protocols': protocols, 'isp': isp, 'supportive': supportive, 'tracking': tracking, 'profile_id': profile_id})        
 
 def behavior(request, profile_id, edit):
+    print(profile_id)
     medical_treatment_plan = requests.get(backendGET + profile_id + '/medical_treatment_plan')
     behavior = requests.get(backendGET + profile_id + '/behavior')
     behavior_support_plans = requests.get(backendGET + profile_id + '/behavior_support_plan')
-    restrictive = requests.get(backendGET + profile_id + '/restrictive')
+    #restrictive = requests.get(backendGET + profile_id + '/restrictive')
     rogers_monitor = requests.get(backendGET + profile_id + '/rogers_monitor')
 
     full_result = requests.get(backendGET + profile_id)
@@ -401,16 +402,16 @@ def behavior(request, profile_id, edit):
     firstname = full_result['name_first']
     lastname = full_result['name_last']
 
-    #medical_treatment_plan = medical_treatment_plan.json()
-    #behavior = behavior.json()
-    #behavior_support_plans = behavior_support_plans.json()
+    medical_treatment_plan = medical_treatment_plan.json()
+    behavior = behavior.json()
+    behavior_support_plans = behavior_support_plans.json()
     #restrictive = restrictive.json()
 
-    # restrictive = restrictive['objects']
-    #rogers_monitor = rogers_monitor.json()
+    #restrictive = restrictive['objects']
+    rogers_monitor = rogers_monitor.json()
         
     if edit == False:
-        return render(request, "behavior.html", context={'first_name': firstname, 'last_name': lastname, 'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})
+        return render(request, "behavior.html", context={'first_name': firstname, 'last_name': lastname, 'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})
     else:
         return render(request, "update_behavior.html", context={'first_name': firstname, 'last_name': lastname, 'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})        
 
@@ -632,8 +633,8 @@ def edit(request, page, profile_id):
             updated_medical_treatment_plan = {}
             updated_behavior = {}
             updated_behavior_support_plans = {}
-            updated_restrictive = []
-            new_restrictive = []
+            #updated_restrictive = []
+            #new_restrictive = []
             updated_rogers_monitor = {}
 
             for keys, values in request.POST.items():
@@ -643,7 +644,7 @@ def edit(request, page, profile_id):
                     updated_behavior[keys.split('.')[1]] = values
                 elif (keys.split('.'))[0] == "behavior_support_plan":
                     updated_behavior_support_plans[keys.split('.')[1]] = values
-                elif (keys.split('.'))[0] == "restrictive":
+                    '''elif (keys.split('.'))[0] == "restrictive":
                     restrictive_id = keys.split('.')[2]
                     dictKey = keys.split('.')[3]
                     if (keys.split('.')[1] == "existing"):
@@ -662,19 +663,19 @@ def edit(request, page, profile_id):
                                 if i['restrictive_id'] == restrictive_id:
                                     i[dictKey] = values
                 elif (keys.split('.'))[0] == "rogers_monitor":
-                    updated_rogers_monitor[keys.split('.')[1]] = values
+                    updated_rogers_monitor[keys.split('.')[1]] = values '''
 
             print("updated_medical_treatment_plan:", updated_medical_treatment_plan)
             print("updated_behavior:", updated_behavior)
             print("updated_behavior_support_plans:", updated_behavior_support_plans)
-            print("updated_restrictive:", updated_restrictive)
+            #print("updated_restrictive:", updated_restrictive)
             print("updated_rogers_monitor", updated_rogers_monitor)
 
             header = {'Content-Type': 'application/json'}
             updated_medical_treatment_plan = json.dumps({"updated_medical_treatment_plan" : updated_medical_treatment_plan})
             updated_behavior = json.dumps({"updated_behavior" : updated_behavior})
             updated_behavior_support_plans = json.dumps({"updated_behavior_support_plans" : updated_behavior_support_plans})
-            updated_restrictive = json.dumps({"updated_restrictive" : updated_restrictive})
+            #updated_restrictive = json.dumps({"updated_restrictive" : updated_restrictive})
             updated_rogers_monitor = json.dumps({"updated_rogers_monitor" : updated_rogers_monitor})
 
 
@@ -682,14 +683,14 @@ def edit(request, page, profile_id):
             requests.put(backendPOST + profile_id, data=updated_behavior, headers=header)
             requests.put(backendPOST + profile_id, data=updated_behavior_support_plans, headers=header)
             requests.put(backendPOST + profile_id, data=updated_rogers_monitor, headers=header)
-
+            '''
             for i in updated_restrictive:
                 requests.post(backendPOST + profile_id + '/restrictive', data=i)
             for i in new_restrictive:
                 i['patient_id'] = profile_id
                 i.pop('restrictive_id', None)
                 print(i)
-                requests.put(backendPOST + 'restrictive/' + profile_id, data=i)
+                requests.put(backendPOST + 'restrictive/' + profile_id, data=i) '''
 
             return HttpResponseRedirect("/behavior/" + profile_id)
     elif page == "support":
