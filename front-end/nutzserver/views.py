@@ -906,7 +906,7 @@ def efs_gen(request, profile_id):
    fields.append((120, 715, result['basic_info']['address_former']))
    fields.append((40, 685, result['basic_info']['sex']))
    fields.append((70, 685, result['basic_info']['race']))
-   fields.append((105, 685, result['basic_info']['birthday']))
+   fields.append((105, 685, result['basic_info']['birthday'][5:]))
    fields.append((155, 685, "30"))
    fields.append((185, 685, str(result['basic_info']['height'])))
    fields.append((225, 685, str(result['basic_info']['weight'])))
