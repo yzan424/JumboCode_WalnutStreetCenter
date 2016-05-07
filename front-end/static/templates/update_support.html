@@ -19,24 +19,18 @@
     </div>
 {% endblock %}
 {% block save_buttons %}
-<div id = "fourthrow">
-      <div data-spy="affix">
-        <div class="row">
-          <div class="col-md-4">
-              <button type="button" class="btn btn-primary icon-save">
+  <div id="fourthrow" class="row col-md-4" data-spy="affix">
+          <button type="submit" form="mainform" class="btn btn-primary icon-save">
               <i class="fa fa-floppy-o" aria-hidden="true"></i>
               Save</button>
-          </div>
-        </div>
-      </div>
-    </div>
+  </div>
 {% endblock %}
 {% block title %}
     Edit Support
 {% endblock %}
 {% block patient_name %}
-    {{basic_info.name_first}} 
-    {{basic_info.name_last}}
+    {{first_name}} 
+    {{last_name}}
 {% endblock %}
 {% block program %}
   {{basic_info.training_program_or_school_address}}
@@ -51,7 +45,7 @@
   {{basic_info.social_security}}
 {% endblock %}
     {% block content %}
-    <form action="/edit/support/{{profile_id}}/" method="post">
+    <form action="/edit/support/{{profile_id}}/" method="post" id="mainform">
     {% csrf_token %}
     <div class="container theme-showcase" role="main">
       <div class="col-xs-12">
@@ -403,6 +397,5 @@
         </div>
     </div>
 </div>
-        <input type="submit"></input>
     </form>
 {% endblock %}

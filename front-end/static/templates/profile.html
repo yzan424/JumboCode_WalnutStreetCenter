@@ -24,19 +24,12 @@
 {% endblock %}
 {% block edit_buttons %}
 
-    <div id = "fourthrow">
-      <div data-spy="affix">
-        <div class="row">
-          <div class="col-md-4">
-
+    <div id="fourthrow" class="row col-md-4" data-spy="affix">
             <button type="button" onclick="location.href='/edit/protocol/{{profile_id}}'" class="btn btn-primary icon-save">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
               Edit</button>
-          </div>
-        </div>
-      </div>
     </div>
-      {% endblock %}
+{% endblock %}
 
 {% block title %}
     Profile
