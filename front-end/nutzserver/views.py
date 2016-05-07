@@ -394,7 +394,7 @@ def behavior(request, profile_id, edit):
     medical_treatment_plan = requests.get(backendGET + profile_id + '/medical_treatment_plan')
     behavior = requests.get(backendGET + profile_id + '/behavior')
     behavior_support_plans = requests.get(backendGET + profile_id + '/behavior_support_plan')
-    #restrictive = requests.get(backendGET + profile_id + '/restrictive')
+    # restrictive = requests.get(backendGET + profile_id + '/restrictive')
     rogers_monitor = requests.get(backendGET + profile_id + '/rogers_monitor')
 
     full_result = requests.get(backendGET + profile_id)
@@ -405,7 +405,7 @@ def behavior(request, profile_id, edit):
     medical_treatment_plan = medical_treatment_plan.json()
     behavior = behavior.json()
     behavior_support_plans = behavior_support_plans.json()
-    #restrictive = restrictive.json()
+    # restrictive = restrictive.json()
 
     #restrictive = restrictive['objects']
     rogers_monitor = rogers_monitor.json()
@@ -413,7 +413,7 @@ def behavior(request, profile_id, edit):
     if edit == False:
         return render(request, "behavior.html", context={'first_name': firstname, 'last_name': lastname, 'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})
     else:
-        return render(request, "update_behavior.html", context={'first_name': firstname, 'last_name': lastname, 'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'restrictive': restrictive, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})        
+        return render(request, "update_behavior.html", context={'first_name': firstname, 'last_name': lastname, 'medical_treatment_plan': medical_treatment_plan, 'behavior': behavior, 'behavior_support_plan': behavior_support_plans, 'rogers_monitor': rogers_monitor, 'profile_id': profile_id})        
 
 def support(request, profile_id, edit):
     legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian')
