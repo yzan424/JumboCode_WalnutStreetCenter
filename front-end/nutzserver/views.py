@@ -709,7 +709,7 @@ def edit(request, page, profile_id):
 
                 if (keys.split('.'))[0] == "insurance":
                     insurance_id = keys.split('.')[2]
-                    dictKey = keys.split('.')[2]
+                    dictKey = keys.split('.')[3]
                     if (keys.split('.')[1] == "existing"):
                         if not any(x['insurance_id'] ==  insurance_id for x in updated_insurance):
                             updated_insurance.append({'insurance_id': insurance_id})
@@ -729,7 +729,7 @@ def edit(request, page, profile_id):
                     updated_legal_guardian[keys.split('.')[1]] = values
                 elif (keys.split('.'))[0] == "legal_status":
                     legal_status_id = keys.split('.')[2]
-                    dictKey = keys.split('.')[2]
+                    dictKey = keys.split('.')[3]
                     if (keys.split('.')[1] == "existing"):
                         if not any(x['legal_status_id'] ==  legal_status_id for x in updated_legal_status):
                             updated_legal_status.append({'legal_status_id': legal_status_id})
