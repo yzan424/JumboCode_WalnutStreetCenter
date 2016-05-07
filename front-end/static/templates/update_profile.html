@@ -382,24 +382,24 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for items in self_preservation %}
+                    {% for item in self_preservation %}
                     <tr>
-                    <td><input type="text" name="self_preservation.existing.{{item.self_preservation_id}}.date_occured" value="{{item.date_occured}}"></td>
+                    <td><input type="date" name="self_preservation.existing.{{item.id}}.date_occurred" value="{{item.date_occurred}}"></td>
                     <td><input type="text" name="UNRESOLVED" value="UNRESOLVED"></td>
                     <td><input type="text" name="UNRESOLVED" value="UNRESOLVED"></td>
-                    <td> <input type="text" name="self_preservation.existing.{{item.self_preservation_id}}.assessment" value="{{item.assessment}}"</td>
-                    <td><input type="text" name="self_preservation.existing.{{item.self_preservation_id}}.cause_of_failure" value="{{item.cause_of_failure}}"</td>
+                    <td> <input type="text" name="self_preservation.existing.{{item.id}}.assessment" value="{{item.assessment}}"</td>
+                    <td><input type="text" name="self_preservation.existing.{{item.id}}.cause_of_failure" value="{{item.cause_of_failure}}"</td>
                     </tr>
                     {% endfor %}
                     <tr>
-                    <td><input type="text" name="self_preservation.new.0.date_occured"></td>
+                    <td><input type="text" name="self_preservation.new.0.date_occurred"></td>
                     <td><input type="text" name="UNRESOLVED" ></td>
                     <td><input type="text" name="UNRESOLVED"></td>
                     <td> <input type="text" name="self_preservation.new.0.assessment"></td>
                     <td><input type="text" name="self_preservation.new.0.cause_of_failure"></td>
                     </tr>
                     <tr>
-                    <td><input type="text" name="self_preservation.new.1.date_occured"></td>
+                    <td><input type="text" name="self_preservation.new.1.date_occurred"></td>
                     <td><input type="text" name="UNRESOLVED" ></td>
                     <td><input type="text" name="UNRESOLVED"></td>
                     <td> <input type="text" name="self_preservation.new.1.assessment"></td>
