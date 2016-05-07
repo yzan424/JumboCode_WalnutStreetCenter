@@ -4,20 +4,39 @@
       <div class="col-md-3 text-center darkgrayed">
         <p> <a href="/profile/{{profile_id}}">Demographic</a> </p>
       </div>
-      <div class="col-md-2 text-center darkgrayed">
+      <div class="col-md-3 text-center darkgrayed">
         <p> <a href="/support/{{profile_id}}">Support</a> </p>
       </div>
-      <div class="col-md-3 text-center darkgrayed">
+      <!-- <div class="col-md-3 text-center darkgrayed">
         <p> Appointments </p>
-      </div>
-      <div class="col-md-2 text-center darkgrayed">
+      </div> -->
+      <div class="col-md-3 text-center darkgrayed">
         <p> <a href="/protocol/{{profile_id}}">Protocols</a> </p>
       </div>
-      <div class="col-md-2 text-center darkgrayed">
-        <p> <a href="/behavior/{{profile_id}}">Behavior</a> </p>
+      <div class="col-md-3 text-center darkgrayed">
+        <p> <a href="/behavior/{{profile_id}}" class="active">Behavior</a> </p>
       </div>
     </div>
 {% endblock %}
+{% block efs %}
+<button type="button" class="btn btn-default " onclick = "location.href='/efs/{{profile_id}}/'">
+           <i class="fa fa-print"></i>  EFS</button>
+{% endblock %}
+    {% block edit_buttons %}
+
+    <div id = "fourthrow">
+      <div data-spy="affix">
+        <div class="row">
+          <div class="col-md-4">
+            <button type="button" onclick="location.href='/edit/behavior/{{profile_id}}'" class="btn btn-primary icon-save">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+        {% endblock %}
+
 {% block title %}
     Behavior
 {% endblock %}
@@ -51,13 +70,13 @@
                   <p class="box-label">Guardian Signature</p>
                   <p>{{medical_treatment_plan.guardian_signature_date}}<br> </p>
                   <p class="box-label">Training Date</p>
-                  <p>UNRESOLVED<br> </p>
+                  <p><!-- UNRESOLVED --><br> </p>
                   <p class="box-label">Medication(s)</p>
-                  <p>{{medical_treatment_plan.medications}}UNRESOLVED<br> </p>
+                  <p>{{medical_treatment_plan.medications}}<!-- UNRESOLVED --><br> </p>
                   <p class="box-label">Diagnoses</p>
-                  <p>{{medical_treatment_plan.diagnoses}}UNRESOLVED<br> </p>
+                  <p>{{medical_treatment_plan.diagnoses}}<!-- UNRESOLVED --><br> </p>
                   <p class="box-label">Symptoms</p>
-                  <p>{{medical_treatment_plan.symptoms}}UNRESOLVED<br> </p>
+                  <p>{{medical_treatment_plan.symptoms}}<!-- UNRESOLVED --><br> </p>
                 </div>
               </div>
             </div>
@@ -100,9 +119,9 @@
                     <p class="box-label">Guardian Signature</p>
                     <p>{{behavior_support_plans.guardian_signature_date}}<br> </p>
                     <p class="box-label">Residential Training</p>
-                    <p>{{behavior_support_plans.residential_appointment_id}}UNRESOLVED<br> </p>
+                    <p>{{behavior_support_plans.residential_appointment_id}}<!-- UNRESOLVED --><br> </p>
                     <p class="box-label">Day Training</p>
-                    <p>{{behavior_support_plans.day_appointment_id}}UNRESOLVED<br> </p>
+                    <p>{{behavior_support_plans.day_appointment_id}}<!-- UNRESOLVED --><br> </p>
                     <p class="box-label">Tier</p>
                     <p>{{behavior_support_plans.tier}}<br> </p>
                   </div>
@@ -121,7 +140,7 @@
                     <p class="box-label">Guardian Signature</p>
                     <p>{{rogers_monitor.guardian_signature_date}}<br> </p>
                     <p class="box-label">Training Date</p>
-                    <p>{{rogers_monitor.appointment_id}}UNRESOLVED<br></p>
+                    <p>{{rogers_monitor.appointment_id}}<!-- UNRESOLVED --><br></p>
                     <p class="box-label">Medication(s)</p>
                     <p>{{rogers_monitor.medications}}<br> </p>
                   </div>

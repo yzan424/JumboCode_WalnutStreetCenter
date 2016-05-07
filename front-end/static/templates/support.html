@@ -4,17 +4,35 @@
       <div class="col-md-3 text-center darkgrayed">
         <p> <a href="/profile/{{profile_id}}">Demographic</a> </p>
       </div>
-      <div class="col-md-2 text-center darkgrayed">
-        <p> <a href="/support/{{profile_id}}">Support</a> </p>
-      </div>
       <div class="col-md-3 text-center darkgrayed">
-        <p> Appointments </p>
+        <p> <a href="/support/{{profile_id}}" class="active">Support</a> </p>
       </div>
-      <div class="col-md-2 text-center darkgrayed">
+      <!-- <div class="col-md-3 text-center darkgrayed">
+        <p> Appointments </p>
+      </div> -->
+      <div class="col-md-3 text-center darkgrayed">
         <p> <a href="/protocol/{{profile_id}}">Protocols</a> </p>
       </div>
-      <div class="col-md-2 text-center darkgrayed">
+      <div class="col-md-3 text-center darkgrayed">
         <p> <a href="/behavior/{{profile_id}}">Behavior</a> </p>
+      </div>
+    </div>
+{% endblock %}
+{% block efs %}
+<button type="button" class="btn btn-default " onclick = "location.href='/efs/{{profile_id}}/'">
+           <i class="fa fa-print"></i>  EFS</button>
+{% endblock %}
+{% block edit_buttons %}
+
+    <div id = "fourthrow">
+      <div data-spy="affix">
+        <div class="row">
+          <div class="col-md-4">
+            <button type="button" onclick="location.href='/edit/support/{{profile_id}}'" class="btn btn-primary icon-save">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              Edit</button>
+          </div>
+        </div>
       </div>
     </div>
 {% endblock %}
@@ -43,7 +61,7 @@
         <div class="col-xs-10 col-xs-offset-1">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Family/Guardian/Conservator <button type="button" onclick="location.href='/edit/support/{{profile_id}}'" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+              <h3 class="panel-title">Family/Guardian/Conservator </h3>
             </div>
             <div class="panel-body">
             <div class="row">
@@ -63,24 +81,24 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>UNRESOLVED<!-- input type="checkbox" value="" disabled style="margin-left: 30px;"> --></td>
+                      <td><!-- UNRESOLVED --><!-- input type="checkbox" value="" disabled style="margin-left: 30px;"> --></td>
                       <td>{{legal_family_info.mother_maiden_name}}</td>
                       <td>Mother</td>
-                      <td>UNRESOLVED</td>
-                      <td>UNRESOLVED</td>
-                      <td>UNRESOLVED</td>
-                      <td>UNRESOLVED</td>
-                      <td>UNRESOLVED</td>
+                      <td><!-- UNRESOLVED --></td>
+                      <td><!-- UNRESOLVED --></td>
+                      <td><!-- UNRESOLVED --></td>
+                      <td><!-- UNRESOLVED --></td>
+                      <td><!-- UNRESOLVED --></td>
                     </tr>
                     <tr>
-                      <td>UNRESOLVED<!-- input type="checkbox" value="" disabled style="margin-left: 30px;"> --></td>
+                      <td><!-- UNRESOLVED --><!-- input type="checkbox" value="" disabled style="margin-left: 30px;"> --></td>
                       <td>{{legal_family_info.father_name}}</td>
                       <td>Father</td>
-                      <td>UNRESOLVED</td>
-                      <td>UNRESOLVED</td>
-                      <td>UNRESOLVED</td>
-                      <td>UNRESOLVED</td>
-                      <td>UNRESOLVED</td>
+                      <td><!-- UNRESOLVED --></td>
+                      <td><!-- UNRESOLVED --></td>
+                      <td><!-- UNRESOLVED --></td>
+                      <td><!-- UNRESOLVED --></td>
+                      <td><!-- UNRESOLVED --></td>
                     </tr>
                   </tbody>
                 </table>
@@ -93,7 +111,7 @@
       <div class="col-xs-10 col-xs-offset-1">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Insurance, Financial Support, Entitlements<button type="button" onclick="location.href='/edit/support/{{profile_id}}'" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+            <h3 class="panel-title">Insurance, Financial Support, Entitlements</h3>
           </div>
           <div class="panel-body">
             <div class="row">
@@ -129,7 +147,7 @@
       <div class="col-xs-10 col-xs-offset-1">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Legal Status <button type="button" onclick="location.href='/edit/support/{{profile_id}}'" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+            <h3 class="panel-title">Legal Status</h3>
           </div>
           <div class="panel-body">
             <p class = "box-label"> Legal Competency </p>

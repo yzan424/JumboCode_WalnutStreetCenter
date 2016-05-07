@@ -35,12 +35,12 @@
 					<button type="button" class="btn btn-default btn-space">
 						<i class="fa fa-print"></i>  ID</button>
 				</div>
-	  			<div class="col-md-4 patient_name"> 
+	  			<div class="col-md-2 patient_name"> 
 	  				<p> {% block patient_name %}
 	  					{% endblock %}
 	  				 </p>
 	  			</div>
-	  			<div class="col-md-4"> 
+	  			<div class="col-md-6 logout"> 
 	  				<button type="button" class="btn btn-default " onclick="location.href='/new'">
 	  					<i class="fa fa-plus-circle"></i>  new</button>
 					<button type="button" class="btn btn-default ">
@@ -49,13 +49,13 @@
 					    <!--<label for="exampleInputSearch">Search</label>-->
 					    <form action="/search/" method="post">
 					    {% csrf_token %}
-					    <input type="search" class="form-control" name="query" id="exampleInputSearch" placeholder="Name or program">
-					    <button type="submit" class="btn btn-default">
-			  				<i class="fa fa-search"></i>
-			  			</button>
+					    	<input type="search" class="form-control" name="query" onclick="location.href='/search'" id="exampleInputSearch" placeholder="Name or program">
 					    </form>
 						</div>
-			  		
+			  		<button type="submit" class="btn btn-default">
+			  			<i class="fa fa-search"></i>
+			  		</button>
+			  		<button type="button" onclick="location.href='/logout'"class="btn btn-default "> <i class="fa fa-sign-out" aria-hidden="true"></i> logout </button>
 	  			</div>
 			</div>
 		</div>
@@ -87,6 +87,15 @@
 		{% block profile_links %}
 		
 		{% endblock %}
+		{% block edit_buttons %}
+
+
+		{% endblock %}
+		{% block save_buttons %}
+
+
+		{% endblock %}
+
 	{% block content %}{% endblock %}
 	<!-- Bootstrap core JavaScript
     ================================================== -->

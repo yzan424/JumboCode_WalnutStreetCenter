@@ -4,20 +4,38 @@
       <div class="col-md-3 text-center darkgrayed">
         <p> <a href="/profile/{{profile_id}}">Demographic</a> </p>
       </div>
-      <div class="col-md-2 text-center darkgrayed">
+      <div class="col-md-3 text-center darkgrayed">
         <p> <a href="/support/{{profile_id}}">Support</a> </p>
       </div>
-      <div class="col-md-3 text-center darkgrayed">
+     <!--  <div class="col-md-3 text-center darkgrayed">
         <p> Appointments </p>
+      </div> -->
+      <div class="col-md-3 text-center darkgrayed">
+        <p> <a href="/protocol/{{profile_id}}" class="active">Protocols</a> </p>
       </div>
-      <div class="col-md-2 text-center darkgrayed">
-        <p> <a href="/protocol/{{profile_id}}">Protocols</a> </p>
-      </div>
-      <div class="col-md-2 text-center darkgrayed">
+      <div class="col-md-3 text-center darkgrayed">
         <p> <a href="/behavior/{{profile_id}}">Behavior</a> </p>
       </div>
     </div>
 {% endblock %}
+{% block efs %}
+<button type="button" class="btn btn-default " onclick = "location.href='/efs/{{profile_id}}/'">
+           <i class="fa fa-print"></i>  EFS</button>
+{% endblock %}
+{% block edit_buttons %}
+
+    <div id = "fourthrow">
+      <div data-spy="affix">
+        <div class="row">
+          <div class="col-md-4">
+            <button type="button" onclick="location.href='/edit/protocol/{{profile_id}}'" class="btn btn-primary icon-save">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+      {% endblock %}
 {% block title %}
     Protocol
 {% endblock %}
@@ -44,13 +62,13 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <!--PROTOCOLS-->
-                        <h3 class="panel-title">Protocols<button type="button" onclick="location.href='/edit/protocol/{{profile_id}}'" class="btn btn-xs btn-default pull-right">Add New</button></h3>
+                        <h3 class="panel-title">Protocols</h3>
                     </div>
                     <div class="panel-body">
                         <div class="col-xs-4">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                  <h3 class="panel-title">Transport<button onclick="location.href='/edit/protocol/{{profile_id}}'" type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                                  <h3 class="panel-title">Transport</h3>
                                 </div>
                                 <div class="panel-body">
                                     <!--{% for item in protocols %}-->
@@ -76,7 +94,7 @@
                 <div class= "col-xs-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                        <h3 class="panel-title">ISP<button type="button" onclick="location.href='/edit/protocol/{{profile_id}}'" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                        <h3 class="panel-title">ISP</h3>
                         </div>
                         <div class="panel-body">
                             <p class="box-label">Most Recent ISP</p>
@@ -96,7 +114,7 @@
                             <div class= "col-xs-6">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title">Wheel Chair<button onclick="location.href='/edit/protocol/{{profile_id}}'" type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                                        <h3 class="panel-title">Wheel Chair</h3>
                                     </div>
                                     <div class="panel-body">
                                     {% for item in supportive %}
@@ -118,13 +136,13 @@
                 <div class= "col-xs-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                          <h3 class="panel-title">Tracking<button type="button" onclick="location.href='/edit/protocol/{{profile_id}}'" class="btn btn-xs btn-default pull-right">Add New</button></h3>
+                          <h3 class="panel-title">Tracking</h3>
                         </div>
                         <div class="panel-body">
                             <div class= "col-xs-6">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title">DSHP<button type="button" class="btn btn-xs btn-default pull-right">Edit</button></h3>
+                                        <h3 class="panel-title">DSHP</h3>
                                     </div>
                                     <div class="panel-body">
                                     {% for item in tracking %}

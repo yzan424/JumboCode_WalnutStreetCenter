@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from nutzserver.models import *
 from django.template import *
 import json, requests
+import datetime
 
 from PyPDF2 import PdfFileWriter, PdfFileReader
 from io import StringIO
@@ -934,9 +935,9 @@ def search(request):
       }, 
       "legal_family_info_id": 1, 
       "medical_info": {
-        "allergies": "", 
+        "allergies": "null", 
         "alzheimers_dementia": null, 
-        "diagnoses": "", 
+        "diagnoses": "null", 
         "down_syndrome": null, 
         "id": 28, 
         "vision_problem": null
@@ -1046,15 +1047,15 @@ def efs_gen(request, profile_id):
         "address_former": "None", 
         "area_meaningful_tie": "kosh deli", 
         "area_office": null, 
-        "birthday": "1995-05-12", 
+        "birthday": "95/05/12", 
         "birthplace": "DTD basement", 
         "blood_type": "a+", 
         "build": "swole", 
         "citizenship": "None", 
-        "competency_status": null, 
-        "day_service": null, 
-        "distinguishing_marks": null, 
-        "eligibility_date": null, 
+        "competency_status": "null", 
+        "day_service": "null", 
+        "distinguishing_marks": "null", 
+        "eligibility_date": "null", 
         "eyes": "brown like poo", 
         "hair": "lush", 
         "height": 5.7, 
@@ -1062,15 +1063,15 @@ def efs_gen(request, profile_id):
         "marital_status": "None", 
         "name_preferred": "None", 
         "phone": "None", 
-        "phone_on_entry": null, 
+        "phone_on_entry": "null", 
         "primary_language": "English", 
         "race": "pale", 
-        "record_location": null, 
-        "referral_source": null, 
+        "record_location": "null", 
+        "referral_source": "null", 
         "religion": "None", 
-        "sex": "yep", 
+        "sex": "M", 
         "social_security": "None", 
-        "state_id": null, 
+        "state_id": "null", 
         "training_program_or_school_address": "None", 
         "training_program_or_school_phone": "None", 
         "weight": 5000.0, 
@@ -1079,7 +1080,7 @@ def efs_gen(request, profile_id):
       }, 
       "basic_info_id": 29, 
       "behavior": {
-        "assessment_date": null, 
+        "assessment_date": "null", 
         "behaviors": "baddd", 
         "id": 1, 
         "summary": "killed a rabbit"
@@ -1087,15 +1088,15 @@ def efs_gen(request, profile_id):
       "behavior_id": 1, 
       "contacts": [
         {
-          "address": null, 
-          "date_added": null, 
-          "date_removed": null, 
+          "address": "null", 
+          "date_added": "null", 
+          "date_removed": "null", 
           "id": 1, 
           "name": "A Malis", 
           "patient_id": 1, 
-          "primary_contact": null, 
+          "primary_contact": "null", 
           "relation": "paps", 
-          "removal_reason": null
+          "removal_reason": "null"
         }
       ], 
       "doctors": [], 
@@ -1104,7 +1105,7 @@ def efs_gen(request, profile_id):
         "behavior": "None", 
         "carries_ID": true, 
         "id": 29, 
-        "last_update": null, 
+        "last_update": "null", 
         "movement_pattern": "None", 
         "places_frequented": "tenoch", 
         "response_to_search": "run!!!", 
@@ -1115,11 +1116,11 @@ def efs_gen(request, profile_id):
       "identifying_info_id": 29, 
       "insurance": {
         "benefits": "free drugs", 
-        "expiration_date": null, 
-        "expired": null, 
+        "expiration_date": "null", 
+        "expired": "null", 
         "id": 1, 
         "id_number": "12345678", 
-        "patient_id": null, 
+        "patient_id": "null", 
         "source": "blue shield", 
         "type_of": "good kind"
       }, 
@@ -1130,10 +1131,10 @@ def efs_gen(request, profile_id):
         "last_isp_date": "2012-12-12"
       }, 
       "isp_id": 1, 
-      "legal_competency_id": null, 
+      "legal_competency_id": "null", 
       "legal_family_info": {
-        "family_address": null, 
-        "family_phone": null, 
+        "family_address": "null", 
+        "family_phone": "null", 
         "father_alive": true, 
         "father_birthday": "1956-01-04", 
         "father_birthplace": "Spain", 
@@ -1142,82 +1143,82 @@ def efs_gen(request, profile_id):
         "guardian_name": "yukes", 
         "guardian_phone": "3018061451", 
         "id": 1, 
-        "mother_alive": null, 
-        "mother_birthday": null, 
-        "mother_birthplace": null, 
+        "mother_alive": "null", 
+        "mother_birthday": "null", 
+        "mother_birthplace": "null", 
         "mother_maiden_name": "Wilson", 
         "parents_marital_status": "great"
       }, 
       "legal_family_info_id": 1, 
       "medical_info": {
-        "allergies": "", 
-        "alzheimers_dementia": null, 
-        "diagnoses": "", 
-        "down_syndrome": null, 
+        "allergies": "null", 
+        "alzheimers_dementia": "null", 
+        "diagnoses": "null", 
+        "down_syndrome": "null", 
         "id": 28, 
-        "vision_problem": null
+        "vision_problem": "null"
       }, 
       "medical_info_id": 28, 
       "name_first": "Bat", 
       "name_last": "Woman", 
-      "primary_physician": null, 
-      "primary_physician_id": null, 
+      "primary_physician": "null", 
+      "primary_physician_id": "null", 
       "program": [], 
       "protocols": [], 
       "self_preservation": [
         {
           "assessment": "help", 
-          "cause_of_failure": null, 
-          "date_occurred": null, 
-          "determination_basis": null, 
+          "cause_of_failure": "null", 
+          "date_occurred": "null", 
+          "determination_basis": "null", 
           "id": 1, 
           "patient_id": 1
         }, 
         {
           "assessment": "helppp", 
-          "cause_of_failure": null, 
-          "date_occurred": null, 
-          "determination_basis": null, 
+          "cause_of_failure": "null", 
+          "date_occurred": "null", 
+          "determination_basis": "null", 
           "id": 2, 
           "patient_id": 1
         }, 
         {
           "assessment": "sllslkdkd", 
-          "cause_of_failure": null, 
-          "date_occurred": null, 
-          "determination_basis": null, 
+          "cause_of_failure": "null", 
+          "date_occurred": "null", 
+          "determination_basis": "null", 
           "id": 3, 
           "patient_id": 1
         }, 
         {
           "assessment": "sdfjkjfjfj", 
-          "cause_of_failure": null, 
-          "date_occurred": null, 
-          "determination_basis": null, 
+          "cause_of_failure": "null", 
+          "date_occurred": "null", 
+          "determination_basis": "null", 
           "id": 4, 
           "patient_id": 1
         }, 
         {
           "assessment": "helo?", 
-          "cause_of_failure": null, 
-          "date_occurred": null, 
-          "determination_basis": null, 
+          "cause_of_failure": "null", 
+          "date_occurred": "null", 
+          "determination_basis": "null", 
           "id": 5, 
           "patient_id": 1
         }, 
         {
           "assessment": "plsplspls", 
-          "cause_of_failure": null, 
-          "date_occurred": null, 
-          "determination_basis": null, 
+          "cause_of_failure": "null", 
+          "date_occurred": "null", 
+          "determination_basis": "null", 
           "id": 6, 
           "patient_id": 1
         }, 
         {
           "assessment": "yayaya", 
-          "cause_of_failure": null, 
-          "date_occurred": null, 
-          "determination_basis": null, 
+          "cause_of_failure": "null", 
+          "date_occurred": "null", 
+          "determination_basis": "null", 
           "id": 7, 
           "patient_id": 1
         }
@@ -1236,11 +1237,47 @@ def efs_gen(request, profile_id):
    buffer = BytesIO() # create string buffer for PDF
    pdf = canvas.Canvas(buffer, pagesize=letter)
    fields = []
-   fields.append((140, 755, result['name_last']))
    fields.append((70, 755, result['name_first']))
+   fields.append((140, 755, result['name_last']))
+   fields.append((250, 755, result['basic_info']['name_preferred']))
    fields.append((120, 735, result['basic_info']['address_current']))
+   fields.append((120, 715, result['basic_info']['address_former']))
+   fields.append((40, 685, result['basic_info']['sex']))
+   fields.append((70, 685, result['basic_info']['race']))
+   fields.append((105, 685, result['basic_info']['birthday']))
+   fields.append((155, 685, "30"))
+   fields.append((185, 685, str(result['basic_info']['height'])))
+   fields.append((225, 685, str(result['basic_info']['weight'])))
+   fields.append((265, 685, result['basic_info']['build']))
+   fields.append((305, 685, result['basic_info']['hair']))
+   fields.append((345, 685, result['basic_info']['eyes']))
+   fields.append((150, 670, result['basic_info']['distinguishing_marks']))
+   fields.append((175, 650, result['basic_info']['competency_status']))
+   fields.append((40, 620, result['legal_family_info']['guardian_name']))
+   fields.append((225, 620, result['legal_family_info']['guardian_phone']))
+   fields.append((40, 590, result['legal_family_info']['guardian_address']))
+   fields.append((40, 560, result['legal_family_info']['family_address']))
+   fields.append((225, 560, result['legal_family_info']['family_phone']))
+   fields.append((40, 520, result['basic_info']['training_program_or_school_address']))
+   fields.append((225, 520, result['basic_info']['training_program_or_school_phone']))
+   fields.append((305, 520, result['basic_info']['work_address']))
+   fields.append((510, 520, result['basic_info']['work_phone']))
+   fields.append((40, 480, result['medical_info']['diagnoses']))
+   fields.append((90, 465, result['medical_info']['allergies']))
+   fields.append((40, 430, result['primary_physician']))
+   fields.append((40, 405, result['basic_info']['primary_language']))
+   fields.append((345, 405, result['identifying_info']['self_protection']))
+   fields.append((40, 370, result['identifying_info']['behavior']))
+   fields.append((345, 370, result['identifying_info']['response_to_search']))
+   fields.append((40, 335, result['identifying_info']['movement_pattern']))
+   fields.append((265, 335, result['identifying_info']['places_frequented']))
+   fields.append((155, 205, result['contacts'][0]['name']))
+   fields.append((427, 197, result['contacts'][0]['address']))
+
+
    for element in fields:
-        pdf.drawString(element[0],element[1],element[2])
+        if type(element[2]) == str:
+            pdf.drawString(element[0],element[1],element[2])
    pdf.save()
 
    # put on watermark from buffer
