@@ -117,7 +117,7 @@ class Patient(db.Model):
         backref='patient'
     )
     medical_treatment_plan_id = db.Column(db.Integer, db.ForeignKey('medical_treatment_plan.id'))
-    isp = db.relationship(
+    medical_treatment_plan = db.relationship(
         'MedicalTreatmentPlan',
         primaryjoin='Patient.medical_treatment_plan_id==MedicalTreatmentPlan.id',
         backref='patient'
