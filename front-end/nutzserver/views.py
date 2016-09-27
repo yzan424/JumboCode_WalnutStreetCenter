@@ -823,7 +823,7 @@ def new(request):
         #TODO: where do i get the resulting  id
         # do i do it before or after?
         if new_identifying != {}:
-            requests.post(backendPOST + 'identifying', data=new_identifying)
+            requests.put(backendPOST + 'identifying', data=new_identifying)
         if new_medical_info != {}:
             requests.put(backendPUT + 'medical_info', data=new_medical_info)
         if new_basic_info != {}:
