@@ -505,7 +505,7 @@ def new(request):
         # send all the new stuff
         #TODO: where do i get the resulting  id
         # do i do it before or after?
-        requests.post(backendPOST,json={"name_first" : new_basic_info["name_first"],
+        requests.post("http://localhost:5000/api/patient",json={"name_first" : new_basic_info["name_first"],
                                         "name_last" : new_basic_info["name_last"]})
 
         if new_identifying != {}:
