@@ -510,13 +510,13 @@ def new(request):
 
         profile_id = str(response["id"])
         
-        if new_identifying != {}:
+        if new_identifying:
             requests.put(backendPOST + profile_id + '/identifying', json=new_identifying)
-        if new_medical_info != {}:
+        if new_medical_info:
             requests.put(backendPUT + profile_id + '/medical_info', json=new_medical_info)
-        if new_basic_info != {}:
+        if new_basic_info:
             requests.put(backendPUT + profile_id + '/basic_info', json=new_basic_info)
-        if new_legal_guardian != {}:
+        if new_legal_guardian:
             requests.put(backendPUT + profile_id + '/legal_guardian', json=new_legal_guardian)
       
         for i in new_self_preservation:
