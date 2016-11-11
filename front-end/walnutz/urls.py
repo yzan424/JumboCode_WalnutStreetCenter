@@ -19,7 +19,6 @@ from nutzserver.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^backend/profile/(?P<profile_id>\d+)/(?P<data>\w+)/$', backend),
     url(r'^profile/(?P<profile_id>\d+)/$', profile, {'edit': False}),
     url(r'^protocol/(?P<profile_id>\d+)/$', protocol, {'edit': False}),
     url(r'^support/(?P<profile_id>\d+)/$', support, {'edit': False}),
