@@ -80,12 +80,12 @@ class Patient(db.Model):
         primaryjoin='Patient.legal_competency_id==LegalCompetency.id',
         backref='patient'
     )
-    self_preservation_id = db.Column(db.Integer, db.ForeignKey('self_preservation.id'))
-    self_preservation = db.relationship(
-        'SelfPreservation',
-        primaryjoin='Patient.self_preservation_id==SelfPreservation.id',
-        backref='patient'
-    )
+    #self_preservation_id = db.Column(db.Integer, db.ForeignKey('self_preservation.id'))
+    #self_preservation = db.relationship(
+       # 'SelfPreservation',
+       # primaryjoin='Patient.self_preservation_id==SelfPreservation.id',
+       # backref='patient'
+    #)
     behavior_id = db.Column(db.Integer, db.ForeignKey('behavior.id'))
     behavior = db.relationship(
         'Behavior',
@@ -288,7 +288,11 @@ class SelfPreservation(db.Model):
     determination_basis = db.Column(db.String)
     date_occurred = db.Column(db.Date)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
-
+    patient = db.relationship(
+        'Patient',
+        primaryjoin='SelfPreservation.patient_id==Patient.id',
+        backref='self_preservation'
+    )
 
 class LegalCompetency(db.Model):
 
