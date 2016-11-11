@@ -821,8 +821,9 @@ def new(request):
         # send all the new stuff
         #TODO: where do i get the resulting  id
         # do i do it before or after?
+
         if new_identifying != {}:
-            requests.put(backendPUT + 'identifying', data=new_identifying)
+            print(requests.put(backendPUT + 'identifying', data=new_identifying))
         if new_medical_info != {}:
             requests.put(backendPUT + 'medical_info', data=new_medical_info)
         if new_basic_info != {}:
