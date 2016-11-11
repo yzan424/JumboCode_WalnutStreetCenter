@@ -522,6 +522,7 @@ def new(request):
             print(i)
             requests.put(backendPUT + "/self_preservation/", data=i) 
 
+        print(response)
         profile_id = str(response["id"]) or "1"
 
         return HttpResponseRedirect("/profile/" + profile_id)
