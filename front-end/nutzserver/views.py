@@ -508,21 +508,23 @@ def new(request):
         response = requests.post(backendPOST[:-1],json={"name_first" : new_basic_info["name_first"],
                                         "name_last" : new_basic_info["name_last"]}).json()
 
+        profile_id = str(response["id"])
+        
         if new_identifying != {}:
-            requests.put(backendPOST + 'identifying', data=new_identifying)
+            requests.put(backendPOST + profile_id + '/identifying', json=new_identifying)
         if new_medical_info != {}:
-            requests.put(backendPUT + 'medical_info', data=new_medical_info)
+            requests.put(backendPUT + profile_id + '/medical_info', json=new_medical_info)
         if new_basic_info != {}:
-            print(requests.put(backendPUT + 'basic', data=new_basic_info))
+            requests.put(backendPUT + profile_id + '/basic_info', json=new_basic_info)
         if new_legal_guardian != {}:
-            requests.put(backendPUT + 'legal_guardian', data=new_legal_guardian)
+            requests.put(backendPUT + profile_id + '/legal_guardian', json=new_legal_guardian)
       
         for i in new_self_preservation:
             i.pop('self_preservation_id', None)
             print(i)
             requests.put(backendPUT + "/self_preservation/", data=i) 
 
-        profile_id = str(response["id"]) or "1"
+        
 
         return HttpResponseRedirect("/profile/" + profile_id)
 
