@@ -288,11 +288,6 @@ class SelfPreservation(db.Model):
     determination_basis = db.Column(db.String)
     date_occurred = db.Column(db.Date)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
-    patient = db.relationship(
-        'Patient',
-        primaryjoin='SelfPreservation.patient_id==Patient.id',
-        backref='self_preservation'
-    )
 
 
 class LegalCompetency(db.Model):
