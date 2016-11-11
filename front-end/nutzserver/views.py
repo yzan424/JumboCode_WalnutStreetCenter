@@ -27,7 +27,7 @@ def profile(request, profile_id, edit):
 
     full_result = requests.get(backendGET + profile_id)
     if not full_result:
-        raise HttpResponseNotFound('<h1>Profile not found</h1>')
+        return HttpResponseNotFound('<h1>Profile not found</h1>')
     else:
         full_result = full_result.json()
     firstname = full_result.get('name_first') or ""
