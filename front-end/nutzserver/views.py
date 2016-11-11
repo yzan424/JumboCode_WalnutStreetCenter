@@ -506,7 +506,7 @@ def new(request):
         #TODO: where do i get the resulting  id
         # do i do it before or after?
         response = requests.post(backendPOST[:-1],json={"name_first" : new_basic_info["name_first"],
-                                        "name_last" : new_basic_info["name_last"]})
+                                        "name_last" : new_basic_info["name_last"]}).json()
 
         if new_identifying != {}:
             requests.put(backendPOST + 'identifying', data=new_identifying)
