@@ -26,8 +26,8 @@ def profile(request, profile_id, edit):
     legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian').json()
 
     full_result = requests.get(backendGET + profile_id).json()
-    firstname = full_result['name_first'] or ""
-    lastname = full_result['name_last'] or ""
+    firstname = full_result.get('name_first') or ""
+    lastname = full_result.get('name_last') or ""
 
     context_data = {'first_name': firstname,
                     'last_name': lastname,
