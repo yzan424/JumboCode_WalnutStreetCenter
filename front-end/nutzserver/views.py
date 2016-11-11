@@ -18,7 +18,7 @@ backendPOST = 'http://127.0.0.1:5000/api/patient/'
 backendPUT = 'http://127.0.0.1:5000/api/patient/'
 
 
-def profile(request, profile_id, edit_mode):
+def profile(request, profile_id, edit):
     medical_info = requests.get(backendGET + profile_id + '/medical_info').json()
     basic_info = requests.get(backendGET + profile_id + '/basic_info').json()
     self_preservation = requests.get(backendGET + profile_id + '/self_preservation').json()
@@ -38,7 +38,7 @@ def profile(request, profile_id, edit_mode):
                     'legal_guardian': legal_guardian,
                     'profile_id': profile_id}
 
-    if not edit_mode:
+    if not edit:
         return render(request, "profile.html", context=context_data)
     else:
         return render(request, "update_profile.html", context=context_data)
