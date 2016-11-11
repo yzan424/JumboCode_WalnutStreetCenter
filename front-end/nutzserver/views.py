@@ -25,7 +25,11 @@ def profile(request, profile_id, edit):
     identifying = requests.get(backendGET + profile_id + '/identifying_info').json()
     legal_guardian = requests.get(backendGET + profile_id + '/legal_guardian').json()
 
-    full_result = requests.get(backendGET + profile_id).json()
+    full_result = requests.get(backendGET + profile_id)
+    if not full_result:
+        return HttpResponseNotFound
+    else:
+        full_result = full_result.json()
     firstname = full_result.get('name_first') or ""
     lastname = full_result.get('name_last') or ""
 
