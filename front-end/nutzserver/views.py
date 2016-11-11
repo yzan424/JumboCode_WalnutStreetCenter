@@ -505,24 +505,24 @@ def new(request):
         # send all the new stuff
         #TODO: where do i get the resulting  id
         # do i do it before or after?
-        requests.post("http://localhost:5000/api/patient",json={"name_first" : new_basic_info["name_first"],
+        response = requests.post(backendPOST[:-2],json={"name_first" : new_basic_info["name_first"],
                                         "name_last" : new_basic_info["name_last"]})
 
         if new_identifying != {}:
-            requests.put(backendPOST + 'identifying', data=new_identifying)
+            requests.put(backendPOST[:-2] + 'identifying', data=new_identifying)
         if new_medical_info != {}:
-            requests.put(backendPUT + 'medical_info', data=new_medical_info)
+            requests.put(backendPUT[:-2] + 'medical_info', data=new_medical_info)
         if new_basic_info != {}:
-            print(requests.put(backendPUT + 'basic', data=new_basic_info))
+            print(requests.put(backendPUT[:-2] + 'basic', data=new_basic_info))
         if new_legal_guardian != {}:
-            requests.put(backendPUT + 'legal_guardian', data=new_legal_guardian)
+            requests.put(backendPUT[:-2] + 'legal_guardian', data=new_legal_guardian)
       
         for i in new_self_preservation:
             i.pop('self_preservation_id', None)
             print(i)
             requests.put(backendPUT + "/self_preservation/", data=i) 
 
-        profile_id = "1"
+        profile_id = str(response["id"]) or "1"
 
         return HttpResponseRedirect("/profile/" + profile_id)
 
