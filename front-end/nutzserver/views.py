@@ -510,7 +510,7 @@ def new(request):
         if new_medical_info != {}:
             requests.put(backendPUT + 'medical_info', data=new_medical_info)
         if new_basic_info != {}:
-            requests.put(backendPUT + 'basic', data=new_basic_info)
+            print(requests.put(backendPUT + 'basic', data=new_basic_info))
         if new_legal_guardian != {}:
             requests.put(backendPUT + 'legal_guardian', data=new_legal_guardian)
       
